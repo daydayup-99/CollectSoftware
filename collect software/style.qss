@@ -1,0 +1,49 @@
+QWidget {
+    font-family: 'Microsoft YaHei';
+    font-size: 12pt;
+    background-color: #E1F5FE;  /* 浅蓝色背景 */
+}
+
+QLineEdit, QDateEdit, QComboBox, QPushButton, QTextBrowser {
+    border: 1px solid #90CAF9;  /* 浅蓝色边框 */
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #FFFFFF;
+}
+
+QLabel {
+    color: #333333;
+}
+
+QPushButton {
+    background-color: #03A9F4;  /* 柔和的蓝色按钮 */
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: #039BE5;  /* 按钮悬停颜色 */
+}
+
+QPushButton:pressed {
+    background-color: #0288D1;  /* 按钮按下颜色 */
+}
+
+QPushButton:disabled {
+    background-color: #B0BEC5;  /* 灰色背景表示不可用 */
+    color: #ECEFF1;  /* 浅灰色文字 */
+}
+
+QScrollArea {
+    border: 1px solid #90CAF9;  /* 浅蓝色边框 */
+    background-color: #E1F5FE;  /* 浅蓝色背景 */
+}
+
+QLabel#label_10 {
+    font-size: 14px;
+    padding: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #90CAF9;  /* 浅蓝色边框 */
+    border-radius: 5px;
+}
+
+

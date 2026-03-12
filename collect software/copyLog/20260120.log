@@ -1,0 +1,1438 @@
+2026-01-20 17:14:10,274 - INFO - 尝试加载配置文件: ./setting/config.ini
+2026-01-20 17:14:10,278 - INFO - 配置文件加载成功
+2026-01-20 17:16:18,513 - INFO - 已复制日志文件: 2025_11_30.txt
+2026-01-20 17:16:18,517 - INFO - 按板号拷贝开始...
+2026-01-20 17:16:18,520 - INFO - 板号 522 开始拷贝!
+2026-01-20 17:16:18,559 - INFO - 522 拷贝完成!
+2026-01-20 17:16:18,562 - INFO - 板号 523 开始拷贝!
+2026-01-20 17:16:18,574 - INFO - 523 拷贝完成!
+2026-01-20 17:16:18,576 - INFO - 板号 524 开始拷贝!
+2026-01-20 17:16:18,586 - INFO - 524 拷贝完成!
+2026-01-20 17:16:18,589 - INFO - 板号 525 开始拷贝!
+2026-01-20 17:16:18,599 - INFO - 525 拷贝完成!
+2026-01-20 17:16:18,602 - INFO - 板号 526 开始拷贝!
+2026-01-20 17:16:18,604 - WARNING - Error processing num 526: list index out of range
+2026-01-20 17:16:18,612 - INFO - 526 拷贝完成!
+2026-01-20 17:16:18,615 - INFO - 板号 527 开始拷贝!
+2026-01-20 17:16:18,618 - WARNING - Error processing num 527: list index out of range
+2026-01-20 17:16:18,620 - INFO - 527 拷贝完成!
+2026-01-20 17:16:18,622 - INFO - 板号 528 开始拷贝!
+2026-01-20 17:16:18,625 - WARNING - Error processing num 528: list index out of range
+2026-01-20 17:16:18,628 - INFO - 528 拷贝完成!
+2026-01-20 17:16:18,630 - INFO - 板号 529 开始拷贝!
+2026-01-20 17:16:18,633 - WARNING - Error processing num 529: list index out of range
+2026-01-20 17:16:18,635 - INFO - 529 拷贝完成!
+2026-01-20 17:16:18,637 - INFO - 板号 530 开始拷贝!
+2026-01-20 17:16:18,639 - WARNING - Error processing num 530: list index out of range
+2026-01-20 17:16:18,641 - INFO - 530 拷贝完成!
+2026-01-20 17:16:18,644 - INFO - 板号 531 开始拷贝!
+2026-01-20 17:16:18,646 - WARNING - Error processing num 531: list index out of range
+2026-01-20 17:16:18,648 - INFO - 531 拷贝完成!
+2026-01-20 17:16:18,651 - INFO - 板号 532 开始拷贝!
+2026-01-20 17:16:18,653 - WARNING - Error processing num 532: list index out of range
+2026-01-20 17:16:18,656 - INFO - 532 拷贝完成!
+2026-01-20 17:16:18,659 - INFO - 板号 533 开始拷贝!
+2026-01-20 17:16:18,662 - WARNING - Error processing num 533: list index out of range
+2026-01-20 17:16:18,664 - INFO - 533 拷贝完成!
+2026-01-20 17:16:18,666 - INFO - 板号 534 开始拷贝!
+2026-01-20 17:16:18,669 - WARNING - Error processing num 534: list index out of range
+2026-01-20 17:16:18,671 - INFO - 534 拷贝完成!
+2026-01-20 17:16:18,673 - INFO - 板号 535 开始拷贝!
+2026-01-20 17:16:18,676 - WARNING - Error processing num 535: list index out of range
+2026-01-20 17:16:18,678 - INFO - 535 拷贝完成!
+2026-01-20 17:16:18,680 - INFO - 板号 536 开始拷贝!
+2026-01-20 17:16:18,682 - WARNING - Error processing num 536: list index out of range
+2026-01-20 17:16:18,684 - INFO - 536 拷贝完成!
+2026-01-20 17:16:18,688 - INFO - 板号 537 开始拷贝!
+2026-01-20 17:16:18,690 - WARNING - Error processing num 537: list index out of range
+2026-01-20 17:16:18,692 - INFO - 537 拷贝完成!
+2026-01-20 17:16:18,695 - INFO - 板号 538 开始拷贝!
+2026-01-20 17:16:18,698 - WARNING - Error processing num 538: list index out of range
+2026-01-20 17:16:18,700 - INFO - 538 拷贝完成!
+2026-01-20 17:16:18,703 - INFO - 板号 539 开始拷贝!
+2026-01-20 17:16:18,706 - WARNING - Error processing num 539: list index out of range
+2026-01-20 17:16:18,708 - INFO - 539 拷贝完成!
+2026-01-20 17:16:18,711 - INFO - 板号 540 开始拷贝!
+2026-01-20 17:16:18,713 - WARNING - Error processing num 540: list index out of range
+2026-01-20 17:16:18,715 - INFO - 540 拷贝完成!
+2026-01-20 17:16:18,718 - INFO - 板号 541 开始拷贝!
+2026-01-20 17:16:18,720 - WARNING - Error processing num 541: list index out of range
+2026-01-20 17:16:18,723 - INFO - 541 拷贝完成!
+2026-01-20 17:16:18,726 - INFO - 板号 542 开始拷贝!
+2026-01-20 17:16:18,729 - WARNING - Error processing num 542: list index out of range
+2026-01-20 17:16:18,731 - INFO - 542 拷贝完成!
+2026-01-20 17:16:18,734 - INFO - 板号 543 开始拷贝!
+2026-01-20 17:16:18,736 - WARNING - Error processing num 543: list index out of range
+2026-01-20 17:16:18,738 - INFO - 543 拷贝完成!
+2026-01-20 17:16:18,740 - INFO - 板号 544 开始拷贝!
+2026-01-20 17:16:18,742 - WARNING - Error processing num 544: list index out of range
+2026-01-20 17:16:18,744 - INFO - 544 拷贝完成!
+2026-01-20 17:16:18,747 - INFO - 板号 545 开始拷贝!
+2026-01-20 17:16:18,750 - WARNING - Error processing num 545: list index out of range
+2026-01-20 17:16:18,752 - INFO - 545 拷贝完成!
+2026-01-20 17:16:18,756 - INFO - 板号 546 开始拷贝!
+2026-01-20 17:16:18,758 - WARNING - Error processing num 546: list index out of range
+2026-01-20 17:16:18,760 - INFO - 546 拷贝完成!
+2026-01-20 17:16:18,763 - INFO - 板号 547 开始拷贝!
+2026-01-20 17:16:18,765 - WARNING - Error processing num 547: list index out of range
+2026-01-20 17:16:18,768 - INFO - 547 拷贝完成!
+2026-01-20 17:16:18,770 - INFO - 板号 548 开始拷贝!
+2026-01-20 17:16:18,772 - WARNING - Error processing num 548: list index out of range
+2026-01-20 17:16:18,775 - INFO - 548 拷贝完成!
+2026-01-20 17:16:18,778 - INFO - 板号 549 开始拷贝!
+2026-01-20 17:16:18,779 - WARNING - Error processing num 549: list index out of range
+2026-01-20 17:16:18,781 - INFO - 549 拷贝完成!
+2026-01-20 17:16:18,784 - INFO - 板号 550 开始拷贝!
+2026-01-20 17:16:18,786 - WARNING - Error processing num 550: list index out of range
+2026-01-20 17:16:18,788 - INFO - 550 拷贝完成!
+2026-01-20 17:16:18,792 - INFO - 板号 551 开始拷贝!
+2026-01-20 17:16:18,794 - WARNING - Error processing num 551: list index out of range
+2026-01-20 17:16:18,796 - INFO - 551 拷贝完成!
+2026-01-20 17:16:18,798 - INFO - 板号 552 开始拷贝!
+2026-01-20 17:16:18,800 - WARNING - Error processing num 552: list index out of range
+2026-01-20 17:16:18,803 - INFO - 552 拷贝完成!
+2026-01-20 17:16:18,805 - INFO - 板号 553 开始拷贝!
+2026-01-20 17:16:18,808 - WARNING - Error processing num 553: list index out of range
+2026-01-20 17:16:18,810 - INFO - 553 拷贝完成!
+2026-01-20 17:16:18,813 - INFO - 板号 554 开始拷贝!
+2026-01-20 17:16:18,815 - WARNING - Error processing num 554: list index out of range
+2026-01-20 17:16:18,818 - INFO - 554 拷贝完成!
+2026-01-20 17:16:18,820 - INFO - 板号 555 开始拷贝!
+2026-01-20 17:16:18,822 - WARNING - Error processing num 555: list index out of range
+2026-01-20 17:16:18,824 - INFO - 555 拷贝完成!
+2026-01-20 17:16:18,827 - INFO - 板号 556 开始拷贝!
+2026-01-20 17:16:18,831 - WARNING - Error processing num 556: list index out of range
+2026-01-20 17:16:18,833 - INFO - 556 拷贝完成!
+2026-01-20 17:16:18,836 - INFO - 板号 557 开始拷贝!
+2026-01-20 17:16:18,838 - WARNING - Error processing num 557: list index out of range
+2026-01-20 17:16:18,840 - INFO - 557 拷贝完成!
+2026-01-20 17:16:18,842 - INFO - 板号 558 开始拷贝!
+2026-01-20 17:16:18,845 - WARNING - Error processing num 558: list index out of range
+2026-01-20 17:16:18,847 - INFO - 558 拷贝完成!
+2026-01-20 17:16:18,850 - INFO - 板号 559 开始拷贝!
+2026-01-20 17:16:18,852 - WARNING - Error processing num 559: list index out of range
+2026-01-20 17:16:18,854 - INFO - 559 拷贝完成!
+2026-01-20 17:16:18,857 - INFO - 板号 560 开始拷贝!
+2026-01-20 17:16:18,859 - WARNING - Error processing num 560: list index out of range
+2026-01-20 17:16:18,861 - INFO - 560 拷贝完成!
+2026-01-20 17:16:18,866 - INFO - 板号 561 开始拷贝!
+2026-01-20 17:16:18,868 - WARNING - Error processing num 561: list index out of range
+2026-01-20 17:16:18,871 - INFO - 561 拷贝完成!
+2026-01-20 17:16:18,873 - INFO - 板号 562 开始拷贝!
+2026-01-20 17:16:18,875 - WARNING - Error processing num 562: list index out of range
+2026-01-20 17:16:18,877 - INFO - 562 拷贝完成!
+2026-01-20 17:16:18,879 - INFO - 板号 563 开始拷贝!
+2026-01-20 17:16:18,882 - WARNING - Error processing num 563: list index out of range
+2026-01-20 17:16:18,884 - INFO - 563 拷贝完成!
+2026-01-20 17:16:18,886 - INFO - 板号 564 开始拷贝!
+2026-01-20 17:16:18,889 - WARNING - Error processing num 564: list index out of range
+2026-01-20 17:16:18,891 - INFO - 564 拷贝完成!
+2026-01-20 17:16:18,893 - INFO - 板号 565 开始拷贝!
+2026-01-20 17:16:18,896 - WARNING - Error processing num 565: list index out of range
+2026-01-20 17:16:18,898 - INFO - 565 拷贝完成!
+2026-01-20 17:16:18,902 - INFO - 板号 566 开始拷贝!
+2026-01-20 17:16:18,904 - WARNING - Error processing num 566: list index out of range
+2026-01-20 17:16:18,906 - INFO - 566 拷贝完成!
+2026-01-20 17:16:18,909 - INFO - 板号 567 开始拷贝!
+2026-01-20 17:16:18,911 - WARNING - Error processing num 567: list index out of range
+2026-01-20 17:16:18,913 - INFO - 567 拷贝完成!
+2026-01-20 17:16:18,915 - INFO - 板号 568 开始拷贝!
+2026-01-20 17:16:18,917 - WARNING - Error processing num 568: list index out of range
+2026-01-20 17:16:18,919 - INFO - 568 拷贝完成!
+2026-01-20 17:16:18,922 - INFO - 板号 569 开始拷贝!
+2026-01-20 17:16:18,925 - WARNING - Error processing num 569: list index out of range
+2026-01-20 17:16:18,927 - INFO - 569 拷贝完成!
+2026-01-20 17:16:18,929 - INFO - 板号 570 开始拷贝!
+2026-01-20 17:16:18,931 - WARNING - Error processing num 570: list index out of range
+2026-01-20 17:16:18,934 - INFO - 570 拷贝完成!
+2026-01-20 17:16:18,936 - INFO - 板号 571 开始拷贝!
+2026-01-20 17:16:18,938 - WARNING - Error processing num 571: list index out of range
+2026-01-20 17:16:18,941 - INFO - 571 拷贝完成!
+2026-01-20 17:16:18,943 - INFO - 板号 572 开始拷贝!
+2026-01-20 17:16:18,945 - WARNING - Error processing num 572: list index out of range
+2026-01-20 17:16:18,947 - INFO - 572 拷贝完成!
+2026-01-20 17:16:18,952 - INFO - 板号 573 开始拷贝!
+2026-01-20 17:16:18,954 - WARNING - Error processing num 573: list index out of range
+2026-01-20 17:16:18,956 - INFO - 573 拷贝完成!
+2026-01-20 17:16:18,959 - INFO - 板号 574 开始拷贝!
+2026-01-20 17:16:18,961 - WARNING - Error processing num 574: list index out of range
+2026-01-20 17:16:18,963 - INFO - 574 拷贝完成!
+2026-01-20 17:16:18,966 - INFO - 板号 575 开始拷贝!
+2026-01-20 17:16:18,968 - WARNING - Error processing num 575: list index out of range
+2026-01-20 17:16:18,970 - INFO - 575 拷贝完成!
+2026-01-20 17:16:18,972 - INFO - 板号 576 开始拷贝!
+2026-01-20 17:16:18,974 - WARNING - Error processing num 576: list index out of range
+2026-01-20 17:16:18,976 - INFO - 576 拷贝完成!
+2026-01-20 17:16:18,980 - INFO - 板号 577 开始拷贝!
+2026-01-20 17:16:18,982 - WARNING - Error processing num 577: list index out of range
+2026-01-20 17:16:18,984 - INFO - 577 拷贝完成!
+2026-01-20 17:16:18,987 - INFO - 板号 578 开始拷贝!
+2026-01-20 17:16:18,989 - WARNING - Error processing num 578: list index out of range
+2026-01-20 17:16:18,991 - INFO - 578 拷贝完成!
+2026-01-20 17:16:18,993 - INFO - 板号 579 开始拷贝!
+2026-01-20 17:16:18,995 - WARNING - Error processing num 579: list index out of range
+2026-01-20 17:16:18,997 - INFO - 579 拷贝完成!
+2026-01-20 17:16:19,000 - INFO - 板号 580 开始拷贝!
+2026-01-20 17:16:19,002 - WARNING - Error processing num 580: list index out of range
+2026-01-20 17:16:19,005 - INFO - 580 拷贝完成!
+2026-01-20 17:16:19,007 - INFO - 板号 581 开始拷贝!
+2026-01-20 17:16:19,009 - WARNING - Error processing num 581: list index out of range
+2026-01-20 17:16:19,011 - INFO - 581 拷贝完成!
+2026-01-20 17:16:19,014 - INFO - 板号 582 开始拷贝!
+2026-01-20 17:16:19,016 - WARNING - Error processing num 582: list index out of range
+2026-01-20 17:16:19,018 - INFO - 582 拷贝完成!
+2026-01-20 17:16:19,022 - INFO - 板号 583 开始拷贝!
+2026-01-20 17:16:19,024 - WARNING - Error processing num 583: list index out of range
+2026-01-20 17:16:19,026 - INFO - 583 拷贝完成!
+2026-01-20 17:16:19,028 - INFO - 板号 584 开始拷贝!
+2026-01-20 17:16:19,030 - WARNING - Error processing num 584: list index out of range
+2026-01-20 17:16:19,033 - INFO - 584 拷贝完成!
+2026-01-20 17:16:19,035 - INFO - 板号 585 开始拷贝!
+2026-01-20 17:16:19,038 - WARNING - Error processing num 585: list index out of range
+2026-01-20 17:16:19,041 - INFO - 585 拷贝完成!
+2026-01-20 17:16:19,043 - INFO - 板号 586 开始拷贝!
+2026-01-20 17:16:19,046 - WARNING - Error processing num 586: list index out of range
+2026-01-20 17:16:19,048 - INFO - 586 拷贝完成!
+2026-01-20 17:16:19,051 - INFO - 板号 587 开始拷贝!
+2026-01-20 17:16:19,053 - WARNING - Error processing num 587: list index out of range
+2026-01-20 17:16:19,055 - INFO - 587 拷贝完成!
+2026-01-20 17:16:19,058 - INFO - 板号 588 开始拷贝!
+2026-01-20 17:16:19,060 - WARNING - Error processing num 588: list index out of range
+2026-01-20 17:16:19,062 - INFO - 588 拷贝完成!
+2026-01-20 17:16:19,066 - INFO - 板号 589 开始拷贝!
+2026-01-20 17:16:19,068 - WARNING - Error processing num 589: list index out of range
+2026-01-20 17:16:19,070 - INFO - 589 拷贝完成!
+2026-01-20 17:16:19,073 - INFO - 板号 590 开始拷贝!
+2026-01-20 17:16:19,075 - WARNING - Error processing num 590: list index out of range
+2026-01-20 17:16:19,077 - INFO - 590 拷贝完成!
+2026-01-20 17:16:19,080 - INFO - 板号 591 开始拷贝!
+2026-01-20 17:16:19,083 - WARNING - Error processing num 591: list index out of range
+2026-01-20 17:16:19,085 - INFO - 591 拷贝完成!
+2026-01-20 17:16:19,087 - INFO - 板号 592 开始拷贝!
+2026-01-20 17:16:19,090 - WARNING - Error processing num 592: list index out of range
+2026-01-20 17:16:19,092 - INFO - 592 拷贝完成!
+2026-01-20 17:16:19,095 - INFO - 板号 593 开始拷贝!
+2026-01-20 17:16:19,097 - WARNING - Error processing num 593: list index out of range
+2026-01-20 17:16:19,099 - INFO - 593 拷贝完成!
+2026-01-20 17:16:19,102 - INFO - 板号 594 开始拷贝!
+2026-01-20 17:16:19,104 - WARNING - Error processing num 594: list index out of range
+2026-01-20 17:16:19,108 - INFO - 594 拷贝完成!
+2026-01-20 17:16:19,110 - INFO - 板号 595 开始拷贝!
+2026-01-20 17:16:19,112 - WARNING - Error processing num 595: list index out of range
+2026-01-20 17:16:19,114 - INFO - 595 拷贝完成!
+2026-01-20 17:16:19,116 - INFO - 板号 596 开始拷贝!
+2026-01-20 17:16:19,119 - WARNING - Error processing num 596: list index out of range
+2026-01-20 17:16:19,120 - INFO - 596 拷贝完成!
+2026-01-20 17:16:19,123 - INFO - 板号 597 开始拷贝!
+2026-01-20 17:16:19,125 - WARNING - Error processing num 597: list index out of range
+2026-01-20 17:16:19,127 - INFO - 597 拷贝完成!
+2026-01-20 17:16:19,130 - INFO - 板号 598 开始拷贝!
+2026-01-20 17:16:19,132 - WARNING - Error processing num 598: list index out of range
+2026-01-20 17:16:19,135 - INFO - 598 拷贝完成!
+2026-01-20 17:16:19,139 - INFO - 板号 599 开始拷贝!
+2026-01-20 17:16:19,144 - WARNING - Error processing num 599: list index out of range
+2026-01-20 17:16:19,146 - INFO - 599 拷贝完成!
+2026-01-20 17:16:19,149 - INFO - 板号 600 开始拷贝!
+2026-01-20 17:16:19,151 - WARNING - Error processing num 600: list index out of range
+2026-01-20 17:16:19,154 - INFO - 600 拷贝完成!
+2026-01-20 17:16:19,156 - INFO - 板号 601 开始拷贝!
+2026-01-20 17:16:19,159 - WARNING - Error processing num 601: list index out of range
+2026-01-20 17:16:19,162 - INFO - 601 拷贝完成!
+2026-01-20 17:16:19,165 - INFO - 板号 602 开始拷贝!
+2026-01-20 17:16:19,167 - WARNING - Error processing num 602: list index out of range
+2026-01-20 17:16:19,169 - INFO - 602 拷贝完成!
+2026-01-20 17:16:19,171 - INFO - 板号 603 开始拷贝!
+2026-01-20 17:16:19,174 - WARNING - Error processing num 603: list index out of range
+2026-01-20 17:16:19,176 - INFO - 603 拷贝完成!
+2026-01-20 17:16:19,179 - INFO - 板号 604 开始拷贝!
+2026-01-20 17:16:19,181 - WARNING - Error processing num 604: list index out of range
+2026-01-20 17:16:19,184 - INFO - 604 拷贝完成!
+2026-01-20 17:16:19,186 - INFO - 板号 605 开始拷贝!
+2026-01-20 17:16:19,189 - WARNING - Error processing num 605: list index out of range
+2026-01-20 17:16:19,192 - INFO - 605 拷贝完成!
+2026-01-20 17:16:19,194 - INFO - 板号 606 开始拷贝!
+2026-01-20 17:16:19,196 - WARNING - Error processing num 606: list index out of range
+2026-01-20 17:16:19,200 - INFO - 606 拷贝完成!
+2026-01-20 17:16:19,202 - INFO - 板号 607 开始拷贝!
+2026-01-20 17:16:19,205 - WARNING - Error processing num 607: list index out of range
+2026-01-20 17:16:19,207 - INFO - 607 拷贝完成!
+2026-01-20 17:16:19,210 - INFO - 板号 608 开始拷贝!
+2026-01-20 17:16:19,212 - WARNING - Error processing num 608: list index out of range
+2026-01-20 17:16:19,215 - INFO - 608 拷贝完成!
+2026-01-20 17:16:19,218 - INFO - 板号 609 开始拷贝!
+2026-01-20 17:16:19,221 - WARNING - Error processing num 609: list index out of range
+2026-01-20 17:16:19,223 - INFO - 609 拷贝完成!
+2026-01-20 17:16:19,225 - INFO - 板号 610 开始拷贝!
+2026-01-20 17:16:19,229 - WARNING - Error processing num 610: list index out of range
+2026-01-20 17:16:19,231 - INFO - 610 拷贝完成!
+2026-01-20 17:16:19,234 - INFO - 板号 611 开始拷贝!
+2026-01-20 17:16:19,237 - WARNING - Error processing num 611: list index out of range
+2026-01-20 17:16:19,239 - INFO - 611 拷贝完成!
+2026-01-20 17:16:19,242 - INFO - 板号 612 开始拷贝!
+2026-01-20 17:16:19,244 - WARNING - Error processing num 612: list index out of range
+2026-01-20 17:16:19,247 - INFO - 612 拷贝完成!
+2026-01-20 17:16:19,249 - INFO - 板号 613 开始拷贝!
+2026-01-20 17:16:19,251 - WARNING - Error processing num 613: list index out of range
+2026-01-20 17:16:19,254 - INFO - 613 拷贝完成!
+2026-01-20 17:16:19,256 - INFO - 板号 614 开始拷贝!
+2026-01-20 17:16:19,258 - WARNING - Error processing num 614: list index out of range
+2026-01-20 17:16:19,261 - INFO - 614 拷贝完成!
+2026-01-20 17:16:19,264 - INFO - 板号 615 开始拷贝!
+2026-01-20 17:16:19,267 - WARNING - Error processing num 615: list index out of range
+2026-01-20 17:16:19,269 - INFO - 615 拷贝完成!
+2026-01-20 17:16:19,272 - INFO - 板号 616 开始拷贝!
+2026-01-20 17:16:19,274 - WARNING - Error processing num 616: list index out of range
+2026-01-20 17:16:19,276 - INFO - 616 拷贝完成!
+2026-01-20 17:16:19,280 - INFO - 板号 617 开始拷贝!
+2026-01-20 17:16:19,283 - WARNING - Error processing num 617: list index out of range
+2026-01-20 17:16:19,285 - INFO - 617 拷贝完成!
+2026-01-20 17:16:19,287 - INFO - 板号 618 开始拷贝!
+2026-01-20 17:16:19,290 - WARNING - Error processing num 618: list index out of range
+2026-01-20 17:16:19,292 - INFO - 618 拷贝完成!
+2026-01-20 17:16:19,294 - INFO - 板号 619 开始拷贝!
+2026-01-20 17:16:19,297 - WARNING - Error processing num 619: list index out of range
+2026-01-20 17:16:19,300 - INFO - 619 拷贝完成!
+2026-01-20 17:16:19,303 - INFO - 板号 620 开始拷贝!
+2026-01-20 17:16:19,305 - WARNING - Error processing num 620: list index out of range
+2026-01-20 17:16:19,307 - INFO - 620 拷贝完成!
+2026-01-20 17:16:19,309 - INFO - 板号 621 开始拷贝!
+2026-01-20 17:16:19,312 - WARNING - Error processing num 621: list index out of range
+2026-01-20 17:16:19,314 - INFO - 621 拷贝完成!
+2026-01-20 17:16:19,317 - INFO - 板号 622 开始拷贝!
+2026-01-20 17:16:19,319 - WARNING - Error processing num 622: list index out of range
+2026-01-20 17:16:19,321 - INFO - 622 拷贝完成!
+2026-01-20 17:16:19,325 - INFO - 板号 623 开始拷贝!
+2026-01-20 17:16:19,327 - WARNING - Error processing num 623: list index out of range
+2026-01-20 17:16:19,329 - INFO - 623 拷贝完成!
+2026-01-20 17:16:19,332 - INFO - 板号 624 开始拷贝!
+2026-01-20 17:16:19,334 - WARNING - Error processing num 624: list index out of range
+2026-01-20 17:16:19,337 - INFO - 624 拷贝完成!
+2026-01-20 17:16:19,340 - INFO - 板号 625 开始拷贝!
+2026-01-20 17:16:19,342 - WARNING - Error processing num 625: list index out of range
+2026-01-20 17:16:19,344 - INFO - 625 拷贝完成!
+2026-01-20 17:16:19,346 - INFO - 板号 626 开始拷贝!
+2026-01-20 17:16:19,348 - WARNING - Error processing num 626: list index out of range
+2026-01-20 17:16:19,350 - INFO - 626 拷贝完成!
+2026-01-20 17:16:19,353 - INFO - 板号 627 开始拷贝!
+2026-01-20 17:16:19,356 - WARNING - Error processing num 627: list index out of range
+2026-01-20 17:16:19,358 - INFO - 627 拷贝完成!
+2026-01-20 17:16:19,361 - INFO - 板号 628 开始拷贝!
+2026-01-20 17:16:19,363 - WARNING - Error processing num 628: list index out of range
+2026-01-20 17:16:19,365 - INFO - 628 拷贝完成!
+2026-01-20 17:16:19,368 - INFO - 板号 629 开始拷贝!
+2026-01-20 17:16:19,369 - WARNING - Error processing num 629: list index out of range
+2026-01-20 17:16:19,371 - INFO - 629 拷贝完成!
+2026-01-20 17:16:19,375 - INFO - 板号 630 开始拷贝!
+2026-01-20 17:16:19,376 - WARNING - Error processing num 630: list index out of range
+2026-01-20 17:16:19,378 - INFO - 630 拷贝完成!
+2026-01-20 17:16:19,381 - INFO - 板号 631 开始拷贝!
+2026-01-20 17:16:19,383 - WARNING - Error processing num 631: list index out of range
+2026-01-20 17:16:19,385 - INFO - 631 拷贝完成!
+2026-01-20 17:16:19,387 - INFO - 板号 632 开始拷贝!
+2026-01-20 17:16:19,389 - WARNING - Error processing num 632: list index out of range
+2026-01-20 17:16:19,392 - INFO - 632 拷贝完成!
+2026-01-20 17:16:19,395 - INFO - 板号 633 开始拷贝!
+2026-01-20 17:16:19,397 - WARNING - Error processing num 633: list index out of range
+2026-01-20 17:16:19,399 - INFO - 633 拷贝完成!
+2026-01-20 17:16:19,402 - INFO - 板号 634 开始拷贝!
+2026-01-20 17:16:19,404 - WARNING - Error processing num 634: list index out of range
+2026-01-20 17:16:19,405 - INFO - 634 拷贝完成!
+2026-01-20 17:16:19,408 - INFO - 板号 635 开始拷贝!
+2026-01-20 17:16:19,410 - WARNING - Error processing num 635: list index out of range
+2026-01-20 17:16:19,412 - INFO - 635 拷贝完成!
+2026-01-20 17:16:19,414 - INFO - 板号 636 开始拷贝!
+2026-01-20 17:16:19,416 - WARNING - Error processing num 636: list index out of range
+2026-01-20 17:16:19,419 - INFO - 636 拷贝完成!
+2026-01-20 17:16:19,422 - INFO - 板号 637 开始拷贝!
+2026-01-20 17:16:19,424 - WARNING - Error processing num 637: list index out of range
+2026-01-20 17:16:19,426 - INFO - 637 拷贝完成!
+2026-01-20 17:16:19,429 - INFO - 板号 638 开始拷贝!
+2026-01-20 17:16:19,431 - WARNING - Error processing num 638: list index out of range
+2026-01-20 17:16:19,434 - INFO - 638 拷贝完成!
+2026-01-20 17:16:19,436 - INFO - 板号 639 开始拷贝!
+2026-01-20 17:16:19,438 - WARNING - Error processing num 639: list index out of range
+2026-01-20 17:16:19,441 - INFO - 639 拷贝完成!
+2026-01-20 17:16:19,443 - INFO - 板号 640 开始拷贝!
+2026-01-20 17:16:19,445 - WARNING - Error processing num 640: list index out of range
+2026-01-20 17:16:19,447 - INFO - 640 拷贝完成!
+2026-01-20 17:16:19,451 - INFO - 板号 641 开始拷贝!
+2026-01-20 17:16:19,452 - WARNING - Error processing num 641: list index out of range
+2026-01-20 17:16:19,454 - INFO - 641 拷贝完成!
+2026-01-20 17:16:19,457 - INFO - 板号 642 开始拷贝!
+2026-01-20 17:16:19,460 - WARNING - Error processing num 642: list index out of range
+2026-01-20 17:16:19,461 - INFO - 642 拷贝完成!
+2026-01-20 17:16:19,463 - INFO - 板号 643 开始拷贝!
+2026-01-20 17:16:19,466 - WARNING - Error processing num 643: list index out of range
+2026-01-20 17:16:19,469 - INFO - 643 拷贝完成!
+2026-01-20 17:16:19,471 - INFO - 板号 644 开始拷贝!
+2026-01-20 17:16:19,473 - WARNING - Error processing num 644: list index out of range
+2026-01-20 17:16:19,475 - INFO - 644 拷贝完成!
+2026-01-20 17:16:19,477 - INFO - 板号 645 开始拷贝!
+2026-01-20 17:16:19,479 - WARNING - Error processing num 645: list index out of range
+2026-01-20 17:16:19,481 - INFO - 645 拷贝完成!
+2026-01-20 17:16:19,484 - INFO - 板号 646 开始拷贝!
+2026-01-20 17:16:19,486 - WARNING - Error processing num 646: list index out of range
+2026-01-20 17:16:19,488 - INFO - 646 拷贝完成!
+2026-01-20 17:16:19,491 - INFO - 板号 647 开始拷贝!
+2026-01-20 17:16:19,493 - WARNING - Error processing num 647: list index out of range
+2026-01-20 17:16:19,495 - INFO - 647 拷贝完成!
+2026-01-20 17:16:19,497 - INFO - 板号 648 开始拷贝!
+2026-01-20 17:16:19,500 - WARNING - Error processing num 648: list index out of range
+2026-01-20 17:16:19,502 - INFO - 648 拷贝完成!
+2026-01-20 17:16:19,504 - INFO - 板号 649 开始拷贝!
+2026-01-20 17:16:19,506 - WARNING - Error processing num 649: list index out of range
+2026-01-20 17:16:19,508 - INFO - 649 拷贝完成!
+2026-01-20 17:16:19,511 - INFO - 板号 650 开始拷贝!
+2026-01-20 17:16:19,513 - WARNING - Error processing num 650: list index out of range
+2026-01-20 17:16:19,515 - INFO - 650 拷贝完成!
+2026-01-20 17:16:19,518 - INFO - 板号 651 开始拷贝!
+2026-01-20 17:16:19,520 - WARNING - Error processing num 651: list index out of range
+2026-01-20 17:16:19,522 - INFO - 651 拷贝完成!
+2026-01-20 17:16:19,524 - INFO - 板号 652 开始拷贝!
+2026-01-20 17:16:19,527 - WARNING - Error processing num 652: list index out of range
+2026-01-20 17:16:19,529 - INFO - 652 拷贝完成!
+2026-01-20 17:16:19,532 - INFO - 板号 653 开始拷贝!
+2026-01-20 17:16:19,534 - WARNING - Error processing num 653: list index out of range
+2026-01-20 17:16:19,536 - INFO - 653 拷贝完成!
+2026-01-20 17:16:19,538 - INFO - 板号 654 开始拷贝!
+2026-01-20 17:16:19,540 - WARNING - Error processing num 654: list index out of range
+2026-01-20 17:16:19,542 - INFO - 654 拷贝完成!
+2026-01-20 17:16:19,544 - INFO - 板号 655 开始拷贝!
+2026-01-20 17:16:19,546 - WARNING - Error processing num 655: list index out of range
+2026-01-20 17:16:19,550 - INFO - 655 拷贝完成!
+2026-01-20 17:16:19,552 - INFO - 板号 656 开始拷贝!
+2026-01-20 17:16:19,555 - WARNING - Error processing num 656: list index out of range
+2026-01-20 17:16:19,556 - INFO - 656 拷贝完成!
+2026-01-20 17:16:19,559 - INFO - 板号 657 开始拷贝!
+2026-01-20 17:16:19,562 - WARNING - Error processing num 657: list index out of range
+2026-01-20 17:16:19,564 - INFO - 657 拷贝完成!
+2026-01-20 17:16:19,566 - INFO - 板号 658 开始拷贝!
+2026-01-20 17:16:19,569 - WARNING - Error processing num 658: list index out of range
+2026-01-20 17:16:19,571 - INFO - 658 拷贝完成!
+2026-01-20 17:16:19,574 - INFO - 板号 659 开始拷贝!
+2026-01-20 17:16:19,577 - WARNING - Error processing num 659: list index out of range
+2026-01-20 17:16:19,578 - INFO - 659 拷贝完成!
+2026-01-20 17:16:19,580 - INFO - 板号 660 开始拷贝!
+2026-01-20 17:16:19,583 - WARNING - Error processing num 660: list index out of range
+2026-01-20 17:16:19,586 - INFO - 660 拷贝完成!
+2026-01-20 17:16:19,589 - INFO - 板号 661 开始拷贝!
+2026-01-20 17:16:19,591 - WARNING - Error processing num 661: list index out of range
+2026-01-20 17:16:19,593 - INFO - 661 拷贝完成!
+2026-01-20 17:16:19,596 - INFO - 板号 662 开始拷贝!
+2026-01-20 17:16:19,598 - WARNING - Error processing num 662: list index out of range
+2026-01-20 17:16:19,600 - INFO - 662 拷贝完成!
+2026-01-20 17:16:19,603 - INFO - 板号 663 开始拷贝!
+2026-01-20 17:16:19,605 - WARNING - Error processing num 663: list index out of range
+2026-01-20 17:16:19,608 - INFO - 663 拷贝完成!
+2026-01-20 17:16:19,610 - INFO - 板号 664 开始拷贝!
+2026-01-20 17:16:19,612 - WARNING - Error processing num 664: list index out of range
+2026-01-20 17:16:19,614 - INFO - 664 拷贝完成!
+2026-01-20 17:16:19,616 - INFO - 板号 665 开始拷贝!
+2026-01-20 17:16:19,618 - WARNING - Error processing num 665: list index out of range
+2026-01-20 17:16:19,621 - INFO - 665 拷贝完成!
+2026-01-20 17:16:19,626 - INFO - 板号 666 开始拷贝!
+2026-01-20 17:16:19,628 - WARNING - Error processing num 666: list index out of range
+2026-01-20 17:16:19,631 - INFO - 666 拷贝完成!
+2026-01-20 17:16:19,633 - INFO - 板号 667 开始拷贝!
+2026-01-20 17:16:19,635 - WARNING - Error processing num 667: list index out of range
+2026-01-20 17:16:19,637 - INFO - 667 拷贝完成!
+2026-01-20 17:16:19,639 - INFO - 板号 668 开始拷贝!
+2026-01-20 17:16:19,642 - WARNING - Error processing num 668: list index out of range
+2026-01-20 17:16:19,644 - INFO - 668 拷贝完成!
+2026-01-20 17:16:19,646 - INFO - 板号 669 开始拷贝!
+2026-01-20 17:16:19,648 - WARNING - Error processing num 669: list index out of range
+2026-01-20 17:16:19,651 - INFO - 669 拷贝完成!
+2026-01-20 17:16:19,654 - INFO - 板号 670 开始拷贝!
+2026-01-20 17:16:19,656 - WARNING - Error processing num 670: list index out of range
+2026-01-20 17:16:19,658 - INFO - 670 拷贝完成!
+2026-01-20 17:16:19,661 - INFO - 板号 671 开始拷贝!
+2026-01-20 17:16:19,663 - WARNING - Error processing num 671: list index out of range
+2026-01-20 17:16:19,665 - INFO - 671 拷贝完成!
+2026-01-20 17:16:19,668 - INFO - 板号 672 开始拷贝!
+2026-01-20 17:16:19,670 - WARNING - Error processing num 672: list index out of range
+2026-01-20 17:16:19,672 - INFO - 672 拷贝完成!
+2026-01-20 17:16:19,675 - INFO - 板号 673 开始拷贝!
+2026-01-20 17:16:19,678 - WARNING - Error processing num 673: list index out of range
+2026-01-20 17:16:19,680 - INFO - 673 拷贝完成!
+2026-01-20 17:16:19,684 - INFO - 板号 674 开始拷贝!
+2026-01-20 17:16:19,686 - WARNING - Error processing num 674: list index out of range
+2026-01-20 17:16:19,688 - INFO - 674 拷贝完成!
+2026-01-20 17:16:19,690 - INFO - 板号 675 开始拷贝!
+2026-01-20 17:16:19,693 - WARNING - Error processing num 675: list index out of range
+2026-01-20 17:16:19,696 - INFO - 675 拷贝完成!
+2026-01-20 17:16:19,698 - INFO - 板号 676 开始拷贝!
+2026-01-20 17:16:19,701 - WARNING - Error processing num 676: list index out of range
+2026-01-20 17:16:19,703 - INFO - 676 拷贝完成!
+2026-01-20 17:16:19,706 - INFO - 板号 677 开始拷贝!
+2026-01-20 17:16:19,709 - WARNING - Error processing num 677: list index out of range
+2026-01-20 17:16:19,711 - INFO - 677 拷贝完成!
+2026-01-20 17:16:19,714 - INFO - 板号 678 开始拷贝!
+2026-01-20 17:16:19,717 - WARNING - Error processing num 678: list index out of range
+2026-01-20 17:16:19,720 - INFO - 678 拷贝完成!
+2026-01-20 17:16:19,723 - INFO - 板号 679 开始拷贝!
+2026-01-20 17:16:19,725 - WARNING - Error processing num 679: list index out of range
+2026-01-20 17:16:19,727 - INFO - 679 拷贝完成!
+2026-01-20 17:16:19,729 - INFO - 板号 680 开始拷贝!
+2026-01-20 17:16:19,732 - WARNING - Error processing num 680: list index out of range
+2026-01-20 17:16:19,734 - INFO - 680 拷贝完成!
+2026-01-20 17:16:19,738 - INFO - 板号 681 开始拷贝!
+2026-01-20 17:16:19,740 - WARNING - Error processing num 681: list index out of range
+2026-01-20 17:16:19,742 - INFO - 681 拷贝完成!
+2026-01-20 17:16:19,744 - INFO - 板号 682 开始拷贝!
+2026-01-20 17:16:19,746 - WARNING - Error processing num 682: list index out of range
+2026-01-20 17:16:19,748 - INFO - 682 拷贝完成!
+2026-01-20 17:16:19,751 - INFO - 板号 683 开始拷贝!
+2026-01-20 17:16:19,753 - WARNING - Error processing num 683: list index out of range
+2026-01-20 17:16:19,755 - INFO - 683 拷贝完成!
+2026-01-20 17:16:19,758 - INFO - 板号 684 开始拷贝!
+2026-01-20 17:16:19,760 - WARNING - Error processing num 684: list index out of range
+2026-01-20 17:16:19,762 - INFO - 684 拷贝完成!
+2026-01-20 17:16:19,766 - INFO - 板号 685 开始拷贝!
+2026-01-20 17:16:19,767 - WARNING - Error processing num 685: list index out of range
+2026-01-20 17:16:19,770 - INFO - 685 拷贝完成!
+2026-01-20 17:16:19,772 - INFO - 板号 686 开始拷贝!
+2026-01-20 17:16:19,774 - WARNING - Error processing num 686: list index out of range
+2026-01-20 17:16:19,776 - INFO - 686 拷贝完成!
+2026-01-20 17:16:19,779 - INFO - 板号 687 开始拷贝!
+2026-01-20 17:16:19,781 - WARNING - Error processing num 687: list index out of range
+2026-01-20 17:16:19,784 - INFO - 687 拷贝完成!
+2026-01-20 17:16:19,786 - INFO - 板号 688 开始拷贝!
+2026-01-20 17:16:19,788 - WARNING - Error processing num 688: list index out of range
+2026-01-20 17:16:19,790 - INFO - 688 拷贝完成!
+2026-01-20 17:16:19,793 - INFO - 板号 689 开始拷贝!
+2026-01-20 17:16:19,796 - WARNING - Error processing num 689: list index out of range
+2026-01-20 17:16:19,798 - INFO - 689 拷贝完成!
+2026-01-20 17:16:19,800 - INFO - 板号 690 开始拷贝!
+2026-01-20 17:16:19,803 - WARNING - Error processing num 690: list index out of range
+2026-01-20 17:16:19,805 - INFO - 690 拷贝完成!
+2026-01-20 17:16:19,807 - INFO - 板号 691 开始拷贝!
+2026-01-20 17:16:19,810 - WARNING - Error processing num 691: list index out of range
+2026-01-20 17:16:19,812 - INFO - 691 拷贝完成!
+2026-01-20 17:16:19,814 - INFO - 板号 692 开始拷贝!
+2026-01-20 17:16:19,817 - WARNING - Error processing num 692: list index out of range
+2026-01-20 17:16:19,819 - INFO - 692 拷贝完成!
+2026-01-20 17:16:19,822 - INFO - 板号 693 开始拷贝!
+2026-01-20 17:16:19,825 - WARNING - Error processing num 693: list index out of range
+2026-01-20 17:16:19,826 - INFO - 693 拷贝完成!
+2026-01-20 17:16:19,829 - INFO - 板号 694 开始拷贝!
+2026-01-20 17:16:19,831 - WARNING - Error processing num 694: list index out of range
+2026-01-20 17:16:19,834 - INFO - 694 拷贝完成!
+2026-01-20 17:16:19,836 - INFO - 板号 695 开始拷贝!
+2026-01-20 17:16:19,838 - WARNING - Error processing num 695: list index out of range
+2026-01-20 17:16:19,841 - INFO - 695 拷贝完成!
+2026-01-20 17:16:19,843 - INFO - 板号 696 开始拷贝!
+2026-01-20 17:16:19,846 - WARNING - Error processing num 696: list index out of range
+2026-01-20 17:16:19,848 - INFO - 696 拷贝完成!
+2026-01-20 17:16:19,850 - INFO - 板号 697 开始拷贝!
+2026-01-20 17:16:19,853 - WARNING - Error processing num 697: list index out of range
+2026-01-20 17:16:19,854 - INFO - 697 拷贝完成!
+2026-01-20 17:16:19,857 - INFO - 板号 698 开始拷贝!
+2026-01-20 17:16:19,860 - WARNING - Error processing num 698: list index out of range
+2026-01-20 17:16:19,862 - INFO - 698 拷贝完成!
+2026-01-20 17:16:19,864 - INFO - 板号 699 开始拷贝!
+2026-01-20 17:16:19,866 - WARNING - Error processing num 699: list index out of range
+2026-01-20 17:16:19,869 - INFO - 699 拷贝完成!
+2026-01-20 17:16:19,872 - INFO - 板号 700 开始拷贝!
+2026-01-20 17:16:19,875 - WARNING - Error processing num 700: list index out of range
+2026-01-20 17:16:19,877 - INFO - 700 拷贝完成!
+2026-01-20 17:16:19,879 - INFO - 板号 701 开始拷贝!
+2026-01-20 17:16:19,881 - WARNING - Error processing num 701: list index out of range
+2026-01-20 17:16:19,883 - INFO - 701 拷贝完成!
+2026-01-20 17:16:19,886 - INFO - 板号 702 开始拷贝!
+2026-01-20 17:16:19,888 - WARNING - Error processing num 702: list index out of range
+2026-01-20 17:16:19,890 - INFO - 702 拷贝完成!
+2026-01-20 17:16:19,894 - INFO - 板号 703 开始拷贝!
+2026-01-20 17:16:19,896 - WARNING - Error processing num 703: list index out of range
+2026-01-20 17:16:19,898 - INFO - 703 拷贝完成!
+2026-01-20 17:16:19,901 - INFO - 板号 704 开始拷贝!
+2026-01-20 17:16:19,903 - WARNING - Error processing num 704: list index out of range
+2026-01-20 17:16:19,905 - INFO - 704 拷贝完成!
+2026-01-20 17:16:19,908 - INFO - 板号 705 开始拷贝!
+2026-01-20 17:16:19,910 - WARNING - Error processing num 705: list index out of range
+2026-01-20 17:16:19,912 - INFO - 705 拷贝完成!
+2026-01-20 17:16:19,914 - INFO - 板号 706 开始拷贝!
+2026-01-20 17:16:19,916 - WARNING - Error processing num 706: list index out of range
+2026-01-20 17:16:19,918 - INFO - 706 拷贝完成!
+2026-01-20 17:16:19,922 - INFO - 板号 707 开始拷贝!
+2026-01-20 17:16:19,924 - WARNING - Error processing num 707: list index out of range
+2026-01-20 17:16:19,926 - INFO - 707 拷贝完成!
+2026-01-20 17:16:19,929 - INFO - 板号 708 开始拷贝!
+2026-01-20 17:16:19,931 - WARNING - Error processing num 708: list index out of range
+2026-01-20 17:16:19,933 - INFO - 708 拷贝完成!
+2026-01-20 17:16:19,936 - INFO - 板号 709 开始拷贝!
+2026-01-20 17:16:19,938 - WARNING - Error processing num 709: list index out of range
+2026-01-20 17:16:19,940 - INFO - 709 拷贝完成!
+2026-01-20 17:16:19,943 - INFO - 板号 710 开始拷贝!
+2026-01-20 17:16:19,945 - WARNING - Error processing num 710: list index out of range
+2026-01-20 17:16:19,947 - INFO - 710 拷贝完成!
+2026-01-20 17:16:19,949 - INFO - 板号 711 开始拷贝!
+2026-01-20 17:16:19,951 - WARNING - Error processing num 711: list index out of range
+2026-01-20 17:16:19,953 - INFO - 711 拷贝完成!
+2026-01-20 17:16:19,956 - INFO - 板号 712 开始拷贝!
+2026-01-20 17:16:19,958 - WARNING - Error processing num 712: list index out of range
+2026-01-20 17:16:19,960 - INFO - 712 拷贝完成!
+2026-01-20 17:16:19,963 - INFO - 板号 713 开始拷贝!
+2026-01-20 17:16:19,966 - WARNING - Error processing num 713: list index out of range
+2026-01-20 17:16:19,968 - INFO - 713 拷贝完成!
+2026-01-20 17:16:19,971 - INFO - 板号 714 开始拷贝!
+2026-01-20 17:16:19,973 - WARNING - Error processing num 714: list index out of range
+2026-01-20 17:16:19,976 - INFO - 714 拷贝完成!
+2026-01-20 17:16:19,978 - INFO - 板号 715 开始拷贝!
+2026-01-20 17:16:19,980 - WARNING - Error processing num 715: list index out of range
+2026-01-20 17:16:19,982 - INFO - 715 拷贝完成!
+2026-01-20 17:16:19,985 - INFO - 板号 716 开始拷贝!
+2026-01-20 17:16:19,987 - WARNING - Error processing num 716: list index out of range
+2026-01-20 17:16:19,989 - INFO - 716 拷贝完成!
+2026-01-20 17:16:19,991 - INFO - 板号 717 开始拷贝!
+2026-01-20 17:16:19,994 - WARNING - Error processing num 717: list index out of range
+2026-01-20 17:16:19,996 - INFO - 717 拷贝完成!
+2026-01-20 17:16:19,999 - INFO - 板号 718 开始拷贝!
+2026-01-20 17:16:20,001 - WARNING - Error processing num 718: list index out of range
+2026-01-20 17:16:20,003 - INFO - 718 拷贝完成!
+2026-01-20 17:16:20,006 - INFO - 板号 719 开始拷贝!
+2026-01-20 17:16:20,008 - WARNING - Error processing num 719: list index out of range
+2026-01-20 17:16:20,010 - INFO - 719 拷贝完成!
+2026-01-20 17:16:20,012 - INFO - 板号 720 开始拷贝!
+2026-01-20 17:16:20,014 - WARNING - Error processing num 720: list index out of range
+2026-01-20 17:16:20,017 - INFO - 720 拷贝完成!
+2026-01-20 17:16:20,019 - INFO - 板号 721 开始拷贝!
+2026-01-20 17:16:20,021 - WARNING - Error processing num 721: list index out of range
+2026-01-20 17:16:20,023 - INFO - 721 拷贝完成!
+2026-01-20 17:16:20,025 - INFO - 板号 722 开始拷贝!
+2026-01-20 17:16:20,027 - WARNING - Error processing num 722: list index out of range
+2026-01-20 17:16:20,031 - INFO - 722 拷贝完成!
+2026-01-20 17:16:20,033 - INFO - 板号 723 开始拷贝!
+2026-01-20 17:16:20,036 - WARNING - Error processing num 723: list index out of range
+2026-01-20 17:16:20,038 - INFO - 723 拷贝完成!
+2026-01-20 17:16:20,040 - INFO - 板号 724 开始拷贝!
+2026-01-20 17:16:20,043 - WARNING - Error processing num 724: list index out of range
+2026-01-20 17:16:20,045 - INFO - 724 拷贝完成!
+2026-01-20 17:16:20,047 - INFO - 板号 725 开始拷贝!
+2026-01-20 17:16:20,049 - WARNING - Error processing num 725: list index out of range
+2026-01-20 17:16:20,051 - INFO - 725 拷贝完成!
+2026-01-20 17:16:20,054 - INFO - 板号 726 开始拷贝!
+2026-01-20 17:16:20,056 - WARNING - Error processing num 726: list index out of range
+2026-01-20 17:16:20,058 - INFO - 726 拷贝完成!
+2026-01-20 17:16:20,060 - INFO - 板号 727 开始拷贝!
+2026-01-20 17:16:20,063 - WARNING - Error processing num 727: list index out of range
+2026-01-20 17:16:20,065 - INFO - 727 拷贝完成!
+2026-01-20 17:16:20,068 - INFO - 板号 728 开始拷贝!
+2026-01-20 17:16:20,071 - WARNING - Error processing num 728: list index out of range
+2026-01-20 17:16:20,073 - INFO - 728 拷贝完成!
+2026-01-20 17:16:20,075 - INFO - 板号 729 开始拷贝!
+2026-01-20 17:16:20,077 - WARNING - Error processing num 729: list index out of range
+2026-01-20 17:16:20,079 - INFO - 729 拷贝完成!
+2026-01-20 17:16:20,082 - INFO - 板号 730 开始拷贝!
+2026-01-20 17:16:20,084 - WARNING - Error processing num 730: list index out of range
+2026-01-20 17:16:20,087 - INFO - 730 拷贝完成!
+2026-01-20 17:16:20,089 - INFO - 板号 731 开始拷贝!
+2026-01-20 17:16:20,091 - WARNING - Error processing num 731: list index out of range
+2026-01-20 17:16:20,093 - INFO - 731 拷贝完成!
+2026-01-20 17:16:20,095 - INFO - 板号 732 开始拷贝!
+2026-01-20 17:16:20,097 - WARNING - Error processing num 732: list index out of range
+2026-01-20 17:16:20,100 - INFO - 732 拷贝完成!
+2026-01-20 17:16:20,102 - INFO - 板号 733 开始拷贝!
+2026-01-20 17:16:20,105 - WARNING - Error processing num 733: list index out of range
+2026-01-20 17:16:20,107 - INFO - 733 拷贝完成!
+2026-01-20 17:16:20,110 - INFO - 板号 734 开始拷贝!
+2026-01-20 17:16:20,112 - WARNING - Error processing num 734: list index out of range
+2026-01-20 17:16:20,114 - INFO - 734 拷贝完成!
+2026-01-20 17:16:20,116 - INFO - 板号 735 开始拷贝!
+2026-01-20 17:16:20,119 - WARNING - Error processing num 735: list index out of range
+2026-01-20 17:16:20,122 - INFO - 735 拷贝完成!
+2026-01-20 17:16:20,124 - INFO - 板号 736 开始拷贝!
+2026-01-20 17:16:20,127 - WARNING - Error processing num 736: list index out of range
+2026-01-20 17:16:20,128 - INFO - 736 拷贝完成!
+2026-01-20 17:16:20,131 - INFO - 板号 737 开始拷贝!
+2026-01-20 17:16:20,133 - WARNING - Error processing num 737: list index out of range
+2026-01-20 17:16:20,135 - INFO - 737 拷贝完成!
+2026-01-20 17:16:20,138 - INFO - 板号 738 开始拷贝!
+2026-01-20 17:16:20,140 - WARNING - Error processing num 738: list index out of range
+2026-01-20 17:16:20,142 - INFO - 738 拷贝完成!
+2026-01-20 17:16:20,146 - INFO - 板号 739 开始拷贝!
+2026-01-20 17:16:20,148 - WARNING - Error processing num 739: list index out of range
+2026-01-20 17:16:20,151 - INFO - 739 拷贝完成!
+2026-01-20 17:16:20,153 - INFO - 板号 740 开始拷贝!
+2026-01-20 17:16:20,156 - WARNING - Error processing num 740: list index out of range
+2026-01-20 17:16:20,158 - INFO - 740 拷贝完成!
+2026-01-20 17:16:20,160 - INFO - 板号 741 开始拷贝!
+2026-01-20 17:16:20,163 - WARNING - Error processing num 741: list index out of range
+2026-01-20 17:16:20,165 - INFO - 741 拷贝完成!
+2026-01-20 17:16:20,167 - INFO - 板号 742 开始拷贝!
+2026-01-20 17:16:20,169 - WARNING - Error processing num 742: list index out of range
+2026-01-20 17:16:20,171 - INFO - 742 拷贝完成!
+2026-01-20 17:16:20,174 - INFO - 板号 743 开始拷贝!
+2026-01-20 17:16:20,177 - WARNING - Error processing num 743: list index out of range
+2026-01-20 17:16:20,180 - INFO - 743 拷贝完成!
+2026-01-20 17:16:20,182 - INFO - 板号 744 开始拷贝!
+2026-01-20 17:16:20,184 - WARNING - Error processing num 744: list index out of range
+2026-01-20 17:16:20,186 - INFO - 744 拷贝完成!
+2026-01-20 17:16:20,189 - INFO - 板号 745 开始拷贝!
+2026-01-20 17:16:20,191 - WARNING - Error processing num 745: list index out of range
+2026-01-20 17:16:20,193 - INFO - 745 拷贝完成!
+2026-01-20 17:16:20,196 - INFO - 板号 746 开始拷贝!
+2026-01-20 17:16:20,198 - WARNING - Error processing num 746: list index out of range
+2026-01-20 17:16:20,200 - INFO - 746 拷贝完成!
+2026-01-20 17:16:20,203 - INFO - 板号 747 开始拷贝!
+2026-01-20 17:16:20,205 - WARNING - Error processing num 747: list index out of range
+2026-01-20 17:16:20,207 - INFO - 747 拷贝完成!
+2026-01-20 17:16:20,209 - INFO - 板号 748 开始拷贝!
+2026-01-20 17:16:20,211 - WARNING - Error processing num 748: list index out of range
+2026-01-20 17:16:20,213 - INFO - 748 拷贝完成!
+2026-01-20 17:16:20,216 - INFO - 板号 749 开始拷贝!
+2026-01-20 17:16:20,218 - WARNING - Error processing num 749: list index out of range
+2026-01-20 17:16:20,220 - INFO - 749 拷贝完成!
+2026-01-20 17:16:20,224 - INFO - 板号 750 开始拷贝!
+2026-01-20 17:16:20,226 - WARNING - Error processing num 750: list index out of range
+2026-01-20 17:16:20,229 - INFO - 750 拷贝完成!
+2026-01-20 17:16:20,232 - INFO - 板号 751 开始拷贝!
+2026-01-20 17:16:20,234 - WARNING - Error processing num 751: list index out of range
+2026-01-20 17:16:20,236 - INFO - 751 拷贝完成!
+2026-01-20 17:16:20,239 - INFO - 板号 752 开始拷贝!
+2026-01-20 17:16:20,241 - WARNING - Error processing num 752: list index out of range
+2026-01-20 17:16:20,244 - INFO - 752 拷贝完成!
+2026-01-20 17:16:20,246 - INFO - 板号 753 开始拷贝!
+2026-01-20 17:16:20,248 - WARNING - Error processing num 753: list index out of range
+2026-01-20 17:16:20,250 - INFO - 753 拷贝完成!
+2026-01-20 17:16:20,253 - INFO - 板号 754 开始拷贝!
+2026-01-20 17:16:20,256 - WARNING - Error processing num 754: list index out of range
+2026-01-20 17:16:20,258 - INFO - 754 拷贝完成!
+2026-01-20 17:16:20,260 - INFO - 板号 755 开始拷贝!
+2026-01-20 17:16:20,262 - WARNING - Error processing num 755: list index out of range
+2026-01-20 17:16:20,265 - INFO - 755 拷贝完成!
+2026-01-20 17:16:20,267 - INFO - 板号 756 开始拷贝!
+2026-01-20 17:16:20,270 - WARNING - Error processing num 756: list index out of range
+2026-01-20 17:16:20,273 - INFO - 756 拷贝完成!
+2026-01-20 17:16:20,276 - INFO - 板号 757 开始拷贝!
+2026-01-20 17:16:20,278 - WARNING - Error processing num 757: list index out of range
+2026-01-20 17:16:20,280 - INFO - 757 拷贝完成!
+2026-01-20 17:16:20,283 - INFO - 板号 758 开始拷贝!
+2026-01-20 17:16:20,285 - WARNING - Error processing num 758: list index out of range
+2026-01-20 17:16:20,287 - INFO - 758 拷贝完成!
+2026-01-20 17:16:20,290 - INFO - 板号 759 开始拷贝!
+2026-01-20 17:16:20,292 - WARNING - Error processing num 759: list index out of range
+2026-01-20 17:16:20,294 - INFO - 759 拷贝完成!
+2026-01-20 17:16:20,297 - INFO - 板号 760 开始拷贝!
+2026-01-20 17:16:20,300 - WARNING - Error processing num 760: list index out of range
+2026-01-20 17:16:20,302 - INFO - 760 拷贝完成!
+2026-01-20 17:16:20,305 - INFO - 板号 761 开始拷贝!
+2026-01-20 17:16:20,307 - WARNING - Error processing num 761: list index out of range
+2026-01-20 17:16:20,310 - INFO - 761 拷贝完成!
+2026-01-20 17:16:20,312 - INFO - 板号 762 开始拷贝!
+2026-01-20 17:16:20,315 - WARNING - Error processing num 762: list index out of range
+2026-01-20 17:16:20,317 - INFO - 762 拷贝完成!
+2026-01-20 17:16:20,320 - INFO - 板号 763 开始拷贝!
+2026-01-20 17:16:20,322 - WARNING - Error processing num 763: list index out of range
+2026-01-20 17:16:20,325 - INFO - 763 拷贝完成!
+2026-01-20 17:16:20,327 - INFO - 板号 764 开始拷贝!
+2026-01-20 17:16:20,329 - WARNING - Error processing num 764: list index out of range
+2026-01-20 17:16:20,331 - INFO - 764 拷贝完成!
+2026-01-20 17:16:20,334 - INFO - 板号 765 开始拷贝!
+2026-01-20 17:16:20,336 - WARNING - Error processing num 765: list index out of range
+2026-01-20 17:16:20,338 - INFO - 765 拷贝完成!
+2026-01-20 17:16:20,341 - INFO - 板号 766 开始拷贝!
+2026-01-20 17:16:20,343 - WARNING - Error processing num 766: list index out of range
+2026-01-20 17:16:20,345 - INFO - 766 拷贝完成!
+2026-01-20 17:16:20,347 - INFO - 板号 767 开始拷贝!
+2026-01-20 17:16:20,350 - WARNING - Error processing num 767: list index out of range
+2026-01-20 17:16:20,352 - INFO - 767 拷贝完成!
+2026-01-20 17:16:20,355 - INFO - 板号 768 开始拷贝!
+2026-01-20 17:16:20,357 - WARNING - Error processing num 768: list index out of range
+2026-01-20 17:16:20,359 - INFO - 768 拷贝完成!
+2026-01-20 17:16:20,362 - INFO - 板号 769 开始拷贝!
+2026-01-20 17:16:20,364 - WARNING - Error processing num 769: list index out of range
+2026-01-20 17:16:20,366 - INFO - 769 拷贝完成!
+2026-01-20 17:16:20,368 - INFO - 板号 770 开始拷贝!
+2026-01-20 17:16:20,371 - WARNING - Error processing num 770: list index out of range
+2026-01-20 17:16:20,373 - INFO - 770 拷贝完成!
+2026-01-20 17:16:20,376 - INFO - 板号 771 开始拷贝!
+2026-01-20 17:16:20,378 - WARNING - Error processing num 771: list index out of range
+2026-01-20 17:16:20,380 - INFO - 771 拷贝完成!
+2026-01-20 17:16:20,384 - INFO - 板号 772 开始拷贝!
+2026-01-20 17:16:20,386 - WARNING - Error processing num 772: list index out of range
+2026-01-20 17:16:20,388 - INFO - 772 拷贝完成!
+2026-01-20 17:16:20,391 - INFO - 板号 773 开始拷贝!
+2026-01-20 17:16:20,393 - WARNING - Error processing num 773: list index out of range
+2026-01-20 17:16:20,395 - INFO - 773 拷贝完成!
+2026-01-20 17:16:20,397 - INFO - 板号 774 开始拷贝!
+2026-01-20 17:16:20,400 - WARNING - Error processing num 774: list index out of range
+2026-01-20 17:16:20,402 - INFO - 774 拷贝完成!
+2026-01-20 17:16:20,405 - INFO - 板号 775 开始拷贝!
+2026-01-20 17:16:20,407 - WARNING - Error processing num 775: list index out of range
+2026-01-20 17:16:20,410 - INFO - 775 拷贝完成!
+2026-01-20 17:16:20,412 - INFO - 板号 776 开始拷贝!
+2026-01-20 17:16:20,414 - WARNING - Error processing num 776: list index out of range
+2026-01-20 17:16:20,417 - INFO - 776 拷贝完成!
+2026-01-20 17:16:20,419 - INFO - 板号 777 开始拷贝!
+2026-01-20 17:16:20,421 - WARNING - Error processing num 777: list index out of range
+2026-01-20 17:16:20,424 - INFO - 777 拷贝完成!
+2026-01-20 17:16:20,426 - INFO - 板号 778 开始拷贝!
+2026-01-20 17:16:20,430 - WARNING - Error processing num 778: list index out of range
+2026-01-20 17:16:20,432 - INFO - 778 拷贝完成!
+2026-01-20 17:16:20,434 - INFO - 板号 779 开始拷贝!
+2026-01-20 17:16:20,437 - WARNING - Error processing num 779: list index out of range
+2026-01-20 17:16:20,439 - INFO - 779 拷贝完成!
+2026-01-20 17:16:20,442 - INFO - 板号 780 开始拷贝!
+2026-01-20 17:16:20,444 - WARNING - Error processing num 780: list index out of range
+2026-01-20 17:16:20,446 - INFO - 780 拷贝完成!
+2026-01-20 17:16:20,448 - INFO - 板号 781 开始拷贝!
+2026-01-20 17:16:20,451 - WARNING - Error processing num 781: list index out of range
+2026-01-20 17:16:20,454 - INFO - 781 拷贝完成!
+2026-01-20 17:16:20,457 - INFO - 板号 782 开始拷贝!
+2026-01-20 17:16:20,460 - WARNING - Error processing num 782: list index out of range
+2026-01-20 17:16:20,462 - INFO - 782 拷贝完成!
+2026-01-20 17:16:20,464 - INFO - 板号 783 开始拷贝!
+2026-01-20 17:16:20,468 - WARNING - Error processing num 783: list index out of range
+2026-01-20 17:16:20,470 - INFO - 783 拷贝完成!
+2026-01-20 17:16:20,473 - INFO - 板号 784 开始拷贝!
+2026-01-20 17:16:20,476 - WARNING - Error processing num 784: list index out of range
+2026-01-20 17:16:20,478 - INFO - 784 拷贝完成!
+2026-01-20 17:16:20,480 - INFO - 板号 785 开始拷贝!
+2026-01-20 17:16:20,482 - WARNING - Error processing num 785: list index out of range
+2026-01-20 17:16:20,485 - INFO - 785 拷贝完成!
+2026-01-20 17:16:20,487 - INFO - 板号 786 开始拷贝!
+2026-01-20 17:16:20,490 - WARNING - Error processing num 786: list index out of range
+2026-01-20 17:16:20,492 - INFO - 786 拷贝完成!
+2026-01-20 17:16:20,496 - INFO - 板号 787 开始拷贝!
+2026-01-20 17:16:20,498 - WARNING - Error processing num 787: list index out of range
+2026-01-20 17:16:20,500 - INFO - 787 拷贝完成!
+2026-01-20 17:16:20,502 - INFO - 板号 788 开始拷贝!
+2026-01-20 17:16:20,505 - WARNING - Error processing num 788: list index out of range
+2026-01-20 17:16:20,507 - INFO - 788 拷贝完成!
+2026-01-20 17:16:20,509 - INFO - 板号 789 开始拷贝!
+2026-01-20 17:16:20,511 - WARNING - Error processing num 789: list index out of range
+2026-01-20 17:16:20,513 - INFO - 789 拷贝完成!
+2026-01-20 17:16:20,517 - INFO - 板号 790 开始拷贝!
+2026-01-20 17:16:20,519 - WARNING - Error processing num 790: list index out of range
+2026-01-20 17:16:20,521 - INFO - 790 拷贝完成!
+2026-01-20 17:16:20,525 - INFO - 板号 791 开始拷贝!
+2026-01-20 17:16:20,527 - WARNING - Error processing num 791: list index out of range
+2026-01-20 17:16:20,529 - INFO - 791 拷贝完成!
+2026-01-20 17:16:20,531 - INFO - 板号 792 开始拷贝!
+2026-01-20 17:16:20,535 - WARNING - Error processing num 792: list index out of range
+2026-01-20 17:16:20,539 - INFO - 792 拷贝完成!
+2026-01-20 17:16:20,542 - INFO - 板号 793 开始拷贝!
+2026-01-20 17:16:20,544 - WARNING - Error processing num 793: list index out of range
+2026-01-20 17:16:20,546 - INFO - 793 拷贝完成!
+2026-01-20 17:16:20,548 - INFO - 板号 794 开始拷贝!
+2026-01-20 17:16:20,550 - WARNING - Error processing num 794: list index out of range
+2026-01-20 17:16:20,552 - INFO - 794 拷贝完成!
+2026-01-20 17:16:20,555 - INFO - 板号 795 开始拷贝!
+2026-01-20 17:16:20,557 - WARNING - Error processing num 795: list index out of range
+2026-01-20 17:16:20,559 - INFO - 795 拷贝完成!
+2026-01-20 17:16:20,562 - INFO - 板号 796 开始拷贝!
+2026-01-20 17:16:20,565 - WARNING - Error processing num 796: list index out of range
+2026-01-20 17:16:20,567 - INFO - 796 拷贝完成!
+2026-01-20 17:16:20,570 - INFO - 板号 797 开始拷贝!
+2026-01-20 17:16:20,572 - WARNING - Error processing num 797: list index out of range
+2026-01-20 17:16:20,576 - INFO - 797 拷贝完成!
+2026-01-20 17:16:20,580 - INFO - 板号 798 开始拷贝!
+2026-01-20 17:16:20,582 - WARNING - Error processing num 798: list index out of range
+2026-01-20 17:16:20,584 - INFO - 798 拷贝完成!
+2026-01-20 17:16:20,588 - INFO - 板号 799 开始拷贝!
+2026-01-20 17:16:20,591 - WARNING - Error processing num 799: list index out of range
+2026-01-20 17:16:20,595 - INFO - 799 拷贝完成!
+2026-01-20 17:16:20,598 - INFO - 板号 800 开始拷贝!
+2026-01-20 17:16:20,600 - WARNING - Error processing num 800: list index out of range
+2026-01-20 17:16:20,603 - INFO - 800 拷贝完成!
+2026-01-20 17:16:20,605 - INFO - 板号 801 开始拷贝!
+2026-01-20 17:16:20,607 - WARNING - Error processing num 801: list index out of range
+2026-01-20 17:16:20,611 - INFO - 801 拷贝完成!
+2026-01-20 17:16:20,613 - INFO - 板号 802 开始拷贝!
+2026-01-20 17:16:20,615 - WARNING - Error processing num 802: list index out of range
+2026-01-20 17:16:20,617 - INFO - 802 拷贝完成!
+2026-01-20 17:16:20,620 - INFO - 板号 803 开始拷贝!
+2026-01-20 17:16:20,622 - WARNING - Error processing num 803: list index out of range
+2026-01-20 17:16:20,625 - INFO - 803 拷贝完成!
+2026-01-20 17:16:20,627 - INFO - 板号 804 开始拷贝!
+2026-01-20 17:16:20,631 - WARNING - Error processing num 804: list index out of range
+2026-01-20 17:16:20,633 - INFO - 804 拷贝完成!
+2026-01-20 17:16:20,636 - INFO - 板号 805 开始拷贝!
+2026-01-20 17:16:20,638 - WARNING - Error processing num 805: list index out of range
+2026-01-20 17:16:20,642 - INFO - 805 拷贝完成!
+2026-01-20 17:16:20,645 - INFO - 板号 806 开始拷贝!
+2026-01-20 17:16:20,647 - WARNING - Error processing num 806: list index out of range
+2026-01-20 17:16:20,649 - INFO - 806 拷贝完成!
+2026-01-20 17:16:20,651 - INFO - 板号 807 开始拷贝!
+2026-01-20 17:16:20,654 - WARNING - Error processing num 807: list index out of range
+2026-01-20 17:16:20,656 - INFO - 807 拷贝完成!
+2026-01-20 17:16:20,659 - INFO - 板号 808 开始拷贝!
+2026-01-20 17:16:20,662 - WARNING - Error processing num 808: list index out of range
+2026-01-20 17:16:20,664 - INFO - 808 拷贝完成!
+2026-01-20 17:16:20,665 - INFO - 板号 809 开始拷贝!
+2026-01-20 17:16:20,670 - WARNING - Error processing num 809: list index out of range
+2026-01-20 17:16:20,672 - INFO - 809 拷贝完成!
+2026-01-20 17:16:20,677 - INFO - 板号 810 开始拷贝!
+2026-01-20 17:16:20,679 - WARNING - Error processing num 810: list index out of range
+2026-01-20 17:16:20,682 - INFO - 810 拷贝完成!
+2026-01-20 17:16:20,685 - INFO - 板号 811 开始拷贝!
+2026-01-20 17:16:20,687 - WARNING - Error processing num 811: list index out of range
+2026-01-20 17:16:20,689 - INFO - 811 拷贝完成!
+2026-01-20 17:16:20,692 - INFO - 板号 812 开始拷贝!
+2026-01-20 17:16:20,695 - WARNING - Error processing num 812: list index out of range
+2026-01-20 17:16:20,698 - INFO - 812 拷贝完成!
+2026-01-20 17:16:20,700 - INFO - 板号 813 开始拷贝!
+2026-01-20 17:16:20,702 - WARNING - Error processing num 813: list index out of range
+2026-01-20 17:16:20,705 - INFO - 813 拷贝完成!
+2026-01-20 17:16:20,708 - INFO - 板号 814 开始拷贝!
+2026-01-20 17:16:20,710 - WARNING - Error processing num 814: list index out of range
+2026-01-20 17:16:20,713 - INFO - 814 拷贝完成!
+2026-01-20 17:16:20,716 - INFO - 板号 815 开始拷贝!
+2026-01-20 17:16:20,719 - WARNING - Error processing num 815: list index out of range
+2026-01-20 17:16:20,721 - INFO - 815 拷贝完成!
+2026-01-20 17:16:20,724 - INFO - 板号 816 开始拷贝!
+2026-01-20 17:16:20,725 - WARNING - Error processing num 816: list index out of range
+2026-01-20 17:16:20,727 - INFO - 816 拷贝完成!
+2026-01-20 17:16:20,730 - INFO - 板号 817 开始拷贝!
+2026-01-20 17:16:20,732 - WARNING - Error processing num 817: list index out of range
+2026-01-20 17:16:20,736 - INFO - 817 拷贝完成!
+2026-01-20 17:16:20,738 - INFO - 板号 818 开始拷贝!
+2026-01-20 17:16:20,740 - WARNING - Error processing num 818: list index out of range
+2026-01-20 17:16:20,743 - INFO - 818 拷贝完成!
+2026-01-20 17:16:20,746 - INFO - 板号 819 开始拷贝!
+2026-01-20 17:16:20,748 - WARNING - Error processing num 819: list index out of range
+2026-01-20 17:16:20,750 - INFO - 819 拷贝完成!
+2026-01-20 17:16:20,754 - INFO - 板号 820 开始拷贝!
+2026-01-20 17:16:20,756 - WARNING - Error processing num 820: list index out of range
+2026-01-20 17:16:20,758 - INFO - 820 拷贝完成!
+2026-01-20 17:16:20,761 - INFO - 板号 821 开始拷贝!
+2026-01-20 17:16:20,763 - WARNING - Error processing num 821: list index out of range
+2026-01-20 17:16:20,766 - INFO - 821 拷贝完成!
+2026-01-20 17:16:20,769 - INFO - 板号 822 开始拷贝!
+2026-01-20 17:16:20,771 - WARNING - Error processing num 822: list index out of range
+2026-01-20 17:16:20,775 - INFO - 822 拷贝完成!
+2026-01-20 17:16:20,778 - INFO - 板号 823 开始拷贝!
+2026-01-20 17:16:20,780 - WARNING - Error processing num 823: list index out of range
+2026-01-20 17:16:20,782 - INFO - 823 拷贝完成!
+2026-01-20 17:16:20,785 - INFO - 板号 824 开始拷贝!
+2026-01-20 17:16:20,786 - WARNING - Error processing num 824: list index out of range
+2026-01-20 17:16:20,790 - INFO - 824 拷贝完成!
+2026-01-20 17:16:20,792 - INFO - 板号 825 开始拷贝!
+2026-01-20 17:16:20,794 - WARNING - Error processing num 825: list index out of range
+2026-01-20 17:16:20,797 - INFO - 825 拷贝完成!
+2026-01-20 17:16:20,799 - INFO - 板号 826 开始拷贝!
+2026-01-20 17:16:20,802 - WARNING - Error processing num 826: list index out of range
+2026-01-20 17:16:20,804 - INFO - 826 拷贝完成!
+2026-01-20 17:16:20,807 - INFO - 板号 827 开始拷贝!
+2026-01-20 17:16:20,809 - WARNING - Error processing num 827: list index out of range
+2026-01-20 17:16:20,811 - INFO - 827 拷贝完成!
+2026-01-20 17:16:20,817 - INFO - 板号 828 开始拷贝!
+2026-01-20 17:16:20,819 - WARNING - Error processing num 828: list index out of range
+2026-01-20 17:16:20,821 - INFO - 828 拷贝完成!
+2026-01-20 17:16:20,824 - INFO - 板号 829 开始拷贝!
+2026-01-20 17:16:20,826 - WARNING - Error processing num 829: list index out of range
+2026-01-20 17:16:20,828 - INFO - 829 拷贝完成!
+2026-01-20 17:16:20,831 - INFO - 板号 830 开始拷贝!
+2026-01-20 17:16:20,835 - WARNING - Error processing num 830: list index out of range
+2026-01-20 17:16:20,836 - INFO - 830 拷贝完成!
+2026-01-20 17:16:20,839 - INFO - 板号 831 开始拷贝!
+2026-01-20 17:16:20,843 - WARNING - Error processing num 831: list index out of range
+2026-01-20 17:16:20,845 - INFO - 831 拷贝完成!
+2026-01-20 17:16:20,848 - INFO - 板号 832 开始拷贝!
+2026-01-20 17:16:20,851 - WARNING - Error processing num 832: list index out of range
+2026-01-20 17:16:20,853 - INFO - 832 拷贝完成!
+2026-01-20 17:16:20,857 - INFO - 板号 833 开始拷贝!
+2026-01-20 17:16:20,859 - WARNING - Error processing num 833: list index out of range
+2026-01-20 17:16:20,861 - INFO - 833 拷贝完成!
+2026-01-20 17:16:20,864 - INFO - 板号 834 开始拷贝!
+2026-01-20 17:16:20,868 - WARNING - Error processing num 834: list index out of range
+2026-01-20 17:16:20,871 - INFO - 834 拷贝完成!
+2026-01-20 17:16:20,873 - INFO - 板号 835 开始拷贝!
+2026-01-20 17:16:20,876 - WARNING - Error processing num 835: list index out of range
+2026-01-20 17:16:20,878 - INFO - 835 拷贝完成!
+2026-01-20 17:16:20,882 - INFO - 板号 836 开始拷贝!
+2026-01-20 17:16:20,885 - WARNING - Error processing num 836: list index out of range
+2026-01-20 17:16:20,887 - INFO - 836 拷贝完成!
+2026-01-20 17:16:20,890 - INFO - 板号 837 开始拷贝!
+2026-01-20 17:16:20,892 - WARNING - Error processing num 837: list index out of range
+2026-01-20 17:16:20,896 - INFO - 837 拷贝完成!
+2026-01-20 17:16:20,898 - INFO - 板号 838 开始拷贝!
+2026-01-20 17:16:20,901 - WARNING - Error processing num 838: list index out of range
+2026-01-20 17:16:20,903 - INFO - 838 拷贝完成!
+2026-01-20 17:16:20,906 - INFO - 板号 839 开始拷贝!
+2026-01-20 17:16:20,910 - WARNING - Error processing num 839: list index out of range
+2026-01-20 17:16:20,913 - INFO - 839 拷贝完成!
+2026-01-20 17:16:20,915 - INFO - 板号 840 开始拷贝!
+2026-01-20 17:16:20,919 - WARNING - Error processing num 840: list index out of range
+2026-01-20 17:16:20,922 - INFO - 840 拷贝完成!
+2026-01-20 17:16:20,924 - INFO - 板号 841 开始拷贝!
+2026-01-20 17:16:20,926 - WARNING - Error processing num 841: list index out of range
+2026-01-20 17:16:20,928 - INFO - 841 拷贝完成!
+2026-01-20 17:16:20,935 - INFO - 板号 842 开始拷贝!
+2026-01-20 17:16:20,937 - WARNING - Error processing num 842: list index out of range
+2026-01-20 17:16:20,939 - INFO - 842 拷贝完成!
+2026-01-20 17:16:20,942 - INFO - 板号 843 开始拷贝!
+2026-01-20 17:16:20,945 - WARNING - Error processing num 843: list index out of range
+2026-01-20 17:16:20,947 - INFO - 843 拷贝完成!
+2026-01-20 17:16:20,949 - INFO - 板号 844 开始拷贝!
+2026-01-20 17:16:20,952 - WARNING - Error processing num 844: list index out of range
+2026-01-20 17:16:20,954 - INFO - 844 拷贝完成!
+2026-01-20 17:16:20,957 - INFO - 板号 845 开始拷贝!
+2026-01-20 17:16:20,959 - WARNING - Error processing num 845: list index out of range
+2026-01-20 17:16:20,961 - INFO - 845 拷贝完成!
+2026-01-20 17:16:20,964 - INFO - 板号 846 开始拷贝!
+2026-01-20 17:16:20,967 - WARNING - Error processing num 846: list index out of range
+2026-01-20 17:16:20,969 - INFO - 846 拷贝完成!
+2026-01-20 17:16:20,972 - INFO - 板号 847 开始拷贝!
+2026-01-20 17:16:20,974 - WARNING - Error processing num 847: list index out of range
+2026-01-20 17:16:20,977 - INFO - 847 拷贝完成!
+2026-01-20 17:16:20,980 - INFO - 板号 848 开始拷贝!
+2026-01-20 17:16:20,982 - WARNING - Error processing num 848: list index out of range
+2026-01-20 17:16:20,984 - INFO - 848 拷贝完成!
+2026-01-20 17:16:20,986 - INFO - 板号 849 开始拷贝!
+2026-01-20 17:16:20,990 - WARNING - Error processing num 849: list index out of range
+2026-01-20 17:16:20,992 - INFO - 849 拷贝完成!
+2026-01-20 17:16:20,995 - INFO - 板号 850 开始拷贝!
+2026-01-20 17:16:20,998 - WARNING - Error processing num 850: list index out of range
+2026-01-20 17:16:21,000 - INFO - 850 拷贝完成!
+2026-01-20 17:16:21,003 - INFO - 板号 851 开始拷贝!
+2026-01-20 17:16:21,005 - WARNING - Error processing num 851: list index out of range
+2026-01-20 17:16:21,008 - INFO - 851 拷贝完成!
+2026-01-20 17:16:21,010 - INFO - 板号 852 开始拷贝!
+2026-01-20 17:16:21,012 - WARNING - Error processing num 852: list index out of range
+2026-01-20 17:16:21,016 - INFO - 852 拷贝完成!
+2026-01-20 17:16:21,019 - INFO - 板号 853 开始拷贝!
+2026-01-20 17:16:21,021 - WARNING - Error processing num 853: list index out of range
+2026-01-20 17:16:21,024 - INFO - 853 拷贝完成!
+2026-01-20 17:16:21,027 - INFO - 板号 854 开始拷贝!
+2026-01-20 17:16:21,032 - WARNING - Error processing num 854: list index out of range
+2026-01-20 17:16:21,034 - INFO - 854 拷贝完成!
+2026-01-20 17:16:21,036 - INFO - 板号 855 开始拷贝!
+2026-01-20 17:16:21,039 - WARNING - Error processing num 855: list index out of range
+2026-01-20 17:16:21,041 - INFO - 855 拷贝完成!
+2026-01-20 17:16:21,044 - INFO - 板号 856 开始拷贝!
+2026-01-20 17:16:21,046 - WARNING - Error processing num 856: list index out of range
+2026-01-20 17:16:21,048 - INFO - 856 拷贝完成!
+2026-01-20 17:16:21,051 - INFO - 板号 857 开始拷贝!
+2026-01-20 17:16:21,054 - WARNING - Error processing num 857: list index out of range
+2026-01-20 17:16:21,056 - INFO - 857 拷贝完成!
+2026-01-20 17:16:21,058 - INFO - 板号 858 开始拷贝!
+2026-01-20 17:16:21,060 - WARNING - Error processing num 858: list index out of range
+2026-01-20 17:16:21,063 - INFO - 858 拷贝完成!
+2026-01-20 17:16:21,065 - INFO - 板号 859 开始拷贝!
+2026-01-20 17:16:21,067 - WARNING - Error processing num 859: list index out of range
+2026-01-20 17:16:21,070 - INFO - 859 拷贝完成!
+2026-01-20 17:16:21,072 - INFO - 板号 860 开始拷贝!
+2026-01-20 17:16:21,075 - WARNING - Error processing num 860: list index out of range
+2026-01-20 17:16:21,078 - INFO - 860 拷贝完成!
+2026-01-20 17:16:21,081 - INFO - 板号 861 开始拷贝!
+2026-01-20 17:16:21,084 - WARNING - Error processing num 861: list index out of range
+2026-01-20 17:16:21,085 - INFO - 861 拷贝完成!
+2026-01-20 17:16:21,089 - INFO - 板号 862 开始拷贝!
+2026-01-20 17:16:21,091 - WARNING - Error processing num 862: list index out of range
+2026-01-20 17:16:21,093 - INFO - 862 拷贝完成!
+2026-01-20 17:16:21,095 - INFO - 板号 863 开始拷贝!
+2026-01-20 17:16:21,097 - WARNING - Error processing num 863: list index out of range
+2026-01-20 17:16:21,100 - INFO - 863 拷贝完成!
+2026-01-20 17:16:21,102 - INFO - 板号 864 开始拷贝!
+2026-01-20 17:16:21,104 - WARNING - Error processing num 864: list index out of range
+2026-01-20 17:16:21,109 - INFO - 864 拷贝完成!
+2026-01-20 17:16:21,111 - INFO - 板号 865 开始拷贝!
+2026-01-20 17:16:21,113 - WARNING - Error processing num 865: list index out of range
+2026-01-20 17:16:21,117 - INFO - 865 拷贝完成!
+2026-01-20 17:16:21,119 - INFO - 板号 866 开始拷贝!
+2026-01-20 17:16:21,122 - WARNING - Error processing num 866: list index out of range
+2026-01-20 17:16:21,124 - INFO - 866 拷贝完成!
+2026-01-20 17:16:21,127 - INFO - 板号 867 开始拷贝!
+2026-01-20 17:16:21,129 - WARNING - Error processing num 867: list index out of range
+2026-01-20 17:16:21,132 - INFO - 867 拷贝完成!
+2026-01-20 17:16:21,135 - INFO - 板号 868 开始拷贝!
+2026-01-20 17:16:21,138 - WARNING - Error processing num 868: list index out of range
+2026-01-20 17:16:21,141 - INFO - 868 拷贝完成!
+2026-01-20 17:16:21,143 - INFO - 板号 869 开始拷贝!
+2026-01-20 17:16:21,145 - WARNING - Error processing num 869: list index out of range
+2026-01-20 17:16:21,147 - INFO - 869 拷贝完成!
+2026-01-20 17:16:21,150 - INFO - 板号 870 开始拷贝!
+2026-01-20 17:16:21,152 - WARNING - Error processing num 870: list index out of range
+2026-01-20 17:16:21,154 - INFO - 870 拷贝完成!
+2026-01-20 17:16:21,157 - INFO - 板号 871 开始拷贝!
+2026-01-20 17:16:21,159 - WARNING - Error processing num 871: list index out of range
+2026-01-20 17:16:21,162 - INFO - 871 拷贝完成!
+2026-01-20 17:16:21,165 - INFO - 板号 872 开始拷贝!
+2026-01-20 17:16:21,169 - WARNING - Error processing num 872: list index out of range
+2026-01-20 17:16:21,172 - INFO - 872 拷贝完成!
+2026-01-20 17:16:21,175 - INFO - 板号 873 开始拷贝!
+2026-01-20 17:16:21,178 - WARNING - Error processing num 873: list index out of range
+2026-01-20 17:16:21,180 - INFO - 873 拷贝完成!
+2026-01-20 17:16:21,183 - INFO - 板号 874 开始拷贝!
+2026-01-20 17:16:21,185 - WARNING - Error processing num 874: list index out of range
+2026-01-20 17:16:21,188 - INFO - 874 拷贝完成!
+2026-01-20 17:16:21,190 - INFO - 板号 875 开始拷贝!
+2026-01-20 17:16:21,193 - WARNING - Error processing num 875: list index out of range
+2026-01-20 17:16:21,195 - INFO - 875 拷贝完成!
+2026-01-20 17:16:21,198 - INFO - 板号 876 开始拷贝!
+2026-01-20 17:16:21,200 - WARNING - Error processing num 876: list index out of range
+2026-01-20 17:16:21,203 - INFO - 876 拷贝完成!
+2026-01-20 17:16:21,206 - INFO - 板号 877 开始拷贝!
+2026-01-20 17:16:21,208 - WARNING - Error processing num 877: list index out of range
+2026-01-20 17:16:21,210 - INFO - 877 拷贝完成!
+2026-01-20 17:16:21,213 - INFO - 板号 878 开始拷贝!
+2026-01-20 17:16:21,216 - WARNING - Error processing num 878: list index out of range
+2026-01-20 17:16:21,218 - INFO - 878 拷贝完成!
+2026-01-20 17:16:21,221 - INFO - 板号 879 开始拷贝!
+2026-01-20 17:16:21,223 - WARNING - Error processing num 879: list index out of range
+2026-01-20 17:16:21,225 - INFO - 879 拷贝完成!
+2026-01-20 17:16:21,229 - INFO - 板号 880 开始拷贝!
+2026-01-20 17:16:21,231 - WARNING - Error processing num 880: list index out of range
+2026-01-20 17:16:21,233 - INFO - 880 拷贝完成!
+2026-01-20 17:16:21,235 - INFO - 板号 881 开始拷贝!
+2026-01-20 17:16:21,238 - WARNING - Error processing num 881: list index out of range
+2026-01-20 17:16:21,242 - INFO - 881 拷贝完成!
+2026-01-20 17:16:21,244 - INFO - 板号 882 开始拷贝!
+2026-01-20 17:16:21,246 - WARNING - Error processing num 882: list index out of range
+2026-01-20 17:16:21,248 - INFO - 882 拷贝完成!
+2026-01-20 17:16:21,250 - INFO - 板号 883 开始拷贝!
+2026-01-20 17:16:21,252 - WARNING - Error processing num 883: list index out of range
+2026-01-20 17:16:21,255 - INFO - 883 拷贝完成!
+2026-01-20 17:16:21,258 - INFO - 板号 884 开始拷贝!
+2026-01-20 17:16:21,260 - WARNING - Error processing num 884: list index out of range
+2026-01-20 17:16:21,262 - INFO - 884 拷贝完成!
+2026-01-20 17:16:21,264 - INFO - 板号 885 开始拷贝!
+2026-01-20 17:16:21,267 - WARNING - Error processing num 885: list index out of range
+2026-01-20 17:16:21,269 - INFO - 885 拷贝完成!
+2026-01-20 17:16:21,271 - INFO - 板号 886 开始拷贝!
+2026-01-20 17:16:21,274 - WARNING - Error processing num 886: list index out of range
+2026-01-20 17:16:21,275 - INFO - 886 拷贝完成!
+2026-01-20 17:16:21,278 - INFO - 板号 887 开始拷贝!
+2026-01-20 17:16:21,280 - WARNING - Error processing num 887: list index out of range
+2026-01-20 17:16:21,283 - INFO - 887 拷贝完成!
+2026-01-20 17:16:21,285 - INFO - 板号 888 开始拷贝!
+2026-01-20 17:16:21,288 - WARNING - Error processing num 888: list index out of range
+2026-01-20 17:16:21,290 - INFO - 888 拷贝完成!
+2026-01-20 17:16:21,292 - INFO - 板号 889 开始拷贝!
+2026-01-20 17:16:21,294 - WARNING - Error processing num 889: list index out of range
+2026-01-20 17:16:21,296 - INFO - 889 拷贝完成!
+2026-01-20 17:16:21,298 - INFO - 板号 890 开始拷贝!
+2026-01-20 17:16:21,301 - WARNING - Error processing num 890: list index out of range
+2026-01-20 17:16:21,303 - INFO - 890 拷贝完成!
+2026-01-20 17:16:21,308 - INFO - 板号 891 开始拷贝!
+2026-01-20 17:16:21,310 - WARNING - Error processing num 891: list index out of range
+2026-01-20 17:16:21,312 - INFO - 891 拷贝完成!
+2026-01-20 17:16:21,314 - INFO - 板号 892 开始拷贝!
+2026-01-20 17:16:21,317 - WARNING - Error processing num 892: list index out of range
+2026-01-20 17:16:21,319 - INFO - 892 拷贝完成!
+2026-01-20 17:16:21,322 - INFO - 板号 893 开始拷贝!
+2026-01-20 17:16:21,324 - WARNING - Error processing num 893: list index out of range
+2026-01-20 17:16:21,325 - INFO - 893 拷贝完成!
+2026-01-20 17:16:21,328 - INFO - 板号 894 开始拷贝!
+2026-01-20 17:16:21,330 - WARNING - Error processing num 894: list index out of range
+2026-01-20 17:16:21,332 - INFO - 894 拷贝完成!
+2026-01-20 17:16:21,335 - INFO - 板号 895 开始拷贝!
+2026-01-20 17:16:21,337 - WARNING - Error processing num 895: list index out of range
+2026-01-20 17:16:21,340 - INFO - 895 拷贝完成!
+2026-01-20 17:16:21,342 - INFO - 板号 896 开始拷贝!
+2026-01-20 17:16:21,345 - WARNING - Error processing num 896: list index out of range
+2026-01-20 17:16:21,347 - INFO - 896 拷贝完成!
+2026-01-20 17:16:21,350 - INFO - 板号 897 开始拷贝!
+2026-01-20 17:16:21,352 - WARNING - Error processing num 897: list index out of range
+2026-01-20 17:16:21,355 - INFO - 897 拷贝完成!
+2026-01-20 17:16:21,358 - INFO - 板号 898 开始拷贝!
+2026-01-20 17:16:21,362 - WARNING - Error processing num 898: list index out of range
+2026-01-20 17:16:21,365 - INFO - 898 拷贝完成!
+2026-01-20 17:16:21,367 - INFO - 板号 899 开始拷贝!
+2026-01-20 17:16:21,369 - WARNING - Error processing num 899: list index out of range
+2026-01-20 17:16:21,371 - INFO - 899 拷贝完成!
+2026-01-20 17:16:21,375 - INFO - 板号 900 开始拷贝!
+2026-01-20 17:16:21,378 - WARNING - Error processing num 900: list index out of range
+2026-01-20 17:16:21,380 - INFO - 900 拷贝完成!
+2026-01-20 17:16:21,383 - INFO - 板号 901 开始拷贝!
+2026-01-20 17:16:21,385 - WARNING - Error processing num 901: list index out of range
+2026-01-20 17:16:21,390 - INFO - 901 拷贝完成!
+2026-01-20 17:16:21,392 - INFO - 板号 902 开始拷贝!
+2026-01-20 17:16:21,395 - WARNING - Error processing num 902: list index out of range
+2026-01-20 17:16:21,397 - INFO - 902 拷贝完成!
+2026-01-20 17:16:21,400 - INFO - 板号 903 开始拷贝!
+2026-01-20 17:16:21,402 - WARNING - Error processing num 903: list index out of range
+2026-01-20 17:16:21,405 - INFO - 903 拷贝完成!
+2026-01-20 17:16:21,407 - INFO - 板号 904 开始拷贝!
+2026-01-20 17:16:21,409 - WARNING - Error processing num 904: list index out of range
+2026-01-20 17:16:21,412 - INFO - 904 拷贝完成!
+2026-01-20 17:16:21,416 - INFO - 板号 905 开始拷贝!
+2026-01-20 17:16:21,418 - WARNING - Error processing num 905: list index out of range
+2026-01-20 17:16:21,420 - INFO - 905 拷贝完成!
+2026-01-20 17:16:21,423 - INFO - 板号 906 开始拷贝!
+2026-01-20 17:16:21,425 - WARNING - Error processing num 906: list index out of range
+2026-01-20 17:16:21,429 - INFO - 906 拷贝完成!
+2026-01-20 17:16:21,432 - INFO - 板号 907 开始拷贝!
+2026-01-20 17:16:21,434 - WARNING - Error processing num 907: list index out of range
+2026-01-20 17:16:21,436 - INFO - 907 拷贝完成!
+2026-01-20 17:16:21,438 - INFO - 板号 908 开始拷贝!
+2026-01-20 17:16:21,442 - WARNING - Error processing num 908: list index out of range
+2026-01-20 17:16:21,444 - INFO - 908 拷贝完成!
+2026-01-20 17:16:21,446 - INFO - 板号 909 开始拷贝!
+2026-01-20 17:16:21,448 - WARNING - Error processing num 909: list index out of range
+2026-01-20 17:16:21,450 - INFO - 909 拷贝完成!
+2026-01-20 17:16:21,453 - INFO - 板号 910 开始拷贝!
+2026-01-20 17:16:21,456 - WARNING - Error processing num 910: list index out of range
+2026-01-20 17:16:21,460 - INFO - 910 拷贝完成!
+2026-01-20 17:16:21,462 - INFO - 板号 911 开始拷贝!
+2026-01-20 17:16:21,464 - WARNING - Error processing num 911: list index out of range
+2026-01-20 17:16:21,466 - INFO - 911 拷贝完成!
+2026-01-20 17:16:21,468 - INFO - 板号 912 开始拷贝!
+2026-01-20 17:16:21,471 - WARNING - Error processing num 912: list index out of range
+2026-01-20 17:16:21,473 - INFO - 912 拷贝完成!
+2026-01-20 17:16:21,475 - INFO - 板号 913 开始拷贝!
+2026-01-20 17:16:21,477 - WARNING - Error processing num 913: list index out of range
+2026-01-20 17:16:21,479 - INFO - 913 拷贝完成!
+2026-01-20 17:16:21,482 - INFO - 板号 914 开始拷贝!
+2026-01-20 17:16:21,485 - WARNING - Error processing num 914: list index out of range
+2026-01-20 17:16:21,486 - INFO - 914 拷贝完成!
+2026-01-20 17:16:21,490 - INFO - 板号 915 开始拷贝!
+2026-01-20 17:16:21,492 - WARNING - Error processing num 915: list index out of range
+2026-01-20 17:16:21,495 - INFO - 915 拷贝完成!
+2026-01-20 17:16:21,498 - INFO - 板号 916 开始拷贝!
+2026-01-20 17:16:21,500 - WARNING - Error processing num 916: list index out of range
+2026-01-20 17:16:21,502 - INFO - 916 拷贝完成!
+2026-01-20 17:16:21,505 - INFO - 板号 917 开始拷贝!
+2026-01-20 17:16:21,507 - WARNING - Error processing num 917: list index out of range
+2026-01-20 17:16:21,509 - INFO - 917 拷贝完成!
+2026-01-20 17:16:21,512 - INFO - 板号 918 开始拷贝!
+2026-01-20 17:16:21,514 - WARNING - Error processing num 918: list index out of range
+2026-01-20 17:16:21,516 - INFO - 918 拷贝完成!
+2026-01-20 17:16:21,519 - INFO - 板号 919 开始拷贝!
+2026-01-20 17:16:21,521 - WARNING - Error processing num 919: list index out of range
+2026-01-20 17:16:21,523 - INFO - 919 拷贝完成!
+2026-01-20 17:16:21,526 - INFO - 板号 920 开始拷贝!
+2026-01-20 17:16:21,529 - WARNING - Error processing num 920: list index out of range
+2026-01-20 17:16:21,530 - INFO - 920 拷贝完成!
+2026-01-20 17:16:21,534 - INFO - 板号 921 开始拷贝!
+2026-01-20 17:16:21,538 - WARNING - Error processing num 921: list index out of range
+2026-01-20 17:16:21,540 - INFO - 921 拷贝完成!
+2026-01-20 17:16:21,542 - INFO - 板号 922 开始拷贝!
+2026-01-20 17:16:21,544 - WARNING - Error processing num 922: list index out of range
+2026-01-20 17:16:21,546 - INFO - 922 拷贝完成!
+2026-01-20 17:16:21,550 - INFO - 板号 923 开始拷贝!
+2026-01-20 17:16:21,553 - WARNING - Error processing num 923: list index out of range
+2026-01-20 17:16:21,555 - INFO - 923 拷贝完成!
+2026-01-20 17:16:21,557 - INFO - 板号 924 开始拷贝!
+2026-01-20 17:16:21,559 - WARNING - Error processing num 924: list index out of range
+2026-01-20 17:16:21,563 - INFO - 924 拷贝完成!
+2026-01-20 17:16:21,566 - INFO - 板号 925 开始拷贝!
+2026-01-20 17:16:21,568 - WARNING - Error processing num 925: list index out of range
+2026-01-20 17:16:21,570 - INFO - 925 拷贝完成!
+2026-01-20 17:16:21,573 - INFO - 板号 926 开始拷贝!
+2026-01-20 17:16:21,575 - WARNING - Error processing num 926: list index out of range
+2026-01-20 17:16:21,577 - INFO - 926 拷贝完成!
+2026-01-20 17:16:21,579 - INFO - 板号 927 开始拷贝!
+2026-01-20 17:16:21,581 - WARNING - Error processing num 927: list index out of range
+2026-01-20 17:16:21,583 - INFO - 927 拷贝完成!
+2026-01-20 17:16:21,586 - INFO - 板号 928 开始拷贝!
+2026-01-20 17:16:21,589 - WARNING - Error processing num 928: list index out of range
+2026-01-20 17:16:21,591 - INFO - 928 拷贝完成!
+2026-01-20 17:16:21,594 - INFO - 板号 929 开始拷贝!
+2026-01-20 17:16:21,595 - WARNING - Error processing num 929: list index out of range
+2026-01-20 17:16:21,597 - INFO - 929 拷贝完成!
+2026-01-20 17:16:21,603 - INFO - 板号 930 开始拷贝!
+2026-01-20 17:16:21,605 - WARNING - Error processing num 930: list index out of range
+2026-01-20 17:16:21,607 - INFO - 930 拷贝完成!
+2026-01-20 17:16:21,610 - INFO - 板号 931 开始拷贝!
+2026-01-20 17:16:21,612 - WARNING - Error processing num 931: list index out of range
+2026-01-20 17:16:21,615 - INFO - 931 拷贝完成!
+2026-01-20 17:16:21,618 - INFO - 板号 932 开始拷贝!
+2026-01-20 17:16:21,620 - WARNING - Error processing num 932: list index out of range
+2026-01-20 17:16:21,622 - INFO - 932 拷贝完成!
+2026-01-20 17:16:21,624 - INFO - 板号 933 开始拷贝!
+2026-01-20 17:16:21,627 - WARNING - Error processing num 933: list index out of range
+2026-01-20 17:16:21,629 - INFO - 933 拷贝完成!
+2026-01-20 17:16:21,633 - INFO - 板号 934 开始拷贝!
+2026-01-20 17:16:21,635 - WARNING - Error processing num 934: list index out of range
+2026-01-20 17:16:21,637 - INFO - 934 拷贝完成!
+2026-01-20 17:16:21,641 - INFO - 板号 935 开始拷贝!
+2026-01-20 17:16:21,644 - WARNING - Error processing num 935: list index out of range
+2026-01-20 17:16:21,646 - INFO - 935 拷贝完成!
+2026-01-20 17:16:21,648 - INFO - 板号 936 开始拷贝!
+2026-01-20 17:16:21,650 - WARNING - Error processing num 936: list index out of range
+2026-01-20 17:16:21,652 - INFO - 936 拷贝完成!
+2026-01-20 17:16:21,656 - INFO - 板号 937 开始拷贝!
+2026-01-20 17:16:21,658 - WARNING - Error processing num 937: list index out of range
+2026-01-20 17:16:21,661 - INFO - 937 拷贝完成!
+2026-01-20 17:16:21,664 - INFO - 板号 938 开始拷贝!
+2026-01-20 17:16:21,666 - WARNING - Error processing num 938: list index out of range
+2026-01-20 17:16:21,670 - INFO - 938 拷贝完成!
+2026-01-20 17:16:21,673 - INFO - 板号 939 开始拷贝!
+2026-01-20 17:16:21,675 - WARNING - Error processing num 939: list index out of range
+2026-01-20 17:16:21,678 - INFO - 939 拷贝完成!
+2026-01-20 17:16:21,680 - INFO - 板号 940 开始拷贝!
+2026-01-20 17:16:21,683 - WARNING - Error processing num 940: list index out of range
+2026-01-20 17:16:21,687 - INFO - 940 拷贝完成!
+2026-01-20 17:16:21,692 - INFO - 板号 941 开始拷贝!
+2026-01-20 17:16:21,695 - WARNING - Error processing num 941: list index out of range
+2026-01-20 17:16:21,697 - INFO - 941 拷贝完成!
+2026-01-20 17:16:21,700 - INFO - 板号 942 开始拷贝!
+2026-01-20 17:16:21,702 - WARNING - Error processing num 942: list index out of range
+2026-01-20 17:16:21,704 - INFO - 942 拷贝完成!
+2026-01-20 17:16:21,707 - INFO - 板号 943 开始拷贝!
+2026-01-20 17:16:21,709 - WARNING - Error processing num 943: list index out of range
+2026-01-20 17:16:21,711 - INFO - 943 拷贝完成!
+2026-01-20 17:16:21,714 - INFO - 板号 944 开始拷贝!
+2026-01-20 17:16:21,717 - WARNING - Error processing num 944: list index out of range
+2026-01-20 17:16:21,720 - INFO - 944 拷贝完成!
+2026-01-20 17:16:21,726 - INFO - 板号 945 开始拷贝!
+2026-01-20 17:16:21,728 - WARNING - Error processing num 945: list index out of range
+2026-01-20 17:16:21,730 - INFO - 945 拷贝完成!
+2026-01-20 17:16:21,732 - INFO - 板号 946 开始拷贝!
+2026-01-20 17:16:21,735 - WARNING - Error processing num 946: list index out of range
+2026-01-20 17:16:21,737 - INFO - 946 拷贝完成!
+2026-01-20 17:16:21,739 - INFO - 板号 947 开始拷贝!
+2026-01-20 17:16:21,741 - WARNING - Error processing num 947: list index out of range
+2026-01-20 17:16:21,744 - INFO - 947 拷贝完成!
+2026-01-20 17:16:21,746 - INFO - 板号 948 开始拷贝!
+2026-01-20 17:16:21,748 - WARNING - Error processing num 948: list index out of range
+2026-01-20 17:16:21,750 - INFO - 948 拷贝完成!
+2026-01-20 17:16:21,753 - INFO - 板号 949 开始拷贝!
+2026-01-20 17:16:21,755 - WARNING - Error processing num 949: list index out of range
+2026-01-20 17:16:21,757 - INFO - 949 拷贝完成!
+2026-01-20 17:16:21,759 - INFO - 板号 950 开始拷贝!
+2026-01-20 17:16:21,763 - WARNING - Error processing num 950: list index out of range
+2026-01-20 17:16:21,765 - INFO - 950 拷贝完成!
+2026-01-20 17:16:21,767 - INFO - 板号 951 开始拷贝!
+2026-01-20 17:16:21,769 - WARNING - Error processing num 951: list index out of range
+2026-01-20 17:16:21,771 - INFO - 951 拷贝完成!
+2026-01-20 17:16:21,774 - INFO - 板号 952 开始拷贝!
+2026-01-20 17:16:21,778 - WARNING - Error processing num 952: list index out of range
+2026-01-20 17:16:21,780 - INFO - 952 拷贝完成!
+2026-01-20 17:16:21,782 - INFO - 板号 953 开始拷贝!
+2026-01-20 17:16:21,784 - WARNING - Error processing num 953: list index out of range
+2026-01-20 17:16:21,786 - INFO - 953 拷贝完成!
+2026-01-20 17:16:21,789 - INFO - 板号 954 开始拷贝!
+2026-01-20 17:16:21,791 - WARNING - Error processing num 954: list index out of range
+2026-01-20 17:16:21,793 - INFO - 954 拷贝完成!
+2026-01-20 17:16:21,796 - INFO - 板号 955 开始拷贝!
+2026-01-20 17:16:21,798 - WARNING - Error processing num 955: list index out of range
+2026-01-20 17:16:21,801 - INFO - 955 拷贝完成!
+2026-01-20 17:16:21,804 - INFO - 板号 956 开始拷贝!
+2026-01-20 17:16:21,806 - WARNING - Error processing num 956: list index out of range
+2026-01-20 17:16:21,808 - INFO - 956 拷贝完成!
+2026-01-20 17:16:21,812 - INFO - 板号 957 开始拷贝!
+2026-01-20 17:16:21,814 - WARNING - Error processing num 957: list index out of range
+2026-01-20 17:16:21,817 - INFO - 957 拷贝完成!
+2026-01-20 17:16:21,819 - INFO - 板号 958 开始拷贝!
+2026-01-20 17:16:21,822 - WARNING - Error processing num 958: list index out of range
+2026-01-20 17:16:21,824 - INFO - 958 拷贝完成!
+2026-01-20 17:16:21,826 - INFO - 板号 959 开始拷贝!
+2026-01-20 17:16:21,828 - WARNING - Error processing num 959: list index out of range
+2026-01-20 17:16:21,831 - INFO - 959 拷贝完成!
+2026-01-20 17:16:21,834 - INFO - 板号 960 开始拷贝!
+2026-01-20 17:16:21,836 - WARNING - Error processing num 960: list index out of range
+2026-01-20 17:16:21,838 - INFO - 960 拷贝完成!
+2026-01-20 17:16:21,841 - INFO - 板号 961 开始拷贝!
+2026-01-20 17:16:21,843 - WARNING - Error processing num 961: list index out of range
+2026-01-20 17:16:21,845 - INFO - 961 拷贝完成!
+2026-01-20 17:16:21,848 - INFO - 板号 962 开始拷贝!
+2026-01-20 17:16:21,850 - WARNING - Error processing num 962: list index out of range
+2026-01-20 17:16:21,852 - INFO - 962 拷贝完成!
+2026-01-20 17:16:21,856 - INFO - 板号 963 开始拷贝!
+2026-01-20 17:16:21,858 - WARNING - Error processing num 963: list index out of range
+2026-01-20 17:16:21,860 - INFO - 963 拷贝完成!
+2026-01-20 17:16:21,863 - INFO - 板号 964 开始拷贝!
+2026-01-20 17:16:21,865 - WARNING - Error processing num 964: list index out of range
+2026-01-20 17:16:21,869 - INFO - 964 拷贝完成!
+2026-01-20 17:16:21,871 - INFO - 板号 965 开始拷贝!
+2026-01-20 17:16:21,873 - WARNING - Error processing num 965: list index out of range
+2026-01-20 17:16:21,876 - INFO - 965 拷贝完成!
+2026-01-20 17:16:21,878 - INFO - 板号 966 开始拷贝!
+2026-01-20 17:16:21,881 - WARNING - Error processing num 966: list index out of range
+2026-01-20 17:16:21,884 - INFO - 966 拷贝完成!
+2026-01-20 17:16:21,886 - INFO - 板号 967 开始拷贝!
+2026-01-20 17:16:21,888 - WARNING - Error processing num 967: list index out of range
+2026-01-20 17:16:21,892 - INFO - 967 拷贝完成!
+2026-01-20 17:16:21,895 - INFO - 板号 968 开始拷贝!
+2026-01-20 17:16:21,898 - WARNING - Error processing num 968: list index out of range
+2026-01-20 17:16:21,900 - INFO - 968 拷贝完成!
+2026-01-20 17:16:21,902 - INFO - 板号 969 开始拷贝!
+2026-01-20 17:16:21,904 - WARNING - Error processing num 969: list index out of range
+2026-01-20 17:16:21,906 - INFO - 969 拷贝完成!
+2026-01-20 17:16:21,911 - INFO - 板号 970 开始拷贝!
+2026-01-20 17:16:21,914 - WARNING - Error processing num 970: list index out of range
+2026-01-20 17:16:21,917 - INFO - 970 拷贝完成!
+2026-01-20 17:16:21,919 - INFO - 板号 971 开始拷贝!
+2026-01-20 17:16:21,922 - WARNING - Error processing num 971: list index out of range
+2026-01-20 17:16:21,925 - INFO - 971 拷贝完成!
+2026-01-20 17:16:21,927 - INFO - 板号 972 开始拷贝!
+2026-01-20 17:16:21,930 - WARNING - Error processing num 972: list index out of range
+2026-01-20 17:16:21,932 - INFO - 972 拷贝完成!
+2026-01-20 17:16:21,935 - INFO - 板号 973 开始拷贝!
+2026-01-20 17:16:21,937 - WARNING - Error processing num 973: list index out of range
+2026-01-20 17:16:21,939 - INFO - 973 拷贝完成!
+2026-01-20 17:16:21,942 - INFO - 板号 974 开始拷贝!
+2026-01-20 17:16:21,945 - WARNING - Error processing num 974: list index out of range
+2026-01-20 17:16:21,947 - INFO - 974 拷贝完成!
+2026-01-20 17:16:21,950 - INFO - 板号 975 开始拷贝!
+2026-01-20 17:16:21,952 - WARNING - Error processing num 975: list index out of range
+2026-01-20 17:16:21,955 - INFO - 975 拷贝完成!
+2026-01-20 17:16:21,960 - INFO - 板号 976 开始拷贝!
+2026-01-20 17:16:21,970 - WARNING - Error processing num 976: list index out of range
+2026-01-20 17:16:21,974 - INFO - 976 拷贝完成!
+2026-01-20 17:16:21,977 - INFO - 板号 977 开始拷贝!
+2026-01-20 17:16:21,980 - WARNING - Error processing num 977: list index out of range
+2026-01-20 17:16:21,983 - INFO - 977 拷贝完成!
+2026-01-20 17:16:21,986 - INFO - 板号 978 开始拷贝!
+2026-01-20 17:16:21,988 - WARNING - Error processing num 978: list index out of range
+2026-01-20 17:16:21,991 - INFO - 978 拷贝完成!
+2026-01-20 17:16:21,993 - INFO - 板号 979 开始拷贝!
+2026-01-20 17:16:21,996 - WARNING - Error processing num 979: list index out of range
+2026-01-20 17:16:21,998 - INFO - 979 拷贝完成!
+2026-01-20 17:16:22,000 - INFO - 板号 980 开始拷贝!
+2026-01-20 17:16:22,005 - WARNING - Error processing num 980: list index out of range
+2026-01-20 17:16:22,007 - INFO - 980 拷贝完成!
+2026-01-20 17:16:22,010 - INFO - 板号 981 开始拷贝!
+2026-01-20 17:16:22,012 - WARNING - Error processing num 981: list index out of range
+2026-01-20 17:16:22,015 - INFO - 981 拷贝完成!
+2026-01-20 17:16:22,018 - INFO - 板号 982 开始拷贝!
+2026-01-20 17:16:22,021 - WARNING - Error processing num 982: list index out of range
+2026-01-20 17:16:22,024 - INFO - 982 拷贝完成!
+2026-01-20 17:16:22,031 - INFO - 板号 983 开始拷贝!
+2026-01-20 17:16:22,035 - WARNING - Error processing num 983: list index out of range
+2026-01-20 17:16:22,044 - INFO - 983 拷贝完成!
+2026-01-20 17:16:22,048 - INFO - 板号 984 开始拷贝!
+2026-01-20 17:16:22,051 - WARNING - Error processing num 984: list index out of range
+2026-01-20 17:16:22,053 - INFO - 984 拷贝完成!
+2026-01-20 17:16:22,056 - INFO - 板号 985 开始拷贝!
+2026-01-20 17:16:22,059 - WARNING - Error processing num 985: list index out of range
+2026-01-20 17:16:22,061 - INFO - 985 拷贝完成!
+2026-01-20 17:16:22,063 - INFO - 板号 986 开始拷贝!
+2026-01-20 17:16:22,066 - WARNING - Error processing num 986: list index out of range
+2026-01-20 17:16:22,070 - INFO - 986 拷贝完成!
+2026-01-20 17:16:22,073 - INFO - 板号 987 开始拷贝!
+2026-01-20 17:16:22,075 - WARNING - Error processing num 987: list index out of range
+2026-01-20 17:16:22,077 - INFO - 987 拷贝完成!
+2026-01-20 17:16:22,079 - INFO - 板号 988 开始拷贝!
+2026-01-20 17:16:22,083 - WARNING - Error processing num 988: list index out of range
+2026-01-20 17:16:22,086 - INFO - 988 拷贝完成!
+2026-01-20 17:16:22,089 - INFO - 板号 989 开始拷贝!
+2026-01-20 17:16:22,091 - WARNING - Error processing num 989: list index out of range
+2026-01-20 17:16:22,095 - INFO - 989 拷贝完成!
+2026-01-20 17:16:22,098 - INFO - 板号 990 开始拷贝!
+2026-01-20 17:16:22,101 - WARNING - Error processing num 990: list index out of range
+2026-01-20 17:16:22,103 - INFO - 990 拷贝完成!
+2026-01-20 17:16:22,106 - INFO - 板号 991 开始拷贝!
+2026-01-20 17:16:22,108 - WARNING - Error processing num 991: list index out of range
+2026-01-20 17:16:22,110 - INFO - 991 拷贝完成!
+2026-01-20 17:16:22,114 - INFO - 板号 992 开始拷贝!
+2026-01-20 17:16:22,116 - WARNING - Error processing num 992: list index out of range
+2026-01-20 17:16:22,118 - INFO - 992 拷贝完成!
+2026-01-20 17:16:22,122 - INFO - 板号 993 开始拷贝!
+2026-01-20 17:16:22,126 - WARNING - Error processing num 993: list index out of range
+2026-01-20 17:16:22,129 - INFO - 993 拷贝完成!
+2026-01-20 17:16:22,132 - INFO - 板号 994 开始拷贝!
+2026-01-20 17:16:22,134 - WARNING - Error processing num 994: list index out of range
+2026-01-20 17:16:22,138 - INFO - 994 拷贝完成!
+2026-01-20 17:16:22,141 - INFO - 板号 995 开始拷贝!
+2026-01-20 17:16:22,144 - WARNING - Error processing num 995: list index out of range
+2026-01-20 17:16:22,146 - INFO - 995 拷贝完成!
+2026-01-20 17:16:22,151 - INFO - 板号 996 开始拷贝!
+2026-01-20 17:16:22,153 - WARNING - Error processing num 996: list index out of range
+2026-01-20 17:16:22,156 - INFO - 996 拷贝完成!
+2026-01-20 17:16:22,160 - INFO - 板号 997 开始拷贝!
+2026-01-20 17:16:22,162 - WARNING - Error processing num 997: list index out of range
+2026-01-20 17:16:22,165 - INFO - 997 拷贝完成!
+2026-01-20 17:16:22,167 - INFO - 板号 998 开始拷贝!
+2026-01-20 17:16:22,170 - WARNING - Error processing num 998: list index out of range
+2026-01-20 17:16:22,173 - INFO - 998 拷贝完成!
+2026-01-20 17:16:22,176 - INFO - 板号 999 开始拷贝!
+2026-01-20 17:16:22,178 - WARNING - Error processing num 999: list index out of range
+2026-01-20 17:16:22,181 - INFO - 999 拷贝完成!
+2026-01-20 17:16:22,183 - INFO - 板号 1000 开始拷贝!
+2026-01-20 17:16:22,186 - WARNING - Error processing num 1000: list index out of range
+2026-01-20 17:16:22,189 - INFO - 1000 拷贝完成!
+2026-01-20 17:16:22,193 - INFO - 按板号拷贝已完成！
