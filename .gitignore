@@ -1,0 +1,24 @@
+# 操作系统相关的文件
+Thumbs.db           # Windows
+
+# Python 项目
+__pycache__         # Python 缓存文件
+*.py[cod]           # 编译后的 Python 文件
+*.pyo               # 优化的 Python 文件
+/build
+.venv/              # 虚拟环境文件夹
+/.idea
+
+# 日志文件
+/copyLog
+*.log               # 日志文件
+
+# 配置文件
+*.env               # 环境变量配置文件
+*.config            # 配置文件
+/setting
+
+# 临时文件
+/test
+*.tmp               # 临时文件
+*.swp               # Vim 临时文件
