@@ -492,6 +492,7 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
 
 if __name__ == '__main__':
     app = PyQt5.QtWidgets.QApplication(sys.argv)
+    print("test")
     if os.path.exists("style.qss"):
         with open("style.qss", "r", encoding="utf-8") as f:
             style = f.read()
