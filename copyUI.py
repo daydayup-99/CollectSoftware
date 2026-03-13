@@ -1,10 +1,42 @@
 import os.path
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import Qt
 
 import settings
 from progress_bar import CustomProgressBar
+
+
+class CheckableComboBox(QtWidgets.QComboBox):
+    def __init__(self):
+        super(CheckableComboBox, self).__init__()
+        self.view().pressed.connect(self.handleItemPressed)
+        self.setModel(QtGui.QStandardItemModel(self))
+        self.setEditable(True)
+        self.lineEdit().setReadOnly(True)  
+    
+    def handleItemPressed(self, index):
+        item = self.model().itemFromIndex(index)
+        if item.checkState() == QtCore.Qt.Checked:
+            item.setCheckState(QtCore.Qt.Unchecked)
+        else:
+            item.setCheckState(QtCore.Qt.Checked)
+        self.updateText()
+    
+    def updateText(self):
+        checked_items = []
+        for i in range(self.model().rowCount()):
+            item = self.model().item(i)
+            if item.checkState() == QtCore.Qt.Checked:
+                checked_items.append(item.text())
+        self.setEditText(', '.join(checked_items) if checked_items else '')
+    
+    def addItems(self, items):
+        for text in items:
+            item = QtGui.QStandardItem(text)
+            item.setCheckState(QtCore.Qt.Unchecked)
+            item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+            self.model().appendRow(item)
 
 
 class JobSelectionDialog(QtWidgets.QDialog):
@@ -98,22 +130,11 @@ class Ui_PreimageWindow(object):
     progress_updated = QtCore.pyqtSignal(int)
 
     def __init__(self):
-        self.level_padding = 10
-        self.vertical_padding = 50
-        self.path_edit_width = 400
-        self.path_edit_height = 30
-        self.date_edit_width = 160
-        self.name_edit_width = 200
-        self.startX = 40
-        self.startY = 30
         self.progress_updated.connect(self.update_progress)
         self.selected_batch_numbers = []
 
     def update_progress(self, value):
         self.progress_bar.setValue(value)
-
-    def getY(self, n):
-        return self.startY + self.vertical_padding * n
 
     def setupUi(self, PreimageWindow):
         PreimageWindow.setObjectName("PreimageWindow")
@@ -121,221 +142,357 @@ class Ui_PreimageWindow(object):
         self.centralwidget = QtWidgets.QWidget(PreimageWindow)
         self.centralwidget.setObjectName("centralwidget")
 
-        # AOI和AVI勾选框
-        self.aoiLabel = QtWidgets.QLabel(self.centralwidget)
-        self.aoiLabel.setGeometry(QtCore.QRect(self.startX + 80, self.startY, 40, 30))
+        # 创建主布局
+        main_layout = QtWidgets.QHBoxLayout(self.centralwidget)
+        main_layout.setContentsMargins(10, 10, 10, 10)
+        main_layout.setSpacing(10)
+
+        # 左侧控制面板
+        control_widget = QtWidgets.QWidget()
+        control_widget.setMaximumWidth(650)  # 设置最大宽度，限制左侧界面大小
+        control_layout = QtWidgets.QVBoxLayout(control_widget)
+        control_layout.setSpacing(15)
+
+        # AOI和AVI选择区域（在Tab外面，顶部）
+        type_group = QtWidgets.QGroupBox("设备类型")
+        type_layout = QtWidgets.QHBoxLayout(type_group)
+        type_layout.setSpacing(20)
+        
+        self.aoiLabel = QtWidgets.QLabel("AOI")
         self.aoiLabel.setObjectName("aoiLabel")
-        self.aoiCheckBox = QtWidgets.QCheckBox(self.centralwidget)
-        self.aoiCheckBox.setGeometry(QtCore.QRect(self.startX + 120, self.startY, 20, 30))
+        self.aoiCheckBox = QtWidgets.QCheckBox()
         self.aoiCheckBox.setObjectName("aoiCheckBox")
-
-        self.aviLabel = QtWidgets.QLabel(self.centralwidget)
-        self.aviLabel.setGeometry(QtCore.QRect(self.startX + 280 + self.level_padding + 120, self.startY, 40, 30))
+        
+        self.aviLabel = QtWidgets.QLabel("AVI")
         self.aviLabel.setObjectName("aviLabel")
-        self.aviCheckBox = QtWidgets.QCheckBox(self.centralwidget)
-        self.aviCheckBox.setGeometry(QtCore.QRect(self.startX + 280 + self.level_padding + 160, self.startY, 20, 30))
+        self.aviCheckBox = QtWidgets.QCheckBox()
         self.aviCheckBox.setObjectName("aviCheckBox")
+        
+        type_layout.addWidget(self.aoiLabel)
+        type_layout.addWidget(self.aoiCheckBox)
+        type_layout.addStretch()
+        type_layout.addWidget(self.aviLabel)
+        type_layout.addWidget(self.aviCheckBox)
+        type_layout.addStretch()
+        
+        control_layout.addWidget(type_group)
 
-        # CAR路径配置
-        self.carLabel = QtWidgets.QLabel(self.centralwidget)
-        self.carLabel.setGeometry(QtCore.QRect(self.startX, self.getY(1), 80, 30))
+        # 创建Tab Widget
+        self.tabWidget = QtWidgets.QTabWidget()
+        self.tabWidget.setObjectName("tabWidget")
+        
+        # Tab 1: 按资料收集
+        self.tab_manual = QtWidgets.QWidget()
+        self.tab_manual.setObjectName("tab_manual")
+        tab_manual_layout = QtWidgets.QVBoxLayout(self.tab_manual)
+        tab_manual_layout.setSpacing(15)
+
+        # 路径配置区域
+        paths_group = QtWidgets.QGroupBox("路径配置")
+        paths_layout = QtWidgets.QGridLayout(paths_group)
+        paths_layout.setSpacing(10)
+
+        # CAR路径
+        self.carLabel = QtWidgets.QLabel("CAR路径")
         self.carLabel.setObjectName("carLabel")
-        self.carEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.carEdit.setGeometry(
-            QtCore.QRect(self.startX + 80, self.getY(1), self.path_edit_width, self.path_edit_height))
+        self.carEdit = QtWidgets.QLineEdit()
         self.carEdit.setObjectName("carEdit")
-        self.carButton = QtWidgets.QPushButton(self.centralwidget)
-        self.carButton.setGeometry(QtCore.QRect(self.startX + 80 + self.path_edit_width, self.getY(1), 50, 30))
+        self.carButton = QtWidgets.QPushButton("...")
         self.carButton.setObjectName("carButton")
+        paths_layout.addWidget(self.carLabel, 0, 0)
+        paths_layout.addWidget(self.carEdit, 0, 1)
+        paths_layout.addWidget(self.carButton, 0, 2)
 
-        # JOB路径配置
-        self.jobLabel = QtWidgets.QLabel(self.centralwidget)
-        self.jobLabel.setGeometry(QtCore.QRect(self.startX, self.getY(2), 80, 30))
+        # JOB路径
+        self.jobLabel = QtWidgets.QLabel("JOB路径")
         self.jobLabel.setObjectName("jobLabel")
-        self.jobEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.jobEdit.setGeometry(
-            QtCore.QRect(self.startX + 80, self.getY(2), self.path_edit_width, self.path_edit_height))
+        self.jobEdit = QtWidgets.QLineEdit()
         self.jobEdit.setObjectName("jobEdit")
-        self.jobButton = QtWidgets.QPushButton(self.centralwidget)
-        self.jobButton.setGeometry(QtCore.QRect(self.startX + 80 + self.path_edit_width, self.getY(2), 50, 30))
+        self.jobButton = QtWidgets.QPushButton("...")
         self.jobButton.setObjectName("jobButton")
+        paths_layout.addWidget(self.jobLabel, 1, 0)
+        paths_layout.addWidget(self.jobEdit, 1, 1)
+        paths_layout.addWidget(self.jobButton, 1, 2)
 
-        # Study路径配置
-        self.studyLabel = QtWidgets.QLabel(self.centralwidget)
-        self.studyLabel.setGeometry(QtCore.QRect(self.startX, self.getY(3), 80, 30))
-        self.studyLabel.setObjectName("saveLabel")
-        self.studyEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.studyEdit.setGeometry(
-            QtCore.QRect(self.startX + 80, self.getY(3), self.path_edit_width, self.path_edit_height))
-        self.studyEdit.setObjectName("saveEdit")
-        self.studyButton = QtWidgets.QPushButton(self.centralwidget)
-        self.studyButton.setGeometry(QtCore.QRect(self.startX + 80 + self.path_edit_width, self.getY(3), 50, 30))
-        self.studyButton.setObjectName("saveButton")
+        # STD路径
+        self.studyLabel = QtWidgets.QLabel("STD路径")
+        self.studyLabel.setObjectName("studyLabel")
+        self.studyEdit = QtWidgets.QLineEdit()
+        self.studyEdit.setObjectName("studyEdit")
+        self.studyButton = QtWidgets.QPushButton("...")
+        self.studyButton.setObjectName("studyButton")
+        paths_layout.addWidget(self.studyLabel, 2, 0)
+        paths_layout.addWidget(self.studyEdit, 2, 1)
+        paths_layout.addWidget(self.studyButton, 2, 2)
 
-        # LOG路径配置
-        self.logLabel = QtWidgets.QLabel(self.centralwidget)
-        self.logLabel.setGeometry(QtCore.QRect(self.startX, self.getY(4), 80, 30))
+        # LOG路径
+        self.logLabel = QtWidgets.QLabel("LOG路径")
         self.logLabel.setObjectName("logLabel")
-        self.logEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.logEdit.setGeometry(
-            QtCore.QRect(self.startX + 80, self.getY(4), self.path_edit_width, self.path_edit_height))
+        self.logEdit = QtWidgets.QLineEdit()
         self.logEdit.setObjectName("logEdit")
-        self.logButton = QtWidgets.QPushButton(self.centralwidget)
-        self.logButton.setGeometry(QtCore.QRect(self.startX + 80 + self.path_edit_width, self.getY(4), 50, 30))
+        self.logButton = QtWidgets.QPushButton("...")
         self.logButton.setObjectName("logButton")
+        paths_layout.addWidget(self.logLabel, 3, 0)
+        paths_layout.addWidget(self.logEdit, 3, 1)
+        paths_layout.addWidget(self.logButton, 3, 2)
 
-        # 保存路径配置
-        self.saveLabel = QtWidgets.QLabel(self.centralwidget)
-        self.saveLabel.setGeometry(QtCore.QRect(self.startX, self.getY(5), 80, 30))
-        self.saveLabel.setObjectName("saveLabel")
-        self.saveEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.saveEdit.setGeometry(
-            QtCore.QRect(self.startX + 80, self.getY(5), self.path_edit_width, self.path_edit_height))
-        self.saveEdit.setObjectName("saveEdit")
-        self.saveButton = QtWidgets.QPushButton(self.centralwidget)
-        self.saveButton.setGeometry(QtCore.QRect(self.startX + 80 + self.path_edit_width, self.getY(5), 50, 30))
-        self.saveButton.setObjectName("saveButton")
+        # 保存路径
+        # self.saveLabel = QtWidgets.QLabel("保存路径")
+        # self.saveLabel.setObjectName("saveLabel")
+        # self.saveEdit = QtWidgets.QLineEdit()
+        # self.saveEdit.setObjectName("saveEdit")
+        # self.saveButton = QtWidgets.QPushButton("...")
+        # self.saveButton.setObjectName("saveButton")
+        # paths_layout.addWidget(self.saveLabel, 4, 0)
+        # paths_layout.addWidget(self.saveEdit, 4, 1)
+        # paths_layout.addWidget(self.saveButton, 4, 2)
+        
+        paths_layout.setColumnStretch(1, 1)
+        tab_manual_layout.addWidget(paths_group)
 
-        # 开始时间
-        self.date_label = QtWidgets.QLabel(self.centralwidget)
-        self.date_label.setGeometry(QtCore.QRect(self.startX, self.getY(6), 80, 30))
-        self.date_label.setObjectName("date_label")
-        self.dateEdit = QtWidgets.QDateEdit(self.centralwidget)
-        startDateX = self.startX + 80
-        self.dateEdit.setGeometry(QtCore.QRect(startDateX, self.getY(6), self.date_edit_width, 30))
-        self.dateEdit.setObjectName("dateEdit")
-
-        # 结束时间
-        self.dateEndLabel = QtWidgets.QLabel(self.centralwidget)
-        self.dateEndLabel.setGeometry(
-            QtCore.QRect(startDateX + self.date_edit_width + self.level_padding + 40, self.getY(6), 80, 30))
-        self.dateEndLabel.setObjectName("dateEndLabel")
-        self.dateEndEdit = QtWidgets.QDateEdit(self.centralwidget)
-        endDateX = startDateX + self.date_edit_width + self.level_padding + 120
-        self.dateEndEdit.setGeometry(QtCore.QRect(endDateX, self.getY(6), self.date_edit_width, 30))
-        self.dateEndEdit.setObjectName("dateEndEdit")
+        # 参数设置区域
+        params_group = QtWidgets.QGroupBox("参数设置")
+        params_layout = QtWidgets.QGridLayout(params_group)
+        params_layout.setSpacing(10)
 
         # 存储方式
-        self.savingModeLabel = QtWidgets.QLabel(self.centralwidget)
-        self.savingModeLabel.setGeometry(QtCore.QRect(self.startX, self.getY(7), 80, 30))
+        self.savingModeLabel = QtWidgets.QLabel("存储方式")
         self.savingModeLabel.setObjectName("savingModeLabel")
-        self.saveset_comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.saveset_comboBox.setGeometry(QtCore.QRect(self.startX + 80, self.getY(7), 160, 30))
+        self.saveset_comboBox = QtWidgets.QComboBox()
         self.saveset_comboBox.setObjectName("saveset_comboBox")
         self.saveset_comboBox.addItems(["按日期存储", "按料号存储", "按批量存储(从0开始)", "按批量存储", "手动机存储"])
-
-        # 批量名称， 用于拷贝批量下的文件， 只用于按批量存储(从0开始)
-        self.copyModelLabel = QtWidgets.QLabel(self.centralwidget)
-        self.copyModelLabel.setGeometry(QtCore.QRect(self.startX + 280 + self.level_padding, self.getY(7), 80, 30))
-        self.copyMode_comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.copyMode_comboBox.setGeometry(QtCore.QRect(self.startX + 360 + self.level_padding, self.getY(7), 160, 30))
+        
+        # 拷贝方式
+        self.copyModelLabel = QtWidgets.QLabel("拷贝方式")
+        self.copyModelLabel.setObjectName("copyModelLabel")
+        self.copyMode_comboBox = QtWidgets.QComboBox()
         self.copyMode_comboBox.addItems(["按日期拷贝", "按板号拷贝", "定时拷贝", "一键拷贝", "离线机拷贝"])
+        
+        params_layout.addWidget(self.savingModeLabel, 0, 0)
+        params_layout.addWidget(self.saveset_comboBox, 0, 1)
+        params_layout.addWidget(self.copyModelLabel, 0, 2)
+        params_layout.addWidget(self.copyMode_comboBox, 0, 3)
 
-        # 料号选择
-        self.chooseJob_button = QtWidgets.QPushButton(self.centralwidget)
-        self.chooseJob_button.setGeometry(QtCore.QRect(self.startX, self.getY(10), 160, 30))
-        self.chooseJob_button.setObjectName("chooseJob_button")
-        self.chooseJob_button.setText("料号选择")
-        self.chooseJob_button.clicked.connect(self.chooseJob_button_clicked_handler)
-
-        #最大批次数
-        self.maxPlNumLabel = QtWidgets.QLabel(self.centralwidget)
-        self.maxPlNumLabel.setGeometry(QtCore.QRect(self.startX, self.getY(8), 100, 30))
+        # 最大批次数
+        self.maxPlNumLabel = QtWidgets.QLabel("最大批次数")
         self.maxPlNumLabel.setObjectName("maxPlNumLabel")
-        self.maxPlNumLabel.setText("最大批次数")
-        self.maxPlNumEdit = QtWidgets.QLineEdit(self.centralwidget)
-        startNumX = self.startX + 100
-        self.maxPlNumEdit.setGeometry(QtCore.QRect(startNumX, self.getY(8), 80, 30))
+        self.maxPlNumEdit = QtWidgets.QLineEdit()
         self.maxPlNumEdit.setObjectName("maxPlNumEdit")
         self.maxPlNumEdit.setText(str(5))
-
+        
         # 机器类型
-        self.machineTypeLabel = QtWidgets.QLabel(self.centralwidget)
-        self.machineTypeLabel.setGeometry(QtCore.QRect(self.startX + 280 + self.level_padding, self.getY(8), 80, 30))
+        self.machineTypeLabel = QtWidgets.QLabel("机器类型")
         self.machineTypeLabel.setObjectName("machineTypeLabel")
-        self.machineType_comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.machineType_comboBox.setGeometry(QtCore.QRect(self.startX + 360 + self.level_padding, self.getY(8), 160, 30))
+        self.machineType_comboBox = QtWidgets.QComboBox()
         self.machineType_comboBox.setObjectName("machineType_comboBox")
         self.machineType_comboBox.addItems(["在线机", "离线机"])
         self.machineType_comboBox.setEnabled(False)
-        if self.machineType_comboBox.currentText() == "在线机":
-            self.chooseJob_button.setVisible(False)
-            self.maxPlNumEdit.setEnabled(False)
+        
+        params_layout.addWidget(self.maxPlNumLabel, 2, 0)
+        params_layout.addWidget(self.maxPlNumEdit, 2, 1)
+        params_layout.addWidget(self.machineTypeLabel, 2, 2)
+        params_layout.addWidget(self.machineType_comboBox, 2, 3)
 
-        # 板号相关
-        self.startNumLabel = QtWidgets.QLabel(self.centralwidget)
-        self.startNumLabel.setGeometry(QtCore.QRect(self.startX, self.getY(9), 100, 30))
+        # 板号范围
+        self.startNumLabel = QtWidgets.QLabel("起始板号")
         self.startNumLabel.setObjectName("startNumLabel")
-        self.startEdit = QtWidgets.QLineEdit(self.centralwidget)
-        startNumX = self.startX + 80
-        self.startEdit.setGeometry(QtCore.QRect(startNumX, self.getY(9), 80, 30))
+        self.startEdit = QtWidgets.QLineEdit()
         self.startEdit.setObjectName("startEdit")
-
-        self.endNumLabel = QtWidgets.QLabel(self.centralwidget)
-        self.endNumLabel.setGeometry(QtCore.QRect(startNumX + 100 + self.level_padding, self.getY(9), 100, 30))
+        
+        self.endNumLabel = QtWidgets.QLabel("结束板号")
         self.endNumLabel.setObjectName("endNumLabel")
-        endNumX = startNumX + 180 + self.level_padding
-        self.endEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.endEdit.setGeometry(QtCore.QRect(endNumX, self.getY(9), 80, 30))
+        self.endEdit = QtWidgets.QLineEdit()
         self.endEdit.setObjectName("endEdit")
-
-        self.maxNumLabel = QtWidgets.QLabel(self.centralwidget)
-        self.maxNumLabel.setGeometry(QtCore.QRect(endNumX + 100 + self.level_padding, self.getY(9), 100, 30))
+        
+        self.maxNumLabel = QtWidgets.QLabel("最大板数")
         self.maxNumLabel.setObjectName("maxNumLabel")
-        maxNumX = endNumX + 180 + self.level_padding
-        self.maxEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.maxEdit.setGeometry(QtCore.QRect(maxNumX, self.getY(9), 80, 30))
+        self.maxEdit = QtWidgets.QLineEdit()
         self.maxEdit.setObjectName("maxEdit")
+        
+        params_layout.addWidget(self.startNumLabel, 3, 0)
+        params_layout.addWidget(self.startEdit, 3, 1)
+        params_layout.addWidget(self.endNumLabel, 3, 2)
+        params_layout.addWidget(self.endEdit, 3, 3)
+        params_layout.addWidget(self.maxNumLabel, 3, 4)
+        params_layout.addWidget(self.maxEdit, 3, 5)
+        
+        tab_manual_layout.addWidget(params_group)
 
-        # 进度条
-        self.progress_bar = CustomProgressBar(self.centralwidget)
-        self.progress_bar.setRange(0, 100)
-        self.progress_bar.setValue(0)
-        self.progress_bar.setGeometry(QtCore.QRect(650, self.startY, 35, 750))
+        # 将Tab 1添加到Tab Widget
+        self.tabWidget.addTab(self.tab_manual, "按资料收集")
+        
+        # Tab 2: 按Mes收集
+        self.tab_mes = QtWidgets.QWidget()
+        self.tab_mes.setObjectName("tab_mes")
+        tab_mes_layout = QtWidgets.QVBoxLayout(self.tab_mes)
+        tab_mes_layout.setSpacing(15)
+        
+        # MES相关配置区域
+        mes_group = QtWidgets.QGroupBox("MES配置")
+        mes_layout = QtWidgets.QVBoxLayout(mes_group)
+        mes_layout.setSpacing(10)
+        
+        # MES IP地址
+        mes_ip_layout = QtWidgets.QHBoxLayout()
+        mes_ip_label = QtWidgets.QLabel("MES IP地址")
+        self.mes_ip_edit = QtWidgets.QLineEdit()
+        self.mes_ip_edit.setText("127.0.0.1")
+        mes_ip_layout.addWidget(mes_ip_label)
+        mes_ip_layout.addWidget(self.mes_ip_edit)
+        mes_layout.addLayout(mes_ip_layout)
+        
+        # 机台号选择和全选
+        machine_layout = QtWidgets.QHBoxLayout()
+        machine_label = QtWidgets.QLabel("机台号")
+        
+        # 机台号下拉框（可多选，使用CheckableComboBox）
+        self.machine_combo = CheckableComboBox()
+        self.machine_combo.setObjectName("machine_combo")
+        self.machine_combo.addItems(["机台1", "机台2", "机台3", "机台4", "机台5"])
+        # 设置最小宽度，确保能正常显示
+        self.machine_combo.setMinimumWidth(200)
+        
+        # 全选checkbox
+        self.select_all_machines = QtWidgets.QCheckBox("全选")
+        self.select_all_machines.setObjectName("select_all_machines")
+        
+        # 将控件添加到水平布局
+        machine_layout.addWidget(machine_label)
+        machine_layout.addWidget(self.machine_combo, 1)  # 设置拉伸因子，让下拉框占满剩余空间
+        machine_layout.addWidget(self.select_all_machines)
+        
+        # 将水平布局添加到mes_layout
+        mes_layout.addLayout(machine_layout)
+        
+        tab_mes_layout.addWidget(mes_group)
+        tab_mes_layout.addStretch()
+        
+        # 将Tab 2添加到Tab Widget
+        self.tabWidget.addTab(self.tab_mes, "按Mes收集")
+        
+        # 将Tab Widget添加到控制面板
+        control_layout.addWidget(self.tabWidget)
 
-        # 拷贝按钮相关
-        self.copy_aidataButton = QtWidgets.QPushButton(self.centralwidget)
-        self.copy_aidataButton.setGeometry(QtCore.QRect(self.startX + 140 + 140, self.getY(10), 120, 50))
+         # 日期和操作区域
+        date_action_group = QtWidgets.QGroupBox()
+        date_action_layout = QtWidgets.QVBoxLayout(date_action_group)
+        date_action_layout.setSpacing(15)
+        
+        # 保存路径
+        save_path_layout = QtWidgets.QHBoxLayout()
+        self.saveLabel = QtWidgets.QLabel("保存路径")
+        self.saveLabel.setObjectName("saveLabel")
+        self.saveEdit = QtWidgets.QLineEdit()
+        self.saveEdit.setObjectName("saveEdit")
+        self.saveButton = QtWidgets.QPushButton("...")
+        self.saveButton.setObjectName("saveButton")
+
+        save_path_layout.addWidget(self.saveLabel)
+        save_path_layout.addWidget(self.saveEdit)
+        save_path_layout.addWidget(self.saveButton)
+        date_action_layout.addLayout(save_path_layout)
+
+        # 日期范围
+        date_range_layout = QtWidgets.QHBoxLayout()
+        self.date_label = QtWidgets.QLabel("开始时间")
+        self.date_label.setObjectName("date_label")
+        self.dateEdit = QtWidgets.QDateEdit()
+        self.dateEdit.setObjectName("dateEdit")
+        self.dateEdit.setMinimumWidth(150)
+        
+        self.dateEndLabel = QtWidgets.QLabel("结束时间")
+        self.dateEndLabel.setObjectName("dateEndLabel")
+        self.dateEndEdit = QtWidgets.QDateEdit()
+        self.dateEndEdit.setObjectName("dateEndEdit")
+        self.dateEndEdit.setMinimumWidth(150)
+        
+        date_range_layout.addWidget(self.date_label)
+        date_range_layout.addWidget(self.dateEdit)
+        date_range_layout.addWidget(self.dateEndLabel)
+        date_range_layout.addWidget(self.dateEndEdit)
+        date_range_layout.addStretch()
+        date_action_layout.addLayout(date_range_layout)
+        
+        # 按钮区域
+        buttons_layout = QtWidgets.QHBoxLayout()
+        buttons_layout.setSpacing(20)
+        
+        self.chooseJob_button = QtWidgets.QPushButton("料号选择")
+        self.chooseJob_button.setObjectName("chooseJob_button")
+        self.chooseJob_button.clicked.connect(self.chooseJob_button_clicked_handler)
+        
+        self.copy_aidataButton = QtWidgets.QPushButton("开始拷贝")
         self.copy_aidataButton.setObjectName("copy_aidataButton")
-
-        # self.copy_all_dayButton = QtWidgets.QPushButton(self.centralwidget)
-        # self.copy_all_dayButton.setGeometry(QtCore.QRect(self.startX + 140, self.getY(7), 120, 50))
-        # self.copy_all_dayButton.setObjectName("copy_all_dayButton")
-        #
-        # self.copy_timer_button = QtWidgets.QPushButton(self.centralwidget)
-        # self.copy_timer_button.setGeometry(QtCore.QRect(self.startX + 140 + 140, self.getY(7), 120, 50))
-        # self.copy_timer_button.setObjectName("copy_timer_button")
-
-        self.stop_Button = QtWidgets.QPushButton(self.centralwidget)
-        self.stop_Button.setGeometry(QtCore.QRect(self.startX + 140 + 140 + 140, self.getY(10), 120, 50))
+        self.copy_aidataButton.setMinimumHeight(40)
+        
+        self.stop_Button = QtWidgets.QPushButton("停止拷贝")
         self.stop_Button.setObjectName("stop_Button")
+        self.stop_Button.setMinimumHeight(40)
+        
+        buttons_layout.addWidget(self.chooseJob_button)
+        buttons_layout.addStretch()
+        buttons_layout.addWidget(self.copy_aidataButton)
+        buttons_layout.addWidget(self.stop_Button)
+        
+        date_action_layout.addLayout(buttons_layout)
+        
+        control_layout.addWidget(date_action_group)
 
-        # 日志输出
-        self.log_output = QtWidgets.QTextBrowser(self.centralwidget)
-        self.log_output.setReadOnly(True)
-        self.log_output.setGeometry(QtCore.QRect(700, self.startY, 400, 750))
-
-        self.warning_browser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.warning_browser.setGeometry(QtCore.QRect(700 + 400 + self.level_padding, self.startY, 400, 750))
-        self.warning_browser.setObjectName("warning_browser")
-
-        # 创建滚动区域和标签
-        scroll_area = QtWidgets.QScrollArea(self.centralwidget)
-        scroll_area.setGeometry(QtCore.QRect(self.startX, self.getY(11) + 30, 550, 350))
-        scroll_area.setWidgetResizable(True)  # 设置滚动区域自适应内容大小
+        # 使用说明区域
+        info_group = QtWidgets.QGroupBox("使用说明")
+        info_layout = QtWidgets.QVBoxLayout(info_group)
+        
+        scroll_area = QtWidgets.QScrollArea()
+        scroll_area.setWidgetResizable(True)
         scroll_area.setObjectName("scroll_area")
-
+        
         self.label_10 = QtWidgets.QLabel()
         self.label_10.setObjectName("label_10")
-        self.label_10.setWordWrap(True)  # 启用文本自动换行
-        self.label_10.setAlignment(Qt.AlignTop)  # 设置文本顶部对齐
-
-        # 将标签放置在滚动区域中
+        self.label_10.setWordWrap(True)
+        self.label_10.setAlignment(Qt.AlignTop)
+        
         scroll_area.setWidget(self.label_10)
+        info_layout.addWidget(scroll_area)
+        
+        control_layout.addWidget(info_group, 1)  # 设置拉伸因子
+        
+        main_layout.addWidget(control_widget)
+
+        # 中间区域（进度条）
+        progress_widget = QtWidgets.QWidget()
+        progress_widget.setMaximumWidth(60)
+        progress_layout = QtWidgets.QVBoxLayout(progress_widget)
+        progress_layout.setContentsMargins(0, 0, 0, 0)
+        
+        self.progress_bar = CustomProgressBar()
+        self.progress_bar.setRange(0, 100)
+        self.progress_bar.setValue(0)
+        self.progress_bar.setObjectName("progress_bar")
+        progress_layout.addWidget(self.progress_bar)
+        
+        main_layout.addWidget(progress_widget)
+
+        # 右侧日志区域
+        log_widget = QtWidgets.QWidget()
+        log_layout = QtWidgets.QHBoxLayout(log_widget)
+        log_layout.setSpacing(10)
+        
+        # 日志输出
+        self.log_output = QtWidgets.QTextBrowser()
+        self.log_output.setReadOnly(True)
+        self.log_output.setObjectName("log_output")
+        
+        # 警告输出
+        self.warning_browser = QtWidgets.QTextBrowser()
+        self.warning_browser.setObjectName("warning_browser")
+        
+        log_layout.addWidget(self.log_output, 1)
+        log_layout.addWidget(self.warning_browser, 1)
+        
+        main_layout.addWidget(log_widget, 2)  # 设置较大的拉伸因子
 
         PreimageWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(PreimageWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 837, 23))
         self.menubar.setObjectName("menubar")
         PreimageWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(PreimageWindow)
@@ -347,16 +504,8 @@ class Ui_PreimageWindow(object):
         self.aoiCheckBox.stateChanged.connect(self.on_aoi_changed)
         self.aviCheckBox.stateChanged.connect(self.on_avi_changed)
         self.machineType_comboBox.currentIndexChanged.connect(self.on_machine_type_changed)
-    #     self.timer1 = QTimer(self)
-    #     self.timer1.timeout.connect(self.updateProgress)
-    #     self.timer1.start(1000)  # 每秒钟增加一次进度
-    #
-    # def updateProgress(self):
-    #     curVal = self.progress_bar.value()
-    #     if curVal < 100:
-    #         self.progress_bar.setValue(curVal + 10)
-    #     else:
-    #         return
+        self.select_all_machines.stateChanged.connect(self.on_select_all_machines)
+
     def on_aoi_changed(self, state):
         if state == QtCore.Qt.Checked:
             self.aviCheckBox.setChecked(False)
@@ -387,6 +536,15 @@ class Ui_PreimageWindow(object):
             self.saveset_comboBox.setCurrentIndex(3)
             self.chooseJob_button.setVisible(True)
             self.maxPlNumEdit.setEnabled(True)
+    
+    def on_select_all_machines(self, state):
+        for i in range(self.machine_combo.model().rowCount()):
+            item = self.machine_combo.model().item(i)
+            if state == QtCore.Qt.Checked:
+                item.setCheckState(QtCore.Qt.Checked)
+            else:
+                item.setCheckState(QtCore.Qt.Unchecked)
+        self.machine_combo.updateText()
 
     def chooseJob_button_clicked_handler(self):
         car_path = self.carEdit.text()
@@ -396,51 +554,17 @@ class Ui_PreimageWindow(object):
 
     def retranslateUi(self, PreimageWindow):
         _translate = QtCore.QCoreApplication.translate
-        PreimageWindow.setWindowTitle(_translate("PreimageWindow", "MainWindow"))
-        self.carButton.setText(_translate("PreimageWindow", "..."))
-        self.carLabel.setText(_translate("PreimageWindow", "CAR路径"))
-
-        self.jobButton.setText(_translate("PreimageWindow", "..."))
-        self.jobLabel.setText(_translate("PreimageWindow", "JOB路径"))
-
-        self.saveButton.setText(_translate("PreimageWindow", "..."))
-        self.saveLabel.setText(_translate("PreimageWindow", "保存路径"))
-
-        self.studyButton.setText(_translate("PreimageWindow", "..."))
-        self.studyLabel.setText(_translate("PreimageWindow", "STD路径"))
-
-        self.logButton.setText(_translate("PreimageWindow", "..."))
-        self.logLabel.setText(_translate("PreimageWindow", "LOG路径"))
-
-        self.date_label.setText(_translate("PreimageWindow", "开始时间"))
-        self.dateEndLabel.setText(_translate("PreimageWindow", "结束时间"))
-
-        self.aoiLabel.setText(_translate("PreimageWindow", "AOI"))
-        self.aviLabel.setText(_translate("PreimageWindow", "AVI"))
-
-        self.copyModelLabel.setText(_translate("PreimageWindow", "拷贝方式"))
-        self.machineTypeLabel.setText(_translate("PreimageWindow", "机器类型"))
-        self.copy_aidataButton.setText(_translate("PreimageWindow", "开始拷贝"))
-        # self.copy_all_dayButton.setText(_translate("PreimageWindow", "按日期拷贝"))
-        # self.copy_timer_button.setText(_translate("PreimageWindow", "定时拷贝"))
-        self.stop_Button.setText(_translate("PreimageWindow", "停止拷贝"))
-
-        self.savingModeLabel.setText(_translate("PreimageWindow", "存储方式"))
-        self.saveset_comboBox.setItemText(0, _translate("PreimageWindow", "按日期存储"))
-        self.saveset_comboBox.setItemText(1, _translate("PreimageWindow", "按料号存储"))
-        self.saveset_comboBox.setItemText(2, _translate("PreimageWindow", "按批量存储(从0开始)"))
-        self.saveset_comboBox.setItemText(3, _translate("PreimageWindow", "按批量存储"))
-        self.saveset_comboBox.setItemText(4, _translate("PreimageWindow", "手动机存储"))
-
-        self.startNumLabel.setText(_translate("PreimageWindow", "起始板号"))
-        self.endNumLabel.setText(_translate("PreimageWindow", "结束板号"))
-        self.maxNumLabel.setText(_translate("PreimageWindow", "最大板数"))
-
-        # 读取文本并设置到label
-        with open("readme.txt", "r", encoding="utf-8") as file:
-            annotation = file.read().strip()
-            self.label_10.setText(annotation)
-        self.label_10.setStyleSheet('color:blue')
+        PreimageWindow.setWindowTitle(_translate("PreimageWindow", "AI数据拷贝工具"))
+        
+        # 读取readme.txt并设置到使用说明标签
+        try:
+            with open("readme.txt", "r", encoding="utf-8") as file:
+                annotation = file.read().strip()
+                self.label_10.setText(annotation)
+            self.label_10.setStyleSheet('color:blue')
+        except:
+            self.label_10.setText("使用说明文件未找到")
+            self.label_10.setStyleSheet('color:red')
 
     @staticmethod
     def validate_BN(edit, field_name):
@@ -487,6 +611,7 @@ class Ui_PreimageWindow(object):
             self.startEdit, self.endEdit, self.maxEdit, self.copy_aidataButton,
             self.copyMode_comboBox,
             self.aoiCheckBox, self.aviCheckBox, self.machineType_comboBox,
+            self.mes_ip_edit, self.machine_combo, self.select_all_machines,
         ]:
             widget.setEnabled(enabled)
         self.stop_Button.setEnabled(not enabled)
