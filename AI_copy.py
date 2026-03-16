@@ -59,7 +59,6 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
 
     # 按钮链接
     def connect_button(self):
-        # 打开文件夹路径按钮链接 传入参数需要使用lambda函数
         self.carButton.clicked.connect(lambda: self.open_dir(edit_components=self.carEdit))
         self.jobButton.clicked.connect(lambda: self.open_dir(edit_components=self.jobEdit))
         self.saveButton.clicked.connect(lambda: self.open_dir(edit_components=self.saveEdit))

@@ -1,7 +1,10 @@
+from PyQt5.QtWidgets import QLabel
 import os.path
+import json
 
 from PyQt5 import QtCore, QtWidgets, QtGui
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QUrl
+from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 
 import settings
 from progress_bar import CustomProgressBar
@@ -37,6 +40,16 @@ class CheckableComboBox(QtWidgets.QComboBox):
             item.setCheckState(QtCore.Qt.Unchecked)
             item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
             self.model().appendRow(item)
+    
+    def clear(self):
+        self.model().clear()
+        self.setEditText('')
+    
+    def addCheckableItem(self, text):
+        item = QtGui.QStandardItem(text)
+        item.setCheckState(QtCore.Qt.Unchecked)
+        item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+        self.model().appendRow(item)
 
 
 class JobSelectionDialog(QtWidgets.QDialog):
@@ -132,6 +145,9 @@ class Ui_PreimageWindow(object):
     def __init__(self):
         self.progress_updated.connect(self.update_progress)
         self.selected_batch_numbers = []
+        # 初始化网络管理器
+        self.network_manager = QNetworkAccessManager()
+        self.network_manager.finished.connect(self.on_machine_data_received)
 
     def update_progress(self, value):
         self.progress_bar.setValue(value)
@@ -337,26 +353,22 @@ class Ui_PreimageWindow(object):
         mes_ip_label = QtWidgets.QLabel("MES IP地址")
         self.mes_ip_edit = QtWidgets.QLineEdit()
         self.mes_ip_edit.setText("127.0.0.1")
+        self.mes_ip_edit.textChanged.connect(self.on_mes_ip_changed)  # IP改变时自动获取机台数据
         mes_ip_layout.addWidget(mes_ip_label)
         mes_ip_layout.addWidget(self.mes_ip_edit)
         mes_layout.addLayout(mes_ip_layout)
         
         # 机台号选择和全选
         machine_layout = QtWidgets.QHBoxLayout()
-        machine_label = QtWidgets.QLabel("机台号")
+        machine_label: QLabel = QtWidgets.QLabel("机台号")
         
-        # 机台号下拉框（可多选，使用CheckableComboBox）
         self.machine_combo = CheckableComboBox()
         self.machine_combo.setObjectName("machine_combo")
-        self.machine_combo.addItems(["机台1", "机台2", "机台3", "机台4", "机台5"])
-        # 设置最小宽度，确保能正常显示
         self.machine_combo.setMinimumWidth(200)
-        
-        # 全选checkbox
         self.select_all_machines = QtWidgets.QCheckBox("全选")
         self.select_all_machines.setObjectName("select_all_machines")
-        
-        # 将控件添加到水平布局
+        self.on_mes_ip_changed(self.mes_ip_edit.text())
+
         machine_layout.addWidget(machine_label)
         machine_layout.addWidget(self.machine_combo, 1)  # 设置拉伸因子，让下拉框占满剩余空间
         machine_layout.addWidget(self.select_all_machines)
@@ -365,6 +377,57 @@ class Ui_PreimageWindow(object):
         mes_layout.addLayout(machine_layout)
         
         tab_mes_layout.addWidget(mes_group)
+        
+        # 收集功能配置区域
+        collect_group = QtWidgets.QGroupBox("收集功能配置")
+        collect_layout = QtWidgets.QVBoxLayout(collect_group)
+        collect_layout.setSpacing(10)
+        self.collect_mode_group = QtWidgets.QButtonGroup(self)
+        self.collect_mode_group.setExclusive(True)  # 设置互斥
+        
+        mode_layout = QtWidgets.QHBoxLayout()
+        self.ai_report_checkbox = QtWidgets.QCheckBox("AI后报点小于")
+        self.ai_report_checkbox.setObjectName("ai_report")
+        self.collect_mode_group.addButton(self.ai_report_checkbox)
+        
+        self.ai_report_value = QtWidgets.QLineEdit()
+        self.ai_report_value.setObjectName("ai_report_value")
+        self.ai_report_value.setFixedWidth(60)
+        self.ai_report_value.setText("0")  
+        
+        self.filter_rate_checkbox = QtWidgets.QCheckBox("料号过滤率小于")
+        self.filter_rate_checkbox.setObjectName("filter_rate")
+        self.collect_mode_group.addButton(self.filter_rate_checkbox)
+        
+        self.filter_rate_value = QtWidgets.QLineEdit()
+        self.filter_rate_value.setObjectName("filter_rate_value")
+        self.filter_rate_value.setFixedWidth(60)
+        self.filter_rate_value.setText("0")  
+        
+        # # 触发收集模式（如MES触发）
+        # self.trigger_collect_checkbox = QtWidgets.QCheckBox("触发收集")
+        # self.trigger_collect_checkbox.setObjectName("trigger_collect")
+        # self.collect_mode_group.addButton(self.trigger_collect_checkbox)
+        
+        # # 自动收集模式
+        # self.auto_collect_checkbox = QtWidgets.QCheckBox("自动收集")
+        # self.auto_collect_checkbox.setObjectName("auto_collect")
+        # self.collect_mode_group.addButton(self.auto_collect_checkbox)
+        
+        mode_layout.addWidget(self.ai_report_checkbox)
+        mode_layout.addWidget(self.ai_report_value)
+        
+        mode_layout.addWidget(self.filter_rate_checkbox)
+        mode_layout.addWidget(self.filter_rate_value)
+        
+        # mode_layout.addWidget(self.timer_collect_checkbox)
+        # mode_layout.addWidget(self.trigger_collect_checkbox)
+        # mode_layout.addWidget(self.auto_collect_checkbox)
+        mode_layout.addStretch()
+        
+        collect_layout.addLayout(mode_layout)
+        
+        tab_mes_layout.addWidget(collect_group)
         tab_mes_layout.addStretch()
         
         # 将Tab 2添加到Tab Widget
@@ -545,6 +608,53 @@ class Ui_PreimageWindow(object):
             else:
                 item.setCheckState(QtCore.Qt.Unchecked)
         self.machine_combo.updateText()
+    
+    def on_mes_ip_changed(self, text):
+        if not text or not self.is_valid_ip(text):
+            return
+        self.machine_combo.clear()
+        self.get_machine_data_from_mes(text)
+    
+    def is_valid_ip(self, ip):
+        parts = ip.split('.')
+        if len(parts) != 4:
+            return False
+        try:
+            for part in parts:
+                if not 0 <= int(part) <= 255:
+                    return False
+            return True
+        except:
+            return False
+    
+    def get_machine_data_from_mes(self, mes_ip):
+        try:
+            port = 5000
+            url_str = f"http://{mes_ip}:{port}/getMacineData"
+            url = QUrl(url_str)
+            request = QNetworkRequest(url)
+            reply = self.network_manager.get(request)
+        except Exception as e:
+            print(f"获取机台数据失败: {e}")
+    
+    def on_machine_data_received(self, reply):
+        if reply.error() == QNetworkReply.NoError:
+            try:
+                data = reply.readAll()
+                json_str = str(data, 'utf-8')
+                json_doc = json.loads(json_str)
+                if 'data' in json_doc and isinstance(json_doc['data'], list):
+                    machine_list = json_doc['data']
+                    self.machine_combo.clear()
+                    for machine in machine_list:
+                        if isinstance(machine, str):
+                            self.machine_combo.addCheckableItem(machine)
+                    self.machine_combo.updateText()
+            except Exception as e:
+                print(f"解析机台数据失败: {e}")
+        else:
+            print(f"请求失败: {reply.errorString()}")
+        reply.deleteLater()
 
     def chooseJob_button_clicked_handler(self):
         car_path = self.carEdit.text()
