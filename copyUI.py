@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QLabel
 import os.path
 import json
+import logging
 
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import Qt, QUrl
@@ -8,6 +9,8 @@ from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkRepl
 
 import settings
 from progress_bar import CustomProgressBar
+
+logger = logging.getLogger(__name__)
 
 
 class CheckableComboBox(QtWidgets.QComboBox):
@@ -50,6 +53,14 @@ class CheckableComboBox(QtWidgets.QComboBox):
         item.setCheckState(QtCore.Qt.Unchecked)
         item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
         self.model().appendRow(item)
+    
+    def get_selected_items(self):
+        checked_items = []
+        for i in range(self.model().rowCount()):
+            item = self.model().item(i)
+            if item.checkState() == QtCore.Qt.Checked:
+                checked_items.append(item.text())
+        return checked_items
 
 
 class JobSelectionDialog(QtWidgets.QDialog):
@@ -74,7 +85,7 @@ class JobSelectionDialog(QtWidgets.QDialog):
         search_layout.addWidget(self.search_edit)
         layout.addLayout(search_layout)
 
-        self.label = QtWidgets.QLabel("请选择需要的文件夹：")
+        self.label = QtWidgets.QLabel("请选择需要的文件夹(已按时间由新到旧排序)：")
         layout.addWidget(self.label)
 
         self.scroll_area = QtWidgets.QScrollArea()
@@ -87,7 +98,12 @@ class JobSelectionDialog(QtWidgets.QDialog):
 
         self.checkboxes = []
         if os.path.exists(self.car_path):
-            self.all_folders = [f for f in os.listdir(self.car_path) if os.path.isdir(os.path.join(self.car_path, f))]
+            folders = [f for f in os.listdir(self.car_path) if os.path.isdir(os.path.join(self.car_path, f))]
+            self.all_folders = sorted(
+                folders,
+                key=lambda f: os.path.getmtime(os.path.join(self.car_path, f)),
+                reverse=True  # 由新到旧
+            )
         self._update_folder_list()
 
         button_layout = QtWidgets.QHBoxLayout()
@@ -115,7 +131,7 @@ class JobSelectionDialog(QtWidgets.QDialog):
             checkbox.deleteLater()
         self.checkboxes.clear()
         filtered_folders = [f for f in self.all_folders if filter_text.lower() in f.lower()]
-        for folder in sorted(filtered_folders):
+        for folder in filtered_folders:
             checkbox = QtWidgets.QCheckBox(folder)
             self.container_layout.addWidget(checkbox)
             self.checkboxes.append(checkbox)
@@ -252,17 +268,6 @@ class Ui_PreimageWindow(object):
         paths_layout.addWidget(self.logEdit, 3, 1)
         paths_layout.addWidget(self.logButton, 3, 2)
 
-        # 保存路径
-        # self.saveLabel = QtWidgets.QLabel("保存路径")
-        # self.saveLabel.setObjectName("saveLabel")
-        # self.saveEdit = QtWidgets.QLineEdit()
-        # self.saveEdit.setObjectName("saveEdit")
-        # self.saveButton = QtWidgets.QPushButton("...")
-        # self.saveButton.setObjectName("saveButton")
-        # paths_layout.addWidget(self.saveLabel, 4, 0)
-        # paths_layout.addWidget(self.saveEdit, 4, 1)
-        # paths_layout.addWidget(self.saveButton, 4, 2)
-        
         paths_layout.setColumnStretch(1, 1)
         tab_manual_layout.addWidget(paths_group)
 
@@ -436,24 +441,37 @@ class Ui_PreimageWindow(object):
         # 将Tab Widget添加到控制面板
         control_layout.addWidget(self.tabWidget)
 
-         # 日期和操作区域
+         # 公共操作区域
         date_action_group = QtWidgets.QGroupBox()
         date_action_layout = QtWidgets.QVBoxLayout(date_action_group)
         date_action_layout.setSpacing(15)
         
+        # 压缩包名称和保存路径（同一行）
+        press_save_layout = QtWidgets.QHBoxLayout()
+        
+        # 压缩包名称
+        self.pressLabel = QtWidgets.QLabel("压缩包名")
+        self.pressLabel.setObjectName("pressLabel")
+        self.pressEdit = QtWidgets.QLineEdit()
+        self.pressEdit.setObjectName("pressEdit")
+        self.pressEdit.setFixedWidth(150)  # 设置合适宽度
+        
         # 保存路径
-        save_path_layout = QtWidgets.QHBoxLayout()
         self.saveLabel = QtWidgets.QLabel("保存路径")
         self.saveLabel.setObjectName("saveLabel")
         self.saveEdit = QtWidgets.QLineEdit()
         self.saveEdit.setObjectName("saveEdit")
         self.saveButton = QtWidgets.QPushButton("...")
         self.saveButton.setObjectName("saveButton")
-
-        save_path_layout.addWidget(self.saveLabel)
-        save_path_layout.addWidget(self.saveEdit)
-        save_path_layout.addWidget(self.saveButton)
-        date_action_layout.addLayout(save_path_layout)
+        
+        press_save_layout.addWidget(self.pressLabel)
+        press_save_layout.addWidget(self.pressEdit)
+        press_save_layout.addSpacing(10)  # 添加间距
+        press_save_layout.addWidget(self.saveLabel)
+        press_save_layout.addWidget(self.saveEdit, 1)  # 设置拉伸因子
+        press_save_layout.addWidget(self.saveButton)
+        
+        date_action_layout.addLayout(press_save_layout)
 
         # 日期范围
         date_range_layout = QtWidgets.QHBoxLayout()
@@ -544,10 +562,15 @@ class Ui_PreimageWindow(object):
         self.log_output = QtWidgets.QTextBrowser()
         self.log_output.setReadOnly(True)
         self.log_output.setObjectName("log_output")
+        self.log_output.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         
         # 警告输出
         self.warning_browser = QtWidgets.QTextBrowser()
         self.warning_browser.setObjectName("warning_browser")
+        self.warning_browser.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        
+        # 创建右键菜单
+        self._create_context_menus()
         
         log_layout.addWidget(self.log_output, 1)
         log_layout.addWidget(self.warning_browser, 1)
@@ -629,11 +652,24 @@ class Ui_PreimageWindow(object):
     
     def get_machine_data_from_mes(self, mes_ip):
         try:
-            port = 5000
-            url_str = f"http://{mes_ip}:{port}/getMacineData"
+            port = 9099
+            url_str = f"http://{mes_ip}:{port}/api/report/conds"
             url = QUrl(url_str)
             request = QNetworkRequest(url)
-            reply = self.network_manager.get(request)
+            request.setHeader(QNetworkRequest.ContentTypeHeader, "application/json")
+            start_date = self.dateEdit.date().toString("yyyy-MM-dd") + " 00:00:00"
+            end_date = self.dateEndEdit.date().toString("yyyy-MM-dd") + " 23:59:59"
+            json_data = {
+                "dates": [
+                    start_date,
+                    end_date
+                ]
+            }
+            json_str = json.dumps(json_data)
+            from PyQt5.QtCore import QByteArray
+            data = QByteArray(json_str.encode('utf-8'))
+            reply = self.network_manager.post(request, data)
+            
         except Exception as e:
             print(f"获取机台数据失败: {e}")
     
@@ -643,13 +679,16 @@ class Ui_PreimageWindow(object):
                 data = reply.readAll()
                 json_str = str(data, 'utf-8')
                 json_doc = json.loads(json_str)
-                if 'data' in json_doc and isinstance(json_doc['data'], list):
-                    machine_list = json_doc['data']
-                    self.machine_combo.clear()
-                    for machine in machine_list:
-                        if isinstance(machine, str):
-                            self.machine_combo.addCheckableItem(machine)
-                    self.machine_combo.updateText()
+                if 'data' in json_doc and isinstance(json_doc['data'], dict):
+                    data_dict = json_doc['data']
+                    if 'avis' in data_dict and isinstance(data_dict['avis'], list):
+                        avis_list = data_dict['avis']
+                        self.machine_combo.clear()
+                        for avi in avis_list:
+                            if isinstance(avi, str):
+                                self.machine_combo.addCheckableItem(avi)
+                        self.machine_combo.updateText()
+                        print(f"成功加载 {len(avis_list)} 个机台")
             except Exception as e:
                 print(f"解析机台数据失败: {e}")
         else:
@@ -658,7 +697,7 @@ class Ui_PreimageWindow(object):
 
     def chooseJob_button_clicked_handler(self):
         car_path = self.carEdit.text()
-        dialog = JobSelectionDialog(car_path, self)
+        dialog: JobSelectionDialog = JobSelectionDialog(car_path, self)
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             self.selected_batch_numbers = dialog.get_selected_folders()
 
@@ -725,3 +764,26 @@ class Ui_PreimageWindow(object):
         ]:
             widget.setEnabled(enabled)
         self.stop_Button.setEnabled(not enabled)
+
+    def _create_context_menus(self):
+        self.log_context_menu = QtWidgets.QMenu(self.log_output)
+        clear_log_action = self.log_context_menu.addAction("清空日志")
+        clear_log_action.triggered.connect(self.clear_log_browser)
+        self.log_output.customContextMenuRequested.connect(
+            lambda pos: self.log_context_menu.exec_(self.log_output.mapToGlobal(pos))
+        )
+        
+        self.warning_context_menu = QtWidgets.QMenu(self.warning_browser)
+        clear_warning_action = self.warning_context_menu.addAction("清空警告")
+        clear_warning_action.triggered.connect(self.clear_warning_browser)
+        self.warning_browser.customContextMenuRequested.connect(
+            lambda pos: self.warning_context_menu.exec_(self.warning_browser.mapToGlobal(pos))
+        )
+    
+    def clear_log_browser(self):
+        self.log_output.clear()
+        logger.info("日志已清空")
+    
+    def clear_warning_browser(self):
+        self.warning_browser.clear()
+        logger.info("警告信息已清空")
