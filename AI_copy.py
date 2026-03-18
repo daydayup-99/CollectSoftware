@@ -455,13 +455,8 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                     logger.warning("返回的数据为空！")
                     return
                 logger.info(f"获取到 {len(mes_data)} 条数据记录")
-                processed_data = {}
-                for item in mes_data:
-                    job_name = item.get('job_name')
-                    if job_name:
-                        processed_data[job_name] = item
-                logger.info(f"处理完成，共 {len(processed_data)} 个料号")
-                self._process_mes_data(processed_data)  # 传入处理后的字典数据
+                # 直接传入列表，每条记录单独处理
+                self._process_mes_data(mes_data)  # 传入原始列表数据
             elif response.status_code == 404:
                 logger.error("URL不存在，请检查MES系统是否启动或可用")
             elif response.status_code == 400:
@@ -477,39 +472,53 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
     def _process_mes_data(self, mes_data):
         """
         处理MES返回的数据并执行拷贝
-        :param mes_data: MES返回的JSON数据（字典格式，key为job_name）
+        :param mes_data: MES返回的JSON数据（列表格式，每条记录单独处理）
         """
         try:
-            jobs = list(mes_data.keys())
-            if not jobs:
-                logger.warning("没有需要处理的料号")
+            if not mes_data:
+                logger.warning("没有需要处理的数据")
                 return
-            logger.info(f"开始处理 {len(jobs)} 个料号")
+            
+            total_records = len(mes_data)
+            logger.info(f"开始处理 {total_records} 条记录")
+            
             save_path = self.saveEdit.text()
             if not save_path:
                 logger.error("保存路径不能为空")
                 return
-            # 统计成功/失败的料号数
+            
+            # 统计成功/失败的记录数
             success_count = 0
             fail_count = 0
             total_copy_count = 0
             
-            for i, job_name in enumerate(jobs):
+            # 记录已经处理过的料号（用于后续拷贝JOB和STD）
+            processed_jobs = set()
+            
+            # 初始化进度跟踪
+            completed_tasks = 0
+            estimated_total = total_records + len(set(r.get('job_name') for r in mes_data)) * 2
+            
+            for i, record in enumerate(mes_data):
                 if not self._running:
                     logger.info("用户停止拷贝")
                     break
                 
                 try:
-                    job_info = mes_data[job_name]
-                    err_path = job_info.get('err_path', '')
-                    job_path = job_info.get('job_path', '')
-                    std_path = job_info.get('std_path', '')
-                    plno = job_info.get('plno', '')
-                    pcb = job_info.get('pcb', '')
-                    is_top = job_info.get('is_top', False)
+                    job_name = record.get('job_name', '')
+                    err_path = record.get('err_path', '')
+                    std_path = record.get('std_path', '')
+                    plno = record.get('plno', '')
+                    is_top = record.get('is_top', False)
+                    pcbno = record.get('pcbno', '')
+                    
+                    if err_path:
+                        err_path = err_path.replace('\\\\', '\\')
+                    if std_path:
+                        std_path = std_path.replace('\\\\', '\\')
                     
                     if not err_path:
-                        logger.warning(f"料号 {job_name} 没有err_path，跳过")
+                        logger.warning(f"记录没有err_path，跳过")
                         fail_count += 1
                         continue
                     
@@ -517,14 +526,16 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                         logger.warning(f"源路径不存在: {err_path}")
                         fail_count += 1
                         continue
+                    logger.info(f"处理记录 {i+1}/{total_records} - 料号 {job_name} ({plno}):")
+                    logger.info(f"  源路径: {err_path}")
                     
-                    logger.info(f"处理料号 {job_name} ({plno}):")
-                    logger.info(f"  源CAR路径: {err_path}")
-                    
+                    # 1. 拷CAR
                     if 'car' in err_path:
+                        # 提取相对路径（从car/开始）
                         relative_path = err_path[err_path.find('car'):]
                         target_car_path = os.path.join(save_path, relative_path)
                         
+                        # 创建目标目录
                         target_car_dir = os.path.dirname(target_car_path)
                         os.makedirs(target_car_dir, exist_ok=True)
                         
@@ -537,86 +548,115 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                         
                         # 2. 拷study文件（如果存在）
                         # study文件路径: std_path/job_name/pl_name/file_study
-                        pl_name = plno  # 获取plno名称
-                        pcb_filename = os.path.basename(err_path)  # 获取文件名如 1_b, 8_t
+                        pl_name = plno
+                        pcb_filename = os.path.basename(err_path)
                         study_file = os.path.join(std_path, job_name, pl_name, f"{pcb_filename}_study")
                         
                         if os.path.exists(study_file):
-                            # study目标路径：保存路径/std/job_name/pl_name/file_study
                             target_study_path = os.path.join(save_path, 'std', job_name, pl_name, f"{pcb_filename}_study")
                             target_study_dir = os.path.dirname(target_study_path)
                             os.makedirs(target_study_dir, exist_ok=True)
+                            
                             shutil.copy2(study_file, target_study_path)
                             logger.info(f"  STUDY拷贝成功: {target_study_path}")
+                    
                     success_count += 1
+                    processed_jobs.add(job_name)
+                    
                 except Exception as e:
-                    logger.error(f"处理料号 {job_name} 失败: {e}")
+                    logger.error(f"处理记录失败: {e}")
                     fail_count += 1
                 
-                progress = int((i + 1) / len(jobs) * 100)
+                completed_tasks += 1
+                progress = int(completed_tasks / estimated_total * 70) if estimated_total > 0 else 0
                 self.progress_updated.emit(progress)
             
-            # 3. 拷JOB文件
-            logger.info("开始拷贝JOB文件...")
-            for job_name in jobs:
-                try:
-                    job_info = mes_data[job_name]
-                    job_path = job_info.get('job_path', '')
-                    if not job_path:
-                        continue
+            # 3. 拷JOB文件（在所有CAR处理完成后，每个料号只需拷贝一次）
+            if processed_jobs:
+                logger.info("开始拷贝JOB文件...")
+                job_count = len(processed_jobs)
+                for idx, job_name in enumerate(processed_jobs):
+                    try:
+                        job_path = None
+                        for record in mes_data:
+                            if record.get('job_name') == job_name:
+                                job_path = record.get('job_path', '')
+                                break
+                        
+                        if not job_path:
+                            continue
+                        else:
+                            job_path = job_path.replace('\\\\', '\\')
+                        # 拷贝.top和.bot文件
+                        for ext in ['.top', '.bot']:
+                            src_job_file = os.path.join(job_path, f"{job_name}{ext}")
+                            if os.path.exists(src_job_file):
+                                target_job_dir = os.path.join(save_path, 'job')
+                                os.makedirs(target_job_dir, exist_ok=True)
+                                target_job_file = os.path.join(target_job_dir, f"{job_name}{ext}")
+                                
+                                # 检查目标文件是否存在，如果源文件更新则拷贝
+                                should_copy = True
+                                if os.path.exists(target_job_file):
+                                    src_mtime = os.path.getmtime(src_job_file)
+                                    dest_mtime = os.path.getmtime(target_job_file)
+                                    should_copy = src_mtime > dest_mtime
+                                
+                                if should_copy:
+                                    shutil.copy2(src_job_file, target_job_file)
+                                    logger.info(f"  JOB拷贝成功: {target_job_file}")
+                        
+                        completed_tasks += 1
+                        progress = int(70 + (completed_tasks / estimated_total * 15)) if estimated_total > 0 else 70
+                        self.progress_updated.emit(progress)
                     
-                    # 拷贝.top和.bot文件
-                    for ext in ['.top', '.bot']:
-                        src_job_file = os.path.join(job_path, f"{job_name}{ext}")
-                        if os.path.exists(src_job_file):
-                            # 目标路径：保存路径/job/job_name.top（或.bot）
-                            target_job_dir = os.path.join(save_path, 'job')
-                            os.makedirs(target_job_dir, exist_ok=True)
-                            target_job_file = os.path.join(target_job_dir, f"{job_name}{ext}")
-                            
-                            # 检查目标文件是否存在，如果源文件更新则拷贝
-                            should_copy = True
-                            if os.path.exists(target_job_file):
-                                src_mtime = os.path.getmtime(src_job_file)
-                                dest_mtime = os.path.getmtime(target_job_file)
-                                should_copy = src_mtime > dest_mtime
-                            
-                            if should_copy:
-                                shutil.copy2(src_job_file, target_job_file)
-                                logger.info(f"  JOB拷贝成功: {target_job_file}")
-                
-                except Exception as e:
-                    logger.error(f"拷贝JOB文件失败 {job_name}: {e}")
+                    except Exception as e:
+                        logger.error(f"拷贝JOB文件失败 {job_name}: {e}")
             
-            # 4. 拷标准板文件
-            logger.info("开始拷贝STD文件...")
-            for job_name in jobs:
-                try:
-                    job_info = mes_data[job_name]
-                    std_path = job_info.get('std_path', '')
-                    if not std_path:
-                        continue
+            # 4. 拷STD文件
+            if processed_jobs:
+                logger.info("开始拷贝STD文件...")
+                job_count = len(processed_jobs)
+                for idx, job_name in enumerate(processed_jobs):
+                    try:
+                        std_path = None
+                        for record in mes_data:
+                            if record.get('job_name') == job_name:
+                                std_path = record.get('std_path', '')
+                                break
+                        
+                        if not std_path:
+                            continue
+                        else:
+                            std_path = std_path.replace('\\\\', '\\')
+                        # 拷贝_View目录
+                        src_std_view = os.path.join(std_path, f"{job_name}_View")
+                        if os.path.exists(src_std_view):
+                            target_std_view = os.path.join(save_path, 'job', f"{job_name}_View")
+                            logger.info(f"  STD View开始拷贝: {target_std_view}")
+                            os.makedirs(os.path.dirname(target_std_view), exist_ok=True)
+                            shutil.copytree(src_std_view, target_std_view, dirs_exist_ok=True)
+                            logger.info(f"  STD View拷贝成功: {target_std_view}")
+                        
+                        # 拷贝StudyTemp目录（如果存在）
+                        src_std_study = os.path.join(std_path, job_name, "StudyTemp")
+                        if os.path.exists(src_std_study):
+                            target_std_study = os.path.join(save_path, 'job', job_name, "StudyTemp")
+                            os.makedirs(os.path.dirname(target_std_study), exist_ok=True)
+                            shutil.copytree(src_std_study, target_std_study, dirs_exist_ok=True)
+                            logger.info(f"  STD StudyTemp拷贝成功: {target_std_study}")
+                        
+                        completed_tasks += 1
+                        progress = int(85 + (completed_tasks / estimated_total * 15)) if estimated_total > 0 else 85
+                        self.progress_updated.emit(progress)
                     
-                    # 拷贝_View目录
-                    src_std_view = os.path.join(std_path, f"{job_name}_View")
-                    if os.path.exists(src_std_view):
-                        target_std_view = os.path.join(save_path, 'std', f"{job_name}_View")
-                        os.makedirs(os.path.dirname(target_std_view), exist_ok=True)
-                        shutil.copytree(src_std_view, target_std_view, dirs_exist_ok=True)
-                        logger.info(f"  STD View拷贝成功: {target_std_view}")
-                    
-                    # 拷贝StudyTemp目录（如果存在）
-                    src_std_study = os.path.join(std_path, job_name, "StudyTemp")
-                    if os.path.exists(src_std_study):
-                        target_std_study = os.path.join(save_path, 'std', job_name, "StudyTemp")
-                        os.makedirs(os.path.dirname(target_std_study), exist_ok=True)
-                        shutil.copytree(src_std_study, target_std_study, dirs_exist_ok=True)
-                        logger.info(f"  STD StudyTemp拷贝成功: {target_std_study}")
-                
-                except Exception as e:
-                    logger.error(f"拷贝STD文件失败 {job_name}: {e}")
+                    except Exception as e:
+                        logger.error(f"拷贝STD文件失败 {job_name}: {e}")
+            else:
+                # 如果没有STD文件，直接设置100%
+                self.progress_updated.emit(100)
             
-            logger.info(f"MES数据拷贝完成！成功: {success_count}, 失败: {fail_count}, 总拷贝文件数: {total_copy_count}")
+            logger.info(f"MES数据拷贝完成！成功: {success_count}, 失败: {fail_count}, 总拷贝文件数: {total_copy_count}, 处理料号数: {len(processed_jobs)}")
         except Exception as e:
             logger.error(f"处理MES数据失败: {e}")
 
