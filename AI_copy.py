@@ -33,7 +33,6 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             self.setWindowIcon(PyQt5.QtGui.QIcon(r'ai.ico'))
             _make_dir("setting")
             self.config_path = './setting/config.ini'
-            # 创建一个 QTextEdit 用于显示日志信息
             self.cwd = os.getcwd()
             self.tid = 0
             self.setEnable(True)
@@ -111,9 +110,12 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
 
         # 拷贝方式
         self.copyMode_comboBox.setCurrentIndex(int(config['DEFAULT'].get('copyMode', '0')))
-        # AOI和AVI状态（默认都勾选）
+        # AOI和AVI状态
         self.aoiCheckBox.setChecked(config['DEFAULT'].get('useAOI', 'True').lower() == 'true')
         self.aviCheckBox.setChecked(config['DEFAULT'].get('useAVI', 'False').lower() == 'true')
+        # MES IP地址
+        mes_ip = config['DEFAULT'].get('mesIp', '127.0.0.1')
+        self.mes_ip_edit.setText(mes_ip)
 
     def setup_logging(self):
         logger.handlers = []
@@ -182,6 +184,7 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             'copyMode': str(self.copyMode_comboBox.currentIndex()),
             'useAOI': str(self.aoiCheckBox.isChecked()),
             'useAVI': str(self.aviCheckBox.isChecked()),
+            'mesIp': str(self.mes_ip_edit.text()), 
         }
         self.config['DEFAULT'] = config_data
         with open(self.config_path, 'w') as configfile:

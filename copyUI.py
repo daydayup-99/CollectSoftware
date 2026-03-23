@@ -377,10 +377,7 @@ class Ui_PreimageWindow(object):
         machine_layout.addWidget(machine_label)
         machine_layout.addWidget(self.machine_combo, 1)  # 设置拉伸因子，让下拉框占满剩余空间
         machine_layout.addWidget(self.select_all_machines)
-        
-        # 将水平布局添加到mes_layout
         mes_layout.addLayout(machine_layout)
-        
         tab_mes_layout.addWidget(mes_group)
         
         # 收集功能配置区域
@@ -409,7 +406,7 @@ class Ui_PreimageWindow(object):
         self.filter_rate_value.setFixedWidth(60)
         self.filter_rate_value.setText("0")  
         
-        # # 触发收集模式（如MES触发）
+        # # 触发收集模式
         # self.trigger_collect_checkbox = QtWidgets.QCheckBox("触发收集")
         # self.trigger_collect_checkbox.setObjectName("trigger_collect")
         # self.collect_mode_group.addButton(self.trigger_collect_checkbox)
@@ -446,15 +443,13 @@ class Ui_PreimageWindow(object):
         date_action_layout = QtWidgets.QVBoxLayout(date_action_group)
         date_action_layout.setSpacing(15)
         
-        # 压缩包名称和保存路径（同一行）
         press_save_layout = QtWidgets.QHBoxLayout()
-        
         # 压缩包名称
-        self.pressLabel = QtWidgets.QLabel("压缩包名")
-        self.pressLabel.setObjectName("pressLabel")
+        self.pressCheckBox = QtWidgets.QCheckBox("压缩包名")
+        self.pressCheckBox.setObjectName("pressCheckBox")
         self.pressEdit = QtWidgets.QLineEdit()
         self.pressEdit.setObjectName("pressEdit")
-        self.pressEdit.setFixedWidth(150)  # 设置合适宽度
+        self.pressEdit.setFixedWidth(120)  # 设置合适宽度
         
         # 保存路径
         self.saveLabel = QtWidgets.QLabel("保存路径")
@@ -464,7 +459,7 @@ class Ui_PreimageWindow(object):
         self.saveButton = QtWidgets.QPushButton("...")
         self.saveButton.setObjectName("saveButton")
         
-        press_save_layout.addWidget(self.pressLabel)
+        press_save_layout.addWidget(self.pressCheckBox)
         press_save_layout.addWidget(self.pressEdit)
         press_save_layout.addSpacing(10)  # 添加间距
         press_save_layout.addWidget(self.saveLabel)
