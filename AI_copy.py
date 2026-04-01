@@ -2,7 +2,6 @@ import logging
 import sys
 import os
 from logging.handlers import TimedRotatingFileHandler
-from pathlib import Path
 
 import PyQt5
 import PyQt5.QtGui
@@ -48,6 +47,10 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
         # 加载配置
         self.config = self.load_config()
         self.default_config = self.config['DEFAULT']
+        
+        if hasattr(self, 'mes_ip_edit') and self.mes_ip_edit.text():
+            self.on_mes_ip_changed(self.mes_ip_edit.text())
+        
         self._running = False
         self._run_timer = False
         self.timer = QTimer(self)
@@ -113,6 +116,9 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
         # AOI和AVI状态
         self.aoiCheckBox.setChecked(config['DEFAULT'].get('useAOI', 'True').lower() == 'true')
         self.aviCheckBox.setChecked(config['DEFAULT'].get('useAVI', 'False').lower() == 'true')
+        # 压缩设置
+        self.pressCheckBox.setChecked(config['DEFAULT'].get('needCompress', 'False').lower() == 'true')
+        self.pressEdit.setText(config['DEFAULT'].get('compressName', ''))
         # MES IP地址
         mes_ip = config['DEFAULT'].get('mesIp', '127.0.0.1')
         self.mes_ip_edit.setText(mes_ip)
@@ -156,6 +162,10 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
         use_aoi = self.aoiCheckBox.isChecked()
         use_avi = self.aviCheckBox.isChecked()
         machine_type = self.machineType_comboBox.currentText()
+        
+        need_compress = self.pressCheckBox.isChecked()
+        compress_name = self.pressEdit.text() if need_compress else ''
+        
         save_cls_map = {
             0: save_modes.DateSaveMode,
             1: save_modes.JobSaveMode,
@@ -164,7 +174,9 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             4: save_modes.ManualSaveMode
         }
         save_cls = save_cls_map.get(save_set, save_modes.DateSaveMode)
-        save_cls_obj = save_cls(car_dir, job_dir, save_dir, study_dir, log_dir, date, use_aoi=use_aoi, use_avi=use_avi, machine_type=machine_type)
+        save_cls_obj = save_cls(car_dir, job_dir, save_dir, study_dir, log_dir, date, 
+                               use_aoi=use_aoi, use_avi=use_avi, machine_type=machine_type,
+                               need_compress=need_compress, compress_name=compress_name)
         return save_cls_obj
 
     @handle_file_errors
@@ -184,7 +196,9 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             'copyMode': str(self.copyMode_comboBox.currentIndex()),
             'useAOI': str(self.aoiCheckBox.isChecked()),
             'useAVI': str(self.aviCheckBox.isChecked()),
-            'mesIp': str(self.mes_ip_edit.text()), 
+            'mesIp': str(self.mes_ip_edit.text()),
+            'needCompress': str(self.pressCheckBox.isChecked()),
+            'compressName': str(self.pressEdit.text()),
         }
         self.config['DEFAULT'] = config_data
         with open(self.config_path, 'w') as configfile:
@@ -237,12 +251,13 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
         self._run_timer = False
         self.timer.stop()  # 停止定时器
 
-    def _execute_copy(self, get_items_func, process_item_func, item_label):
+    def _execute_copy(self, get_items_func, process_item_func, item_label, save_mode_obj=None):
         """
         通用的拷贝方法。
         :param get_items_func: 获取需要拷贝的项目列表（如板号列表或日期列表）的函数
         :param process_item_func: 对单个项目进行处理的函数
         :param item_label: 项目类型（如 "板号" 或 "日期"），用于日志记录
+        :param save_mode_obj: save_modes 对象，用于拷贝完成后压缩（仅用于按板号拷贝）
         """
         try:
             def is_running():
@@ -273,6 +288,11 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 log_item_finish(item)
 
             logger.info(f'按{item_label}拷贝已完成！')
+
+            if save_mode_obj and save_mode_obj.need_compress:
+                logger.info('开始压缩文件夹...')
+                save_mode_obj.compress_folder()
+                logger.info('压缩完成！')
 
         except Exception as e:
             logger.error(e)
@@ -759,6 +779,10 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             start_date = self.default_config.get('startDate', QDate.currentDate())
             end_date = self.default_config.get('enddate', QDate.currentDate())
             self._copy_log_path(start_date, end_date)
+            
+            # 在外层创建 save_cls_obj，用于所有板号拷贝和最后的压缩
+            date = self.default_config.get('startDate', '20000101').replace('-', '')
+            save_cls_obj = self._choose_save_mode_cls(date)
 
             def get_nums():
                 start_num = int(self.default_config.get('startNum', '-1'))
@@ -766,12 +790,10 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 return list(range(start_num, end_num + 1))
 
             def process_num(num, is_running_callback, *args, **kwargs):
-                date = self.default_config.get('startDate', '20000101').replace('-', '')
-                save_cls_obj = self._choose_save_mode_cls(date)
                 logger.info(f'板号 {num} 开始拷贝!')
                 save_cls_obj.copy([num], is_running_callback, by_date=False)
 
-            self._execute_copy(get_nums, process_num, "板号")
+            self._execute_copy(get_nums, process_num, "板号", save_cls_obj)
         except Exception as e:
             logger.error(e)
             self.setEnable(True)
@@ -780,7 +802,7 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
         try:
             selected_batch_numbers = self.selected_batch_numbers
             if not selected_batch_numbers:
-                logger.warning('请先选择批次号')
+                logger.warning('请先选择料号')
                 self.setEnable(True)
                 return
             max_pl = int(self.maxPlNumEdit.text())
@@ -788,6 +810,10 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             start_date = self.default_config.get('startDate', QDate.currentDate().addDays(-7).toString('yyyyMMdd')).replace('-', '')
             end_date = self.default_config.get('enddate', QDate.currentDate().toString('yyyyMMdd')).replace('-', '')
             car_path = self.carEdit.text()
+            
+            # 在外层创建 save_cls_obj，用于所有料号拷贝和最后的压缩
+            save_cls_obj = self._choose_save_mode_cls(start_date)
+            
             def get_nums():
                 valid_date_path = []
                 for job in selected_batch_numbers:
@@ -809,19 +835,12 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                                         valid_date_path.append(pl_path)
                                         pl_count += 1
                 return valid_date_path
-            # lst = get_nums()
-            # if not lst:
-            #     logger.warning(f'在日期范围 {start_date} 至 {end_date} 内没有找到符合条件的批量')
-            #     self.setEnable(True)
-            #     return
-            # logger.info(f'共找到 {len(lst)} 个符合条件日期的批量')
 
             def process_num(num, is_running_callback, *args, **kwargs):
-                save_cls_obj = self._choose_save_mode_cls(start_date)
                 logger.info(f'料号 {num} 开始拷贝!')
                 save_cls_obj.copyAVI([num], is_running_callback)
 
-            self._execute_copy(get_nums, process_num, "板号")
+            self._execute_copy(get_nums, process_num, "板号", save_cls_obj)
         except Exception as e:
             logger.error(e)
             self.setEnable(True)

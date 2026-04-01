@@ -11,7 +11,7 @@ from logging_handler import logger
 
 # 存储方式的基类
 class SaveMode:
-    def __init__(self, car_dir, job_dir, save_dir, study_dir, log_dir, date, use_aoi=True, use_avi=False, machine_type='在线机'):
+    def __init__(self, car_dir, job_dir, save_dir, study_dir, log_dir, date, use_aoi=True, use_avi=False, machine_type='在线机', need_compress=False, compress_name=''):
         """
         :param car_dir: 缺陷资料存储路径
         :param job_dir: Gerber资料存储路径
@@ -21,6 +21,8 @@ class SaveMode:
         :param date: 日期
         :param use_aoi: 是否使用aoi模式
         :param use_avi: 是否使用avi模式
+        :param need_compress: 是否需要压缩
+        :param compress_name: 压缩包名称
         """
         self.car_dir = car_dir
         self.job_dir = job_dir
@@ -32,6 +34,8 @@ class SaveMode:
         self.use_aoi = use_aoi
         self.use_avi = use_avi
         self.machine_type = machine_type
+        self.need_compress = need_compress
+        self.compress_name = compress_name
         self.car_date_dir = os.path.join(self.car_dir, self.date)
         self.save_car_dir = os.path.join(self.save_dir, 'aoicar' if use_aoi else 'car')
         self.save_job_dir = os.path.join(self.save_dir, 'aoijob' if use_aoi else 'job')
@@ -252,6 +256,56 @@ class SaveMode:
         """
         return self.get_job_name(num)
 
+    def compress_folder(self):
+        """
+        压缩目标文件夹
+        """
+        if not self.need_compress or not self.compress_name:
+            logger.info('不需要压缩或压缩名称为空，跳过压缩')
+            return
+        
+        import zipfile
+        
+        compress_name = self.compress_name
+        if not compress_name.endswith('.zip'):
+            compress_name += '.zip'
+        
+        zip_path = os.path.join(self.save_dir, compress_name)
+        try:
+            logger.info(f'开始压缩文件夹: {self.save_dir} -> {zip_path}')
+            
+            if not os.path.exists(self.save_dir):
+                logger.error(f'源目录不存在: {self.save_dir}')
+                return
+            if not os.listdir(self.save_dir):
+                logger.warning(f'源目录为空: {self.save_dir}')
+                return
+            
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                for root, dirs, files in os.walk(self.save_dir):
+                    for file in files:
+                        if file == compress_name:
+                            continue
+                        file_path = os.path.join(root, file)
+                        arcname = os.path.relpath(file_path, self.save_dir)
+                        zipf.write(file_path, arcname)
+
+            if os.path.exists(self.save_dir):
+                import shutil
+                for item in os.listdir(self.save_dir):
+                    item_path = os.path.join(self.save_dir, item)
+                    if item == compress_name:
+                        continue
+                    
+                    if os.path.isfile(item_path):
+                        os.remove(item_path)
+                        logger.info(f'删除文件: {item_path}')
+                    elif os.path.isdir(item_path):
+                        shutil.rmtree(item_path)
+                        logger.info(f'删除文件夹: {item_path}')
+                
+        except Exception as e:
+            logger.error(f'压缩失败: {e}', exc_info=True)
 
 class DateSaveMode(SaveMode):
     def __init__(self, *args, **kwargs):

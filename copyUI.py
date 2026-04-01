@@ -372,7 +372,6 @@ class Ui_PreimageWindow(object):
         self.machine_combo.setMinimumWidth(200)
         self.select_all_machines = QtWidgets.QCheckBox("全选")
         self.select_all_machines.setObjectName("select_all_machines")
-        self.on_mes_ip_changed(self.mes_ip_edit.text())
 
         machine_layout.addWidget(machine_label)
         machine_layout.addWidget(self.machine_combo, 1)  # 设置拉伸因子，让下拉框占满剩余空间
@@ -438,7 +437,7 @@ class Ui_PreimageWindow(object):
         # 将Tab Widget添加到控制面板
         control_layout.addWidget(self.tabWidget)
 
-         # 公共操作区域
+        # 公共操作区域
         date_action_group = QtWidgets.QGroupBox()
         date_action_layout = QtWidgets.QVBoxLayout(date_action_group)
         date_action_layout.setSpacing(15)
@@ -586,6 +585,7 @@ class Ui_PreimageWindow(object):
         self.aviCheckBox.stateChanged.connect(self.on_avi_changed)
         self.machineType_comboBox.currentIndexChanged.connect(self.on_machine_type_changed)
         self.select_all_machines.stateChanged.connect(self.on_select_all_machines)
+        self.on_mes_ip_changed(self.mes_ip_edit.text())
 
     def on_aoi_changed(self, state):
         if state == QtCore.Qt.Checked:
