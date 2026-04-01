@@ -510,6 +510,13 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 logger.error("保存路径不能为空")
                 return
             
+            need_compress = self.pressCheckBox.isChecked()
+            save_mode_obj = None
+            if need_compress:
+                from datetime import datetime
+                date_str = datetime.now().strftime('%Y%m%d')
+                save_mode_obj = self._choose_save_mode_cls(date_str)
+            
             # 统计成功/失败的记录数
             success_count = 0
             fail_count = 0
@@ -680,6 +687,11 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 self.progress_updated.emit(100)
             
             logger.info(f"MES数据拷贝完成！成功: {success_count}, 失败: {fail_count}, 总拷贝文件数: {total_copy_count}, 处理料号数: {len(processed_jobs)}")
+            
+            if save_mode_obj and save_mode_obj.need_compress:
+                logger.info('开始压缩MES数据文件夹...')
+                save_mode_obj.compress_folder()
+                logger.info('MES数据压缩完成！')
         except Exception as e:
             logger.error(f"处理MES数据失败: {e}")
 
