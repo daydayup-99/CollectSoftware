@@ -325,17 +325,12 @@ class Ui_PreimageWindow(object):
         self.endEdit = QtWidgets.QLineEdit()
         self.endEdit.setObjectName("endEdit")
         
-        self.maxNumLabel = QtWidgets.QLabel("最大板数")
-        self.maxNumLabel.setObjectName("maxNumLabel")
-        self.maxEdit = QtWidgets.QLineEdit()
-        self.maxEdit.setObjectName("maxEdit")
+
         
         params_layout.addWidget(self.startNumLabel, 3, 0)
         params_layout.addWidget(self.startEdit, 3, 1)
         params_layout.addWidget(self.endNumLabel, 3, 2)
         params_layout.addWidget(self.endEdit, 3, 3)
-        params_layout.addWidget(self.maxNumLabel, 3, 4)
-        params_layout.addWidget(self.maxEdit, 3, 5)
         
         tab_manual_layout.addWidget(params_group)
 
@@ -495,6 +490,12 @@ class Ui_PreimageWindow(object):
         self.chooseJob_button = QtWidgets.QPushButton("料号选择")
         self.chooseJob_button.setObjectName("chooseJob_button")
         self.chooseJob_button.clicked.connect(self.chooseJob_button_clicked_handler)
+
+        self.maxNumLabel = QtWidgets.QLabel("最大板数")
+        self.maxNumLabel.setObjectName("maxNumLabel")
+        self.maxEdit = QtWidgets.QLineEdit()
+        self.maxEdit.setObjectName("maxEdit")
+        self.maxEdit.setFixedWidth(50) 
         
         self.copy_aidataButton = QtWidgets.QPushButton("开始拷贝")
         self.copy_aidataButton.setObjectName("copy_aidataButton")
@@ -505,6 +506,8 @@ class Ui_PreimageWindow(object):
         self.stop_Button.setMinimumHeight(40)
         
         buttons_layout.addWidget(self.chooseJob_button)
+        buttons_layout.addWidget(self.maxNumLabel)
+        buttons_layout.addWidget(self.maxEdit)
         buttons_layout.addStretch()
         buttons_layout.addWidget(self.copy_aidataButton)
         buttons_layout.addWidget(self.stop_Button)
