@@ -605,13 +605,11 @@ class Ui_PreimageWindow(object):
             self.copyMode_comboBox.setCurrentIndex(1)
             self.startEdit.setEnabled(True)
             self.endEdit.setEnabled(True)
-            self.maxEdit.setEnabled(True)
             self.chooseJob_button.setVisible(False)
             self.maxPlNumEdit.setEnabled(False)
         else:
             self.startEdit.setEnabled(False)
             self.endEdit.setEnabled(False)
-            self.maxEdit.setEnabled(False)
             self.saveset_comboBox.setEnabled(False)
             self.copyMode_comboBox.setCurrentIndex(4)
             self.saveset_comboBox.setCurrentIndex(3)

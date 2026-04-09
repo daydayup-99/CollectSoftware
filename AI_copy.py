@@ -478,8 +478,7 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                     logger.warning("返回的数据为空！")
                     return
                 logger.info(f"获取到 {len(mes_data)} 条数据记录")
-                # 直接传入列表，每条记录单独处理
-                self._process_mes_data(mes_data)  # 传入原始列表数据
+                self._process_mes_data(mes_data)
             elif response.status_code == 404:
                 logger.error("URL不存在，请检查MES系统是否启动或可用")
             elif response.status_code == 400:
@@ -510,6 +509,11 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 logger.error("保存路径不能为空")
                 return
             
+            # 获取最大板数限制
+            max_boards = int(self.maxEdit.text()) if self.maxEdit.text().isdigit() else 0
+            if max_boards > 0:
+                logger.info(f"设置最大拷贝板数: {max_boards}")
+            
             need_compress = self.pressCheckBox.isChecked()
             save_mode_obj = None
             if need_compress:
@@ -528,6 +532,8 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             # 初始化进度跟踪
             completed_tasks = 0
             estimated_total = total_records + len(set(r.get('job_name') for r in mes_data)) * 2
+            
+            reach_max_boards = False
             
             for i, record in enumerate(mes_data):
                 if not self._running:
@@ -576,6 +582,11 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                         logger.info(f"  CAR拷贝成功: {target_car_path}")
                         total_copy_count += 1
                         
+                        if max_boards > 0 and total_copy_count >= max_boards:
+                            logger.info(f"已达到最大板数限制 {max_boards}，停止拷贝")
+                            reach_max_boards = True
+                            break
+                        
                         # 2. 拷study文件（如果存在）
                         # study文件路径: std_path/job_name/pl_name/file_study
                         pl_name = plno
@@ -600,6 +611,9 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 completed_tasks += 1
                 progress = int(completed_tasks / estimated_total * 70) if estimated_total > 0 else 0
                 self.progress_updated.emit(progress)
+                
+                if reach_max_boards:
+                    break
             
             # 3. 拷JOB文件（在所有CAR处理完成后，每个料号只需拷贝一次）
             if processed_jobs:
