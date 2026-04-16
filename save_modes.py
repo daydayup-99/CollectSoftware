@@ -43,8 +43,7 @@ class SaveMode:
             self.save_study_dir = os.path.join(self.save_dir, 'aoijob' if use_aoi else 'job')
         else:
             self.save_study_dir = os.path.join(self.save_dir, 'aoicar' if use_aoi else 'car')
-            if use_avi:
-                self.save_log_dir = os.path.join(self.save_dir, 'avilog')
+            self.save_log_dir = os.path.join(self.save_dir, 'aoilog' if use_aoi else 'avilog')
         self.save_car_date_dir = os.path.join(self.save_car_dir, self.date)
         self._make_save_dirs()
 
@@ -59,8 +58,7 @@ class SaveMode:
         paths = [self.save_job_dir, self.save_study_dir]
         if self.machine_type != '离线机':
             paths.append(self.save_car_date_dir)
-            if self.use_avi:
-                paths.append(self.save_log_dir)
+            paths.append(self.save_log_dir)
         for path in paths:
             _make_dir(path)
 
