@@ -211,7 +211,7 @@ class SaveMode:
                 save_file_path = os.path.join(self.save_job_dir, os.path.basename(file))
                 if os.path.exists(save_file_path) is False:
                     copy_with_error_handling(file, self.save_job_dir)
-        std_dir = glob.glob(os.path.join(self.job_dir, f'{job_name}_View'))
+        std_dir = glob.glob(os.path.join(self.study_dir, f'{job_name}_View'))
         if len(std_dir) > 0 and self.use_avi and self.machine_type == "离线机":
             src_dir = std_dir[0]
             target_dir = os.path.join(self.save_job_dir, os.path.basename(src_dir))
