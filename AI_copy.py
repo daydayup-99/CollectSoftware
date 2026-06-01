@@ -181,6 +181,8 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
 
     @handle_file_errors
     def _save_setting(self):
+        start_text = self.startEdit.text().strip()
+        end_text = self.endEdit.text().strip()
         config_data = {
             'carPath': str(self.carEdit.text()),
             'jobPath': str(self.jobEdit.text()),
@@ -190,8 +192,8 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             'saveMode': str(self.saveset_comboBox.currentIndex()),
             'startDate': format_date(self.dateEdit.text()),
             'endDate': format_date(self.dateEndEdit.text()),
-            'startNum': int(self.startEdit.text()),
-            'endNum': int(self.endEdit.text()),
+            'startNum': int(start_text) if start_text else 0,
+            'endNum': int(end_text) if end_text else 0,
             'maxNum': str(self.maxEdit.text()),
             'copyMode': str(self.copyMode_comboBox.currentIndex()),
             'useAOI': str(self.aoiCheckBox.isChecked()),
