@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='AI_copy_3.1.4',
+    name='AI_copy_3.1.8',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

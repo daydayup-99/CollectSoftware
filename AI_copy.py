@@ -550,9 +550,9 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                     is_top = record.get('is_top', False)
                     pcbno = record.get('pcbno', '')
                     
-                    if err_path:
+                    if err_path and self.aviCheckBox.isChecked():
                         err_path = err_path.replace('\\\\', '\\')
-                    if std_path:
+                    if std_path and self.aviCheckBox.isChecked():
                         std_path = std_path.replace('\\\\', '\\')
                     
                     if not err_path:
@@ -570,9 +570,12 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                     # 1. 拷CAR
                     if 'car' in err_path:
                         # 提取相对路径（从car/开始）
-                        relative_path = err_path[err_path.find('car'):]
-                        target_car_path = os.path.join(save_path, relative_path)
-                        
+                        if self.aviCheckBox.isChecked():
+                            relative_path = err_path[err_path.find('car'):]
+                            target_car_path = os.path.join(save_path, relative_path)
+                        elif self.aoiCheckBox.isChecked():
+                            relative_path = err_path[err_path.find('aoicar'):]
+                            target_car_path = os.path.join(save_path, relative_path)
                         # 创建目标目录
                         target_car_dir = os.path.dirname(target_car_path)
                         os.makedirs(target_car_dir, exist_ok=True)
@@ -631,27 +634,36 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                         
                         if not job_path:
                             continue
-                        else:
+                        elif self.aviCheckBox.isChecked():
                             job_path = job_path.replace('\\\\', '\\')
+                        elif self.aoiCheckBox.isChecked():
+                            job_path = os.path.join(job_path, job_name)
                         # 拷贝.top和.bot文件
-                        for ext in ['.top', '.bot']:
-                            src_job_file = os.path.join(job_path, f"{job_name}{ext}")
-                            if os.path.exists(src_job_file):
-                                target_job_dir = os.path.join(save_path, 'job')
-                                os.makedirs(target_job_dir, exist_ok=True)
-                                target_job_file = os.path.join(target_job_dir, f"{job_name}{ext}")
-                                
-                                # 检查目标文件是否存在，如果源文件更新则拷贝
-                                should_copy = True
-                                if os.path.exists(target_job_file):
-                                    src_mtime = os.path.getmtime(src_job_file)
-                                    dest_mtime = os.path.getmtime(target_job_file)
-                                    should_copy = src_mtime > dest_mtime
-                                
-                                if should_copy:
-                                    shutil.copy2(src_job_file, target_job_file)
-                                    logger.info(f"  JOB拷贝成功: {target_job_file}")
-                        
+                        if self.aviCheckBox.isChecked():
+                            for ext in ['.top', '.bot']:
+                                src_job_file = os.path.join(job_path, f"{job_name}{ext}")
+                                if os.path.exists(src_job_file):
+                                    target_job_dir = os.path.join(save_path, 'job')
+                                    os.makedirs(target_job_dir, exist_ok=True)
+                                    target_job_file = os.path.join(target_job_dir, f"{job_name}{ext}")
+
+                                    # 检查目标文件是否存在，如果源文件更新则拷贝
+                                    should_copy = True
+                                    if os.path.exists(target_job_file):
+                                        src_mtime = os.path.getmtime(src_job_file)
+                                        dest_mtime = os.path.getmtime(target_job_file)
+                                        should_copy = src_mtime > dest_mtime
+
+                                    if should_copy:
+                                        shutil.copy2(src_job_file, target_job_file)
+                                        logger.info(f"  JOB拷贝成功: {target_job_file}")
+                        else:
+                            if os.path.isdir(job_path):
+                                target_job_dir = os.path.join(save_path, 'aoijob')
+                                target_job_file = os.path.join(target_job_dir, job_name)
+                                os.makedirs(os.path.dirname(target_job_file), exist_ok=True)
+                                shutil.copytree(job_path, target_job_file, dirs_exist_ok=True)
+
                         completed_tasks += 1
                         progress = int(70 + (completed_tasks / estimated_total * 15)) if estimated_total > 0 else 70
                         self.progress_updated.emit(progress)
@@ -660,7 +672,7 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                         logger.error(f"拷贝JOB文件失败 {job_name}: {e}")
             
             # 4. 拷STD文件
-            if processed_jobs:
+            if processed_jobs and self.aviCheckBox.isChecked():
                 logger.info("开始拷贝STD文件...")
                 job_count = len(processed_jobs)
                 for idx, job_name in enumerate(processed_jobs):
@@ -673,7 +685,7 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                         
                         if not std_path:
                             continue
-                        else:
+                        elif self.aviCheckBox.isChecked():
                             std_path = std_path.replace('\\\\', '\\')
                         # 拷贝_View目录
                         src_std_view = os.path.join(std_path, f"{job_name}_View")
