@@ -546,6 +546,7 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                     job_name = record.get('job_name', '')
                     err_path = record.get('err_path', '')
                     std_path = record.get('std_path', '')
+                    log_path = record.get('log_path', '')
                     plno = record.get('plno', '')
                     is_top = record.get('is_top', False)
                     pcbno = record.get('pcbno', '')
@@ -554,6 +555,8 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                         err_path = err_path.replace('\\\\', '\\')
                     if std_path and self.aviCheckBox.isChecked():
                         std_path = std_path.replace('\\\\', '\\')
+                    if log_path and self.aviCheckBox.isChecked():
+                        log_path = std_path.replace('\\\\', '\\')
                     
                     if not err_path:
                         logger.warning(f"记录没有err_path，跳过")
@@ -605,7 +608,18 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                             
                             shutil.copy2(study_file, target_study_path)
                             logger.info(f"  STUDY拷贝成功: {target_study_path}")
-                    
+
+                    if 'log' in log_path:
+                        if self.aviCheckBox.isChecked():
+                            relative_path = log_path[log_path.find('log'):]
+                            target_log_dir = os.path.join(save_path, relative_path)
+                        elif self.aoiCheckBox.isChecked():
+                            relative_path = log_path[log_path.find('aoilog'):]
+                            target_log_dir = os.path.join(save_path, relative_path)
+                        if not os.path.isdir(target_log_dir):
+                            os.makedirs(target_log_dir, exist_ok=True)
+                            shutil.copytree(log_path, target_log_dir)
+
                     success_count += 1
                     processed_jobs.add(job_name)
                     
