@@ -618,7 +618,7 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                             target_log_dir = os.path.join(save_path, relative_path)
                         if not os.path.isdir(target_log_dir):
                             os.makedirs(target_log_dir, exist_ok=True)
-                            shutil.copytree(log_path, target_log_dir)
+                            shutil.copytree(log_path, target_log_dir, dirs_exist_ok=True)
 
                     success_count += 1
                     processed_jobs.add(job_name)

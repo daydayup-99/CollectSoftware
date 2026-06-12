@@ -69,6 +69,7 @@ class JobSelectionDialog(QtWidgets.QDialog):
         self.car_path = car_path
         self.selected_folders = []
         self.all_folders = []
+        self.checked_folders = set()
         self.setupUi()
 
     def setupUi(self):
@@ -127,12 +128,17 @@ class JobSelectionDialog(QtWidgets.QDialog):
         self.search_edit.textChanged.connect(self.filter_folders)
 
     def _update_folder_list(self, filter_text=""):
+        for cb in self.checkboxes:
+            if cb.isChecked():
+                self.checked_folders.add(cb.text())
         for checkbox in self.checkboxes:
             checkbox.deleteLater()
         self.checkboxes.clear()
         filtered_folders = [f for f in self.all_folders if filter_text.lower() in f.lower()]
         for folder in filtered_folders:
             checkbox = QtWidgets.QCheckBox(folder)
+            if folder in self.checked_folders:
+                checkbox.setChecked(True)
             self.container_layout.addWidget(checkbox)
             self.checkboxes.append(checkbox)
 
