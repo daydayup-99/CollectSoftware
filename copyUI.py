@@ -64,16 +64,34 @@ class CheckableComboBox(QtWidgets.QComboBox):
 
 
 class JobSelectionDialog(QtWidgets.QDialog):
-    def __init__(self, car_path, parent=None):
+    def __init__(self, car_path=None, parent=None, job_list=None):
         super().__init__(parent)
         self.car_path = car_path
+        self.job_list = job_list
         self.selected_folders = []
         self.all_folders = []
         self.checked_folders = set()
         self.setupUi()
 
+    @staticmethod
+    def _normalize_job_names(job_list):
+        """将 MES 返回的料号统一成字符串列表。"""
+        names = []
+        for j in job_list or []:
+            if isinstance(j, str):
+                name = j.strip()
+            elif isinstance(j, dict):
+                name = str(j.get('job_name') or j.get('name') or j.get('job') or '').strip()
+            elif j is not None:
+                name = str(j).strip()
+            else:
+                name = ''
+            if name and name not in names:
+                names.append(name)
+        return names
+
     def setupUi(self):
-        self.setWindowTitle("选择文件夹")
+        self.setWindowTitle("选择料号" if self.job_list is not None else "选择文件夹")
         self.setMinimumSize(400, 500)
 
         layout = QtWidgets.QVBoxLayout(self)
@@ -86,7 +104,10 @@ class JobSelectionDialog(QtWidgets.QDialog):
         search_layout.addWidget(self.search_edit)
         layout.addLayout(search_layout)
 
-        self.label = QtWidgets.QLabel("请选择需要的文件夹(已按时间由新到旧排序)：")
+        if self.job_list is not None:
+            self.label = QtWidgets.QLabel("请选择需要的料号：")
+        else:
+            self.label = QtWidgets.QLabel("请选择需要的文件夹(已按时间由新到旧排序)：")
         layout.addWidget(self.label)
 
         self.scroll_area = QtWidgets.QScrollArea()
@@ -98,7 +119,9 @@ class JobSelectionDialog(QtWidgets.QDialog):
         self.scroll_area.setWidget(self.container)
 
         self.checkboxes = []
-        if os.path.exists(self.car_path):
+        if self.job_list is not None:
+            self.all_folders = self._normalize_job_names(self.job_list)
+        elif self.car_path and os.path.exists(self.car_path):
             folders = [f for f in os.listdir(self.car_path) if os.path.isdir(os.path.join(self.car_path, f))]
             self.all_folders = sorted(
                 folders,
@@ -131,8 +154,13 @@ class JobSelectionDialog(QtWidgets.QDialog):
         for cb in self.checkboxes:
             if cb.isChecked():
                 self.checked_folders.add(cb.text())
-        for checkbox in self.checkboxes:
-            checkbox.deleteLater()
+            else:
+                self.checked_folders.discard(cb.text())
+        while self.container_layout.count():
+            item = self.container_layout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
         self.checkboxes.clear()
         filtered_folders = [f for f in self.all_folders if filter_text.lower() in f.lower()]
         for folder in filtered_folders:
@@ -141,6 +169,7 @@ class JobSelectionDialog(QtWidgets.QDialog):
                 checkbox.setChecked(True)
             self.container_layout.addWidget(checkbox)
             self.checkboxes.append(checkbox)
+        self.container_layout.addStretch()
 
     def filter_folders(self, text):
         self._update_folder_list(text)
@@ -148,13 +177,21 @@ class JobSelectionDialog(QtWidgets.QDialog):
     def select_all(self):
         for checkbox in self.checkboxes:
             checkbox.setChecked(True)
+            self.checked_folders.add(checkbox.text())
 
     def select_none(self):
         for checkbox in self.checkboxes:
             checkbox.setChecked(False)
+            self.checked_folders.discard(checkbox.text())
 
     def accept_selection(self):
-        self.selected_folders = [cb.text() for cb in self.checkboxes if cb.isChecked()]
+        for cb in self.checkboxes:
+            if cb.isChecked():
+                self.checked_folders.add(cb.text())
+            else:
+                self.checked_folders.discard(cb.text())
+        # 按列表顺序返回，并保留被搜索过滤隐藏但仍勾选的项
+        self.selected_folders = [f for f in self.all_folders if f in self.checked_folders]
         self.accept()
 
     def get_selected_folders(self):
@@ -169,12 +206,18 @@ class Ui_PreimageWindow(object):
         self.selected_batch_numbers = []
         # 初始化网络管理器
         self.network_manager = QNetworkAccessManager()
-        self.network_manager.finished.connect(self.on_machine_data_received)
+        # network_manager.finished handled per-reply via reply.finished.connect
 
     def update_progress(self, value):
         self.progress_bar.setValue(value)
 
     def setupUi(self, PreimageWindow):
+        # 确保关键状态已初始化（Ui mixin 的 __init__ 不一定会被调用）
+        if not hasattr(self, 'selected_batch_numbers'):
+            self.selected_batch_numbers = []
+        if not hasattr(self, 'network_manager'):
+            self.network_manager = QNetworkAccessManager(PreimageWindow)
+
         PreimageWindow.setObjectName("PreimageWindow")
         PreimageWindow.resize(1600, 850)
         self.centralwidget = QtWidgets.QWidget(PreimageWindow)
@@ -370,13 +413,27 @@ class Ui_PreimageWindow(object):
         
         self.machine_combo = CheckableComboBox()
         self.machine_combo.setObjectName("machine_combo")
-        self.machine_combo.setMinimumWidth(200)
+        self.machine_combo.setMinimumWidth(80)
         self.select_all_machines = QtWidgets.QCheckBox("全选")
         self.select_all_machines.setObjectName("select_all_machines")
+
+        self.filmside_label = QtWidgets.QLabel("膜面")
+        self.filmside_combo = CheckableComboBox()
+        self.filmside_combo.setObjectName("filmside_combo")
+        self.filmside_combo.setMinimumWidth(80)
+
+        self.ink_label = QtWidgets.QLabel("油墨")
+        self.ink_combo = CheckableComboBox()
+        self.ink_combo.setObjectName("ink_combo")
+        self.ink_combo.setMinimumWidth(180)
 
         machine_layout.addWidget(machine_label)
         machine_layout.addWidget(self.machine_combo, 1)  # 设置拉伸因子，让下拉框占满剩余空间
         machine_layout.addWidget(self.select_all_machines)
+        machine_layout.addWidget(self.filmside_label)
+        machine_layout.addWidget(self.filmside_combo)
+        machine_layout.addWidget(self.ink_label)
+        machine_layout.addWidget(self.ink_combo)
         mes_layout.addLayout(machine_layout)
         tab_mes_layout.addWidget(mes_group)
         
@@ -594,7 +651,16 @@ class Ui_PreimageWindow(object):
         self.aviCheckBox.stateChanged.connect(self.on_avi_changed)
         self.machineType_comboBox.currentIndexChanged.connect(self.on_machine_type_changed)
         self.select_all_machines.stateChanged.connect(self.on_select_all_machines)
+        self.tabWidget.currentChanged.connect(self.on_tab_changed)
         self.on_mes_ip_changed(self.mes_ip_edit.text())
+        self.on_tab_changed(self.tabWidget.currentIndex())
+
+    def on_tab_changed(self, index):
+        # MES页始终可选择料号；资料页仍按机器类型控制可见性
+        if index == 1:
+            self.chooseJob_button.setVisible(True)
+        else:
+            self.on_machine_type_changed(self.machineType_comboBox.currentIndex())
 
     def on_aoi_changed(self, state):
         if state == QtCore.Qt.Checked:
@@ -614,7 +680,7 @@ class Ui_PreimageWindow(object):
             self.copyMode_comboBox.setCurrentIndex(1)
             self.startEdit.setEnabled(True)
             self.endEdit.setEnabled(True)
-            self.chooseJob_button.setVisible(False)
+            self.chooseJob_button.setVisible(self.tabWidget.currentIndex() == 1)
             self.maxPlNumEdit.setEnabled(False)
         else:
             self.startEdit.setEnabled(False)
@@ -671,10 +737,65 @@ class Ui_PreimageWindow(object):
             from PyQt5.QtCore import QByteArray
             data = QByteArray(json_str.encode('utf-8'))
             reply = self.network_manager.post(request, data)
+            reply.finished.connect(lambda r=reply: self.on_machine_data_received(r))
             
         except Exception as e:
             print(f"获取机台数据失败: {e}")
-    
+
+    def get_job_from_mes(self, mes_ip, machine=None, ink=None, surface=None):
+        try:
+            port = 9099
+            url_str = f"http://{mes_ip}:{port}/api/report/conds"
+            url = QUrl(url_str)
+            request = QNetworkRequest(url)
+            request.setHeader(QNetworkRequest.ContentTypeHeader, "application/json")
+            start_date = self.dateEdit.date().toString("yyyy-MM-dd") + " 00:00:00"
+            end_date = self.dateEndEdit.date().toString("yyyy-MM-dd") + " 23:59:59"
+            json_data = {"dates": [start_date, end_date]}
+            if surface:
+                json_data["surface_ids"] = surface if isinstance(surface, list) else [surface]
+            if ink:
+                json_data["ink_types"] = ink if isinstance(ink, list) else [ink]
+            if machine:
+                json_data["avis"] = machine if isinstance(machine, list) else [machine]
+            json_str = json.dumps(json_data)
+            from PyQt5.QtCore import QByteArray
+            data = QByteArray(json_str.encode('utf-8'))
+            reply = self.network_manager.post(request, data)
+            reply.finished.connect(lambda r=reply: self.on_job_data_received(r))
+
+        except Exception as e:
+            print(f"获取料号数据失败: {e}")
+
+    def on_job_data_received(self, reply):
+        if reply.error() == QNetworkReply.NoError:
+            try:
+                data = reply.readAll()
+                json_str = str(data, 'utf-8')
+                json_doc = json.loads(json_str)
+                if 'data' in json_doc and isinstance(json_doc['data'], dict):
+                    data_dict = json_doc['data']
+                    if 'jobs' in data_dict and isinstance(data_dict['jobs'], list):
+                        jobs_list = JobSelectionDialog._normalize_job_names(data_dict['jobs'])
+                        logger.info(f"成功加载料号: {len(jobs_list)} 个")
+                        if jobs_list:
+                            dialog = JobSelectionDialog(parent=self, job_list=jobs_list)
+                            if dialog.exec_() == QtWidgets.QDialog.Accepted:
+                                selected = dialog.get_selected_folders()
+                                if not selected:
+                                    logger.warning("未勾选任何料号")
+                                else:
+                                    self.selected_batch_numbers = selected
+                                    self.chooseJob_button.setText(f"料号选择({len(selected)})")
+                                    logger.info(f"已选择料号({len(selected)}): {', '.join(selected)}")
+                        else:
+                            logger.warning("未获取到料号")
+            except Exception as e:
+                logger.error(f"解析料号数据失败: {e}")
+        else:
+            logger.error(f"料号请求失败: {reply.errorString()}")
+        reply.deleteLater()
+
     def on_machine_data_received(self, reply):
         if reply.error() == QNetworkReply.NoError:
             try:
@@ -691,6 +812,24 @@ class Ui_PreimageWindow(object):
                                 self.machine_combo.addCheckableItem(avi)
                         self.machine_combo.updateText()
                         print(f"成功加载 {len(avis_list)} 个机台")
+                        # 加载膜面数据
+                        if 'surface_ids' in data_dict and isinstance(data_dict['surface_ids'], list):
+                            sides_list = data_dict['surface_ids']
+                            self.filmside_combo.clear()
+                            for side in sides_list:
+                                if isinstance(side, str):
+                                    self.filmside_combo.addCheckableItem(side)
+                            self.filmside_combo.updateText()
+                        # 加载油墨数据
+                        if 'ink_types' in data_dict and isinstance(data_dict['ink_types'], list):
+                            inks_list = data_dict['ink_types']
+                            self.ink_combo.clear()
+                            for ink in inks_list:
+                                if isinstance(ink, str):
+                                    self.ink_combo.addCheckableItem(ink)
+                            self.ink_combo.updateText()
+                            print("成功加载", len(inks_list), "个油墨")
+                            print("成功加载", len(sides_list), "个膜面")
             except Exception as e:
                 print(f"解析机台数据失败: {e}")
         else:
@@ -698,10 +837,22 @@ class Ui_PreimageWindow(object):
         reply.deleteLater()
 
     def chooseJob_button_clicked_handler(self):
-        car_path = self.carEdit.text()
-        dialog: JobSelectionDialog = JobSelectionDialog(car_path, self)
-        if dialog.exec_() == QtWidgets.QDialog.Accepted:
-            self.selected_batch_numbers = dialog.get_selected_folders()
+        if self.tabWidget.currentIndex() == 1:
+            mes_ip = self.mes_ip_edit.text()
+            if not mes_ip:
+                print("MES IP地址为空，无法获取料号")
+                return
+            machine = self.machine_combo.get_selected_items() or None
+            ink = self.ink_combo.get_selected_items() or None
+            surface = self.filmside_combo.get_selected_items() or None
+            self.get_job_from_mes(mes_ip, machine=machine, ink=ink, surface=surface)
+        else:
+            car_path = self.carEdit.text()
+            dialog: JobSelectionDialog = JobSelectionDialog(car_path, self)
+            if dialog.exec_() == QtWidgets.QDialog.Accepted:
+                self.selected_batch_numbers = dialog.get_selected_folders()
+                self.chooseJob_button.setText(f"料号选择({len(self.selected_batch_numbers)})")
+                logger.info(f"已选择料号({len(self.selected_batch_numbers)}): {', '.join(self.selected_batch_numbers)}")
 
     def retranslateUi(self, PreimageWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -762,8 +913,7 @@ class Ui_PreimageWindow(object):
             self.startEdit, self.endEdit, self.maxEdit, self.copy_aidataButton,
             self.copyMode_comboBox,
             self.aoiCheckBox, self.aviCheckBox, self.machineType_comboBox,
-            self.mes_ip_edit, self.machine_combo, self.select_all_machines,
-        ]:
+            self.mes_ip_edit, self.machine_combo, self.select_all_machines, self.filmside_combo,self.ink_combo]:
             widget.setEnabled(enabled)
         self.stop_Button.setEnabled(not enabled)
 

@@ -351,147 +351,152 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
     def get_mes_collect_mode(self):
         """
         获取MES收集模式下选中的收集条件
-        :return: {'mode': 'ai_report'|'filter_rate', 'value': int}
+        :return: {'mode': 'ai_report'|'filter_rate', 'value': int} 或 None
         """
         if self.ai_report_checkbox.isChecked():
-            value = int(self.ai_report_value.text())
+            value = int(self.ai_report_value.text() or '0')
             return {'mode': 'ai_report', 'value': value}
         elif self.filter_rate_checkbox.isChecked():
-            value = int(self.filter_rate_value.text())
+            value = int(self.filter_rate_value.text() or '0')
             return {'mode': 'filter_rate', 'value': value}
+        return None
+
+    def _build_mes_request_data(self, machines=None, threshold=None, jobs=None):
+        """
+        构建MES查询请求体。
+        已选料号时只传 jobs + dates；否则传 avis + err_count + dates。
+        """
+        start_time = self.dateEdit.date().toString("yyyy-MM-dd") + " 00:00:00"
+        end_time = self.dateEndEdit.date().toString("yyyy-MM-dd") + " 23:59:59"
+        request_data = {"dates": [start_time, end_time]}
+        if jobs:
+            request_data["jobs"] = jobs
+        else:
+            request_data["avis"] = machines or []
+            request_data["err_count"] = threshold
+        return request_data
+
+    def _post_mes_request(self, url, request_data):
+        """发送MES查询请求，成功返回 response.json()，失败返回 None。"""
+        logger.info(f"请求URL: {url}")
+        logger.info(f"请求参数: {request_data}")
+        try:
+            response = requests.post(url, json=request_data, timeout=(3, 10))
+        except requests.exceptions.Timeout:
+            logger.error("请求超时，请检查MES系统是否启动或可用")
+            return None
+
+        if response.status_code == 200:
+            return response.json()
+        if response.status_code == 404:
+            logger.error("URL不存在，请检查MES系统是否启动或可用")
+        elif response.status_code == 400:
+            try:
+                error_msg = response.json().get('error', '请求参数错误')
+            except Exception:
+                error_msg = '请求参数错误'
+            logger.error(f"请求错误: {error_msg}")
+        else:
+            logger.error(f"请求失败，状态码: {response.status_code}")
+        return None
 
     def _copy_by_mes_new(self, collect_mode):
         """
-        新的MES拷贝方法，支持根据条件过滤
-        :param collect_mode: {'mode': 'ai_report'|'filter_rate', 'value': int}
+        MES拷贝：支持按机台+阈值，或按已选料号+时间查询。
+        已选料号时不强制勾选收集模式，默认走 AI 后报点接口。
+        :param collect_mode: {'mode': 'ai_report'|'filter_rate', 'value': int} 或 None
         """
         try:
-            logger.info(f"MES收集模式: {collect_mode['mode']}, 阈值: {collect_mode['value']}")
+            jobs = self.selected_batch_numbers or None
             selected_machines = self.machine_combo.get_selected_items()
-            if not selected_machines:
-                logger.warning("请选择至少一个机台！")
-                self.setEnable(True)
-                self._running = False
+            if not jobs and not selected_machines:
+                logger.warning("请选择至少一个机台，或先通过「料号选择」选定料号！")
                 return
+
             mes_ip = self.mes_ip_edit.text()
             if not mes_ip:
                 logger.warning("请输入MES IP地址！")
-                self.setEnable(True)
-                self._running = False
                 return
-            
-            if collect_mode['mode'] == 'ai_report':
-                self._query_ai_report_data(mes_ip, selected_machines, collect_mode['value'])
-            elif collect_mode['mode'] == 'filter_rate':
-                self._query_filter_rate_data(mes_ip, selected_machines, collect_mode['value'])
-            
+
+            # 已选料号：默认走 AI 后报点接口，只传 jobs + dates
+            if jobs:
+                mode = collect_mode['mode'] if collect_mode else 'ai_report'
+                threshold = collect_mode['value'] if collect_mode else 0
+                logger.info(f"MES按料号收集, 模式: {mode}, 料号数: {len(jobs)}, 料号: {jobs}")
+                if mode == 'filter_rate':
+                    self._query_filter_rate_data(mes_ip, selected_machines, threshold, jobs=jobs)
+                else:
+                    self._query_ai_report_data(mes_ip, selected_machines, threshold, jobs=jobs)
+            elif not collect_mode:
+                # 未选料号：必须勾选收集模式，按机台+阈值查询
+                logger.warning("请选择收集模式（AI后报点或料号过滤率）！")
+            else:
+                logger.info(f"MES收集模式: {collect_mode['mode']}, 阈值: {collect_mode['value']}, 机台: {selected_machines}")
+                if collect_mode['mode'] == 'ai_report':
+                    self._query_ai_report_data(mes_ip, selected_machines, collect_mode['value'])
+                elif collect_mode['mode'] == 'filter_rate':
+                    self._query_filter_rate_data(mes_ip, selected_machines, collect_mode['value'])
+
         except Exception as e:
             logger.error(f"MES收集失败: {e}")
+        finally:
             self.setEnable(True)
-        self._running = False
-    
-    def _query_filter_rate_data(self, mes_ip, machines, threshold):
-        """
-        查询料号过滤率数据
-        """
+            self._running = False
+
+    def _query_filter_rate_data(self, mes_ip, machines, threshold, jobs=None):
+        """查询料号过滤率数据；已选料号时只传 jobs + dates。"""
         try:
-            start_time = self.dateEdit.date().toString("yyyy-MM-dd") + " 00:00:00"
-            end_time = self.dateEndEdit.date().toString("yyyy-MM-dd") + " 23:59:59"
-            
             url = f"http://{mes_ip}:9099/GetLowRatioJob"
-            logger.info(f"请求URL: {url}")
-            logger.info(f"机台: {machines}, 时间范围: {start_time} - {end_time}, 阈值: {threshold}")
-            
-            request_data = {
-                "dates": [start_time, end_time],
-                "avis": machines,
-                "err_count": threshold,
-            }
-            
-            response = requests.post(url, json=request_data, timeout=(3, 10))
-            
-            if response.status_code == 200:
-                response_data = response.json()
-                data_str = response_data.get('data', '')
-                
-                if not data_str or data_str == "{}" or data_str == "{}\\n":
-                    logger.warning("未找到数据，请调整时间范围或料号过滤率阈值！")
-                    return
-                
-                # 解析返回的数据
-                try:
-                    # 移除可能的换行符
-                    data_str = data_str.strip()
-                    mes_data = json.loads(data_str)
-                    
-                    if not mes_data:
-                        logger.warning("返回的数据为空！")
-                        return
-                    
-                    logger.info(f"获取到 {len(mes_data)} 个料号的数据")
-                    
-                    self.mes_copy_data = mes_data  # 存储到实例变量
-                    self._process_mes_data(mes_data)  # 直接执行拷贝
-                    
-                except json.JSONDecodeError as e:
-                    logger.error(f"JSON解析失败: {e}, 响应数据: {data_str}")
+            request_data = self._build_mes_request_data(machines, threshold, jobs)
+            response_data = self._post_mes_request(url, request_data)
+            if not response_data:
+                return
 
-            elif response.status_code == 404:
-                logger.error("URL不存在，请检查MES系统是否启动或可用")
-            elif response.status_code == 400:
-                error_msg = response.json().get('error', '请求参数错误')
-                logger.error(f"请求错误: {error_msg}")
-            else:
-                logger.error(f"请求失败，状态码: {response.status_code}")
+            data_str = response_data.get('data', '')
+            if not data_str or data_str == "{}" or data_str == "{}\\n":
+                logger.warning("未找到数据，请调整时间范围、料号或过滤率阈值！")
+                return
 
-        except requests.exceptions.Timeout:
-            logger.error("请求超时，请检查MES系统是否启动或可用")
+            try:
+                data_str = data_str.strip()
+                mes_data = json.loads(data_str)
+            except json.JSONDecodeError as e:
+                logger.error(f"JSON解析失败: {e}, 响应数据: {data_str}")
+                return
+
+            if not mes_data:
+                logger.warning("返回的数据为空！")
+                return
+
+            logger.info(f"获取到 {len(mes_data)} 个料号的数据")
+            self.mes_copy_data = mes_data
+            self._process_mes_data(mes_data)
         except Exception as e:
             logger.error(f"查询料号过滤率数据失败: {e}")
 
-    def _query_ai_report_data(self, mes_ip, machines, threshold):
-        """
-        查询AI后报点数据
-        """
+    def _query_ai_report_data(self, mes_ip, machines, threshold, jobs=None):
+        """查询AI后报点数据；已选料号时只传 jobs + dates。"""
         try:
-            start_time = self.dateEdit.date().toString("yyyy-MM-dd") + " 00:00:00"
-            end_time = self.dateEndEdit.date().toString("yyyy-MM-dd") + " 23:59:59"
-
             url = f"http://{mes_ip}:9099/api/test/list"
-            logger.info(f"请求URL: {url}")
-            logger.info(f"机台: {machines}, 时间范围: {start_time} - {end_time}, 阈值: {threshold}")
+            request_data = self._build_mes_request_data(machines, threshold, jobs)
+            response_data = self._post_mes_request(url, request_data)
+            if not response_data:
+                return
 
-            request_data = {
-                "dates": [start_time, end_time],
-                "avis": machines,
-                "err_count": threshold,
-            }
+            data = response_data.get('data', '')
+            if not data or data == "{}" or data == "{}\\n":
+                logger.warning("未找到数据，请调整时间范围、料号或阈值！")
+                return
 
-            response = requests.post(url, json=request_data, timeout=(3, 10))
-            if response.status_code == 200:
-                response_data = response.json()
-                data = response_data.get('data', '')
-                if not data or data == "{}" or data == "{}\\n":
-                    logger.warning("未找到数据，请调整时间范围或料号过滤率阈值！")
-                    return
-                if isinstance(data, list):
-                    mes_data = data
-                if not mes_data:
-                    logger.warning("返回的数据为空！")
-                    return
-                logger.info(f"获取到 {len(mes_data)} 条数据记录")
-                self._process_mes_data(mes_data)
-            elif response.status_code == 404:
-                logger.error("URL不存在，请检查MES系统是否启动或可用")
-            elif response.status_code == 400:
-                error_msg = response.json().get('error', '请求参数错误')
-                logger.error(f"请求错误: {error_msg}")
-            else:
-                logger.error(f"请求失败，状态码: {response.status_code}")
-        except requests.exceptions.Timeout:
-            logger.error("请求超时，请检查MES系统是否启动或可用")
+            mes_data = data if isinstance(data, list) else None
+            if not mes_data:
+                logger.warning("返回的数据为空！")
+                return
+
+            logger.info(f"获取到 {len(mes_data)} 条数据记录")
+            self._process_mes_data(mes_data)
         except Exception as e:
-            logger.error(f"查询料号过滤率数据失败: {e}")
+            logger.error(f"查询AI后报点数据失败: {e}")
 
     def _process_mes_data(self, mes_data):
         """
