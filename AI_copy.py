@@ -516,10 +516,10 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 logger.error("保存路径不能为空")
                 return
             
-            # 获取最大板数限制
+            # 获取最大板数限制（按每个料号分别控制）
             max_boards = int(self.maxEdit.text()) if self.maxEdit.text().isdigit() else 0
             if max_boards > 0:
-                logger.info(f"设置最大拷贝板数: {max_boards}")
+                logger.info(f"设置每个料号最大拷贝板数: {max_boards}")
             
             need_compress = self.pressCheckBox.isChecked()
             save_mode_obj = None
@@ -535,12 +535,12 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             
             # 记录已经处理过的料号（用于后续拷贝JOB和STD）
             processed_jobs = set()
+            # 每个料号已拷贝的板数
+            job_copy_counts = {}
             
             # 初始化进度跟踪
             completed_tasks = 0
             estimated_total = total_records + len(set(r.get('job_name') for r in mes_data)) * 2
-            
-            reach_max_boards = False
             
             for i, record in enumerate(mes_data):
                 if not self._running:
@@ -555,6 +555,10 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                     plno = record.get('plno', '')
                     is_top = record.get('is_top', False)
                     pcbno = record.get('pcbno', '')
+
+                    # 该料号已达最大板数则跳过
+                    if max_boards > 0 and job_copy_counts.get(job_name, 0) >= max_boards:
+                        continue
                     
                     if err_path and self.aviCheckBox.isChecked():
                         err_path = err_path.replace('\\\\', '\\')
@@ -592,13 +596,12 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                         import shutil
                         shutil.copy2(err_path, target_car_path)
                         
-                        logger.info(f"  CAR拷贝成功: {target_car_path}")
+                        job_copy_counts[job_name] = job_copy_counts.get(job_name, 0) + 1
                         total_copy_count += 1
+                        logger.info(f"  CAR拷贝成功: {target_car_path} (料号 {job_name}: {job_copy_counts[job_name]}/{max_boards if max_boards > 0 else '不限'})")
                         
-                        if max_boards > 0 and total_copy_count >= max_boards:
-                            logger.info(f"已达到最大板数限制 {max_boards}，停止拷贝")
-                            reach_max_boards = True
-                            break
+                        if max_boards > 0 and job_copy_counts[job_name] >= max_boards:
+                            logger.info(f"料号 {job_name} 已达到最大板数限制 {max_boards}，跳过该料号剩余记录")
                         
                         # 2. 拷study文件（如果存在）
                         # study文件路径: std_path/job_name/pl_name/file_study
@@ -635,9 +638,6 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 completed_tasks += 1
                 progress = int(completed_tasks / estimated_total * 70) if estimated_total > 0 else 0
                 self.progress_updated.emit(progress)
-                
-                if reach_max_boards:
-                    break
             
             # 3. 拷JOB文件（在所有CAR处理完成后，每个料号只需拷贝一次）
             if processed_jobs:
