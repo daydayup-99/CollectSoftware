@@ -369,10 +369,10 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
         start_time = self.dateEdit.date().toString("yyyy-MM-dd") + " 00:00:00"
         end_time = self.dateEndEdit.date().toString("yyyy-MM-dd") + " 23:59:59"
         request_data = {"dates": [start_time, end_time]}
+        request_data["avis"] = machines or []
         if jobs:
             request_data["jobs"] = jobs
         else:
-            request_data["avis"] = machines or []
             request_data["err_count"] = threshold
         return request_data
 
