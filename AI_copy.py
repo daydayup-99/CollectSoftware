@@ -538,10 +538,6 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             # 每个料号已拷贝的板数
             job_copy_counts = {}
             
-            # 初始化进度跟踪
-            completed_tasks = 0
-            estimated_total = total_records + len(set(r.get('job_name') for r in mes_data)) * 2
-            
             for i, record in enumerate(mes_data):
                 if not self._running:
                     logger.info("用户停止拷贝")
@@ -634,16 +630,17 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 except Exception as e:
                     logger.error(f"处理记录失败: {e}")
                     fail_count += 1
-                
-                completed_tasks += 1
-                progress = int(completed_tasks / estimated_total * 70) if estimated_total > 0 else 0
-                self.progress_updated.emit(progress)
+                finally:
+                    # 按已遍历记录数更新进度（含跳过项），CAR阶段占 0~70%
+                    if total_records > 0:
+                        self.progress_updated.emit(int((i + 1) / total_records * 70))
             
             # 3. 拷JOB文件（在所有CAR处理完成后，每个料号只需拷贝一次）
-            if processed_jobs:
+            processed_job_list = list(processed_jobs)
+            if processed_job_list:
                 logger.info("开始拷贝JOB文件...")
-                job_count = len(processed_jobs)
-                for idx, job_name in enumerate(processed_jobs):
+                job_count = len(processed_job_list)
+                for idx, job_name in enumerate(processed_job_list):
                     try:
                         job_path = None
                         for record in mes_data:
@@ -682,19 +679,18 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                                 target_job_file = os.path.join(target_job_dir, job_name)
                                 os.makedirs(os.path.dirname(target_job_file), exist_ok=True)
                                 shutil.copytree(job_path, target_job_file, dirs_exist_ok=True)
-
-                        completed_tasks += 1
-                        progress = int(70 + (completed_tasks / estimated_total * 15)) if estimated_total > 0 else 70
-                        self.progress_updated.emit(progress)
                     
                     except Exception as e:
                         logger.error(f"拷贝JOB文件失败 {job_name}: {e}")
+                    finally:
+                        if job_count > 0:
+                            self.progress_updated.emit(70 + int((idx + 1) / job_count * 15))
             
             # 4. 拷STD文件
-            if processed_jobs and self.aviCheckBox.isChecked():
+            if processed_job_list and self.aviCheckBox.isChecked():
                 logger.info("开始拷贝STD文件...")
-                job_count = len(processed_jobs)
-                for idx, job_name in enumerate(processed_jobs):
+                job_count = len(processed_job_list)
+                for idx, job_name in enumerate(processed_job_list):
                     try:
                         std_path = None
                         for record in mes_data:
@@ -722,16 +718,14 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                             os.makedirs(os.path.dirname(target_std_study), exist_ok=True)
                             shutil.copytree(src_std_study, target_std_study, dirs_exist_ok=True)
                             logger.info(f"  STD StudyTemp拷贝成功: {target_std_study}")
-                        
-                        completed_tasks += 1
-                        progress = int(85 + (completed_tasks / estimated_total * 15)) if estimated_total > 0 else 85
-                        self.progress_updated.emit(progress)
                     
                     except Exception as e:
                         logger.error(f"拷贝STD文件失败 {job_name}: {e}")
-            else:
-                # 如果没有STD文件，直接设置100%
-                self.progress_updated.emit(100)
+                    finally:
+                        if job_count > 0:
+                            self.progress_updated.emit(85 + int((idx + 1) / job_count * 15))
+            
+            self.progress_updated.emit(100)
             
             logger.info(f"MES数据拷贝完成！成功: {success_count}, 失败: {fail_count}, 总拷贝文件数: {total_copy_count}, 处理料号数: {len(processed_jobs)}")
             

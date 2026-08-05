@@ -442,7 +442,7 @@ class Ui_PreimageWindow(object):
         collect_layout = QtWidgets.QVBoxLayout(collect_group)
         collect_layout.setSpacing(10)
         self.collect_mode_group = QtWidgets.QButtonGroup(self)
-        self.collect_mode_group.setExclusive(True)  # 设置互斥
+        self.collect_mode_group.setExclusive(False)  # 允许两个都不选；互斥由 toggled 处理
         
         mode_layout = QtWidgets.QHBoxLayout()
         self.ai_report_checkbox = QtWidgets.QCheckBox("AI后报点小于")
@@ -478,6 +478,11 @@ class Ui_PreimageWindow(object):
         
         mode_layout.addWidget(self.filter_rate_checkbox)
         mode_layout.addWidget(self.filter_rate_value)
+        
+        self.ai_report_checkbox.toggled.connect(
+            lambda checked: self._on_collect_mode_toggled(self.ai_report_checkbox, checked))
+        self.filter_rate_checkbox.toggled.connect(
+            lambda checked: self._on_collect_mode_toggled(self.filter_rate_checkbox, checked))
         
         # mode_layout.addWidget(self.timer_collect_checkbox)
         # mode_layout.addWidget(self.trigger_collect_checkbox)
@@ -661,6 +666,16 @@ class Ui_PreimageWindow(object):
             self.chooseJob_button.setVisible(True)
         else:
             self.on_machine_type_changed(self.machineType_comboBox.currentIndex())
+
+    def _on_collect_mode_toggled(self, source_checkbox, checked):
+        """两个收集模式最多选一个，但允许都不选。"""
+        if not checked:
+            return
+        for checkbox in (self.ai_report_checkbox, self.filter_rate_checkbox):
+            if checkbox is not source_checkbox and checkbox.isChecked():
+                checkbox.blockSignals(True)
+                checkbox.setChecked(False)
+                checkbox.blockSignals(False)
 
     def on_aoi_changed(self, state):
         if state == QtCore.Qt.Checked:
