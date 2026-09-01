@@ -655,6 +655,7 @@ class Ui_PreimageWindow(object):
         self.aoiCheckBox.stateChanged.connect(self.on_aoi_changed)
         self.aviCheckBox.stateChanged.connect(self.on_avi_changed)
         self.machineType_comboBox.currentIndexChanged.connect(self.on_machine_type_changed)
+        self.copyMode_comboBox.currentIndexChanged.connect(self.on_copy_mode_changed)
         self.select_all_machines.stateChanged.connect(self.on_select_all_machines)
         self.tabWidget.currentChanged.connect(self.on_tab_changed)
         self.on_mes_ip_changed(self.mes_ip_edit.text())
@@ -693,18 +694,27 @@ class Ui_PreimageWindow(object):
         if machine_type == '在线机':
             self.saveset_comboBox.setEnabled(True)
             self.copyMode_comboBox.setCurrentIndex(1)
-            self.startEdit.setEnabled(True)
-            self.endEdit.setEnabled(True)
             self.chooseJob_button.setVisible(self.tabWidget.currentIndex() == 1)
             self.maxPlNumEdit.setEnabled(False)
         else:
-            self.startEdit.setEnabled(False)
-            self.endEdit.setEnabled(False)
             self.saveset_comboBox.setEnabled(False)
             self.copyMode_comboBox.setCurrentIndex(4)
             self.saveset_comboBox.setCurrentIndex(3)
             self.chooseJob_button.setVisible(True)
             self.maxPlNumEdit.setEnabled(True)
+        self._update_board_num_edits_enabled()
+
+    def on_copy_mode_changed(self, index):
+        self._update_board_num_edits_enabled()
+
+    def _update_board_num_edits_enabled(self):
+        """仅在线机 + 按板号拷贝时启用起始/结束板号。"""
+        enable_board_num = (
+            self.machineType_comboBox.currentText() == '在线机'
+            and self.copyMode_comboBox.currentIndex() == 1
+        )
+        self.startEdit.setEnabled(enable_board_num)
+        self.endEdit.setEnabled(enable_board_num)
     
     def on_select_all_machines(self, state):
         for i in range(self.machine_combo.model().rowCount()):
