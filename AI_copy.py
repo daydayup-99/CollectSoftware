@@ -97,15 +97,19 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
         # 存储方式
         self.saveset_comboBox.setCurrentIndex(int(config['DEFAULT'].get('saveMode', '0')))
         # 开始日期
-        self.dateEdit.setDate(
-            QDate.fromString(config['DEFAULT'].get('startDate', '').replace('/', '-'), 'yyyy-MM-d'))
+        start_date = QDate.fromString(format_date(config['DEFAULT'].get('startDate', '')), 'yyyy-MM-dd')
+        if not start_date.isValid():
+            start_date = QDate.currentDate()
+        self.dateEdit.setDate(start_date)
         # 开始板号
         self.startEdit.setText(config['DEFAULT'].get('startNum', '0'))
         # 结束板号
         self.endEdit.setText(config['DEFAULT'].get('endNum', '0'))
         # 结束日期
-        self.dateEndEdit.setDate(
-            QDate.fromString(config['DEFAULT'].get('endDate', '').replace('/', '-'), 'yyyy-MM-d'))
+        end_date = QDate.fromString(format_date(config['DEFAULT'].get('endDate', '')), 'yyyy-MM-dd')
+        if not end_date.isValid():
+            end_date = QDate.currentDate()
+        self.dateEndEdit.setDate(end_date)
         # aoijob路径
         self.jobEdit.setText(config['DEFAULT'].get('jobPath', ''))
         # 最大板数
@@ -190,8 +194,8 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
             'logPath': str(self.logEdit.text()),
             'savePath': str(self.saveEdit.text()),
             'saveMode': str(self.saveset_comboBox.currentIndex()),
-            'startDate': format_date(self.dateEdit.text()),
-            'endDate': format_date(self.dateEndEdit.text()),
+            'startDate': self.dateEdit.date().toString('yyyy-MM-dd'),
+            'endDate': self.dateEndEdit.date().toString('yyyy-MM-dd'),
             'startNum': int(start_text) if start_text else 0,
             'endNum': int(end_text) if end_text else 0,
             'maxNum': str(self.maxEdit.text()),
@@ -749,8 +753,8 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
 
     def _date_copy(self):
         def get_dates():
-            start_date = self.default_config.get('startDate', '20000102').replace('-', '')
-            end_date = self.default_config.get('endDate', '20000101').replace('-', '')
+            start_date = format_date(self.default_config.get('startDate')).replace('-', '')
+            end_date = format_date(self.default_config.get('endDate')).replace('-', '')
             if int(start_date) > int(end_date):
                 raise Exception('开始日期在结束日期之后，请重新输入！')
             return self._get_dates_interval(start_date, end_date)
@@ -829,12 +833,12 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
 
     def _copy_by_num(self):
         try:
-            start_date = self.default_config.get('startDate', QDate.currentDate())
-            end_date = self.default_config.get('enddate', QDate.currentDate())
+            start_date = format_date(self.default_config.get('startDate'))
+            end_date = format_date(self.default_config.get('endDate') or self.default_config.get('enddate'))
             self._copy_log_path(start_date, end_date)
             
             # 在外层创建 save_cls_obj，用于所有板号拷贝和最后的压缩
-            date = self.default_config.get('startDate', '20000101').replace('-', '')
+            date = start_date.replace('-', '')
             save_cls_obj = self._choose_save_mode_cls(date)
 
             def get_nums():
@@ -860,8 +864,8 @@ class Copy(PyQt5.QtWidgets.QMainWindow, copyUI.Ui_PreimageWindow):
                 return
             max_pl = int(self.maxPlNumEdit.text())
             logger.info(f'选择的料号: {", ".join(selected_batch_numbers)}')
-            start_date = self.default_config.get('startDate', QDate.currentDate().addDays(-7).toString('yyyyMMdd')).replace('-', '')
-            end_date = self.default_config.get('enddate', QDate.currentDate().toString('yyyyMMdd')).replace('-', '')
+            start_date = format_date(self.default_config.get('startDate', QDate.currentDate().addDays(-7).toString('yyyy-MM-dd'))).replace('-', '')
+            end_date = format_date(self.default_config.get('endDate') or self.default_config.get('enddate') or QDate.currentDate().toString('yyyy-MM-dd')).replace('-', '')
             car_path = self.carEdit.text()
             
             # 在外层创建 save_cls_obj，用于所有料号拷贝和最后的压缩

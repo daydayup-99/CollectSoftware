@@ -537,12 +537,16 @@ class Ui_PreimageWindow(object):
         self.dateEdit = QtWidgets.QDateEdit()
         self.dateEdit.setObjectName("dateEdit")
         self.dateEdit.setMinimumWidth(150)
+        self.dateEdit.setCalendarPopup(True)
+        self.dateEdit.setDisplayFormat("yyyy-MM-dd")
         
         self.dateEndLabel = QtWidgets.QLabel("结束时间")
         self.dateEndLabel.setObjectName("dateEndLabel")
         self.dateEndEdit = QtWidgets.QDateEdit()
         self.dateEndEdit.setObjectName("dateEndEdit")
         self.dateEndEdit.setMinimumWidth(150)
+        self.dateEndEdit.setCalendarPopup(True)
+        self.dateEndEdit.setDisplayFormat("yyyy-MM-dd")
         
         date_range_layout.addWidget(self.date_label)
         date_range_layout.addWidget(self.dateEdit)
